@@ -11,6 +11,11 @@ import { LoginComponent } from './pagina-login/login/login.component';
 import { BannerComponent } from './pagina-login/banner/banner.component';
 import { PaginaLoginComponent } from './pagina-login/pagina-login.component';
 import { ClientesComponent } from './home/clientes/clientes.component';
+import { ReactiveFormsModule } from '@angular/forms';
+
+
+import {HttpClientModule  } from '@angular/common/http';
+import { BuscaCepService} from './busca-cep.service';
 
 @NgModule({
   declarations: [
@@ -26,9 +31,11 @@ import { ClientesComponent } from './home/clientes/clientes.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule,
+    HttpClientModule,
   ],
-  providers: [],
+  providers: [ BuscaCepService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
