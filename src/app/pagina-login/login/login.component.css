@@ -1,0 +1,20 @@
+.card{
+    border-color:#048243;
+    padding: 2px ;
+    width: 23rem;
+}
+
+.card-img-top{
+    border-radius: 2%;
+    margin-top: 2px;
+}
+
+.login{
+    color: #048243;
+    text-align: center;
+    margin: -6px 0px 15px 0px;
+}
+
+.container{
+    margin-bottom: auto;
+}

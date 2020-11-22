@@ -90,7 +90,11 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [                
+              "./node_modules/popper.js/dist/umd/popper.min.js",
+              "./node_modules/jquery/dist/jquery.min.js",
+              "./node_modules/bootstrap/dist/js/bootstrap.min.js"
+            ]
           }
         },
         "lint": {
@@ -119,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "faturaCliente"
+    }
+  },
+  "defaultProject": "faturaCliente",
+  "cli": {
+    "analytics": "8db49137-7c71-418e-ba16-cc1b88046c20"
+  }
 }
