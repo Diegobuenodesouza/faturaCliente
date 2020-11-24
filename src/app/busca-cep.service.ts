@@ -12,6 +12,7 @@ export class BuscaCepService {
 
   buscarCEP(cep: string): Observable<any> {
     return this.http.get(`${this.BUSCA_CEP}/${cep}/json`);
+
   }
 
 }

@@ -1,12 +1,14 @@
 <div class="container">
   
   <br>
+  
+  
   <div class="shadow-lg p-3 mb-5 bg-white rounded">
     <form [formGroup]="formulario">
       <div class="form-group">
         <div class="row col-4">        
           <label>CNPJ</label>
-          <input class="form-control" type="text" >
+          <input class="form-control" type="text" formControlName="cnpj" >
         </div>      
       </div>
       
@@ -16,17 +18,17 @@
         <div class="col-8">
           <div class="form-group">
             <label>Nome Empresarial</label>
-            <input class="form-control" type="text" >
+            <input class="form-control" formControlName="nomeEmpresarial"   type="text"  >
           </div>
         </div>
         
         <div class="col-4">
           <div class="form-group">
             <label>CEP</label>
-            <input class="form-control" #cep type="text" (blur)="buscarCep(cep.value)" >
+            <input class="form-control"  type="text" formControlName="cep" (blur)="buscarCep($event.target.value)" >
           </div>
         </div>
-                
+        
       </div>
       
       <div class="row">
@@ -34,65 +36,68 @@
         <div class="col-2">
           <div class="form-group">
             <label>Número</label>
-            <input class="form-control" type="text" disabled  FormNameControl="numero">
-          </div>
-        </div>
-
-        <div class="col-5">
-          <div class="form-group">
-            <label>Estado</label>
-            <input class="form-control" type="text"   disabled  >
+            <input class="form-control" type="text"   formControlName="numero">
           </div>
         </div>
         
-
+        <div class="col-5">
+          <div class="form-group">
+            <label>Logradouro</label>
+            <input class="form-control" type="text"  formControlName="logradouro" disabled >
+          </div>
+        </div>
+        
+        
         <div class="col-5">
           <div class="form-group">
             <label>Bairro</label>
-            <input class="form-control" type="text"   disabled >
+            <input class="form-control" type="text" formControlName="bairro"  disabled >
           </div>
         </div>
       </div>
-        
-      <div class="row">
-        <div class="col-4">
-          <div class="form-group">
-            <label>Municipio</label>
-            <input class="form-control" type="text"  disabled  >
-          </div>
-        </div>
-        
-        <div class="col-2">
-          <div class="form-group">
-            <label>UF</label>
-            <input class="form-control" type="text"  disabled >
-          </div>
-        </div>
-      </div>
-        
-    
       
       <div class="row">
-        <div class="col d-flex justify-content-star"><button type="button" class="btn btn-light"  [routerLink]="['/home']" routerLinkActive="router-link-active">
-            
-            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-backspace-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-              <path fill-rule="evenodd" d="M15.683 3a2 2 0 0 0-2-2h-7.08a2 2 0 0 0-1.519.698L.241 7.35a1 1 0 0 0 0 1.302l4.843 5.65A2 2 0 0 0 6.603 15h7.08a2 2 0 0 0 2-2V3zM5.829 5.854a.5.5 0 1 1 .707-.708l2.147 2.147 2.146-2.147a.5.5 0 1 1 .707.708L9.39 8l2.146 2.146a.5.5 0 0 1-.707.708L8.683 8.707l-2.147 2.147a.5.5 0 0 1-.707-.708L7.976 8 5.829 5.854z"></path>
-            </svg>
-            Voltar
-          </button>
+        
+        <div class="col-6">
+          <div class="form-group">
+            <label>Municipio</label>
+            <input class="form-control" type="text"  formControlName="localidade"  disabled >
+          </div>
         </div>
         
-        <div class="col d-flex justify-content-end">
-          <button type="button" class="btn btn-success" >            
-            Salvar
-            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-bookmark-check-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-              <path fill-rule="evenodd" d="M4 0a2 2 0 0 0-2 2v13.5a.5.5 0 0 0 .74.439L8 13.069l5.26 2.87A.5.5 0 0 0 14 15.5V2a2 2 0 0 0-2-2H4zm6.854 5.854a.5.5 0 0 0-.708-.708L7.5 7.793 6.354 6.646a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z"/>
-            </svg>
-          </button>
+        <div class="col-1">
+          <div class="form-group">
+            <label>UF</label>
+            <input class="form-control" type="text" formControlName="uf" disabled >
+          </div>
+        </div>
+        
+        <div class="col-5">
+          <div class="form-group">
+            <div class="col d-flex justify-content-end altura">
+              <button type="button" class="btn btn-success" [disabled]="formulario.invalid">            
+                Salvar
+                <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-bookmark-check-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" d="M4 0a2 2 0 0 0-2 2v13.5a.5.5 0 0 0 .74.439L8 13.069l5.26 2.87A.5.5 0 0 0 14 15.5V2a2 2 0 0 0-2-2H4zm6.854 5.854a.5.5 0 0 0-.708-.708L7.5 7.793 6.354 6.646a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z"/>
+                </svg>
+              </button> 
+            </div>
+          </div> 
         </div>
       </div>
       
       
     </form>
+    <div class="col d-flex justify-content-star"><button type="button" class="btn btn-light"  [routerLink]="['/home']" routerLinkActive="router-link-active">
+      <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-backspace-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" d="M15.683 3a2 2 0 0 0-2-2h-7.08a2 2 0 0 0-1.519.698L.241 7.35a1 1 0 0 0 0 1.302l4.843 5.65A2 2 0 0 0 6.603 15h7.08a2 2 0 0 0 2-2V3zM5.829 5.854a.5.5 0 1 1 .707-.708l2.147 2.147 2.146-2.147a.5.5 0 1 1 .707.708L9.39 8l2.146 2.146a.5.5 0 0 1-.707.708L8.683 8.707l-2.147 2.147a.5.5 0 0 1-.707-.708L7.976 8 5.829 5.854z"></path>
+      </svg>
+      Voltar
+    </button>
   </div>
+  
+  
+  
+</div>
+
 </div>

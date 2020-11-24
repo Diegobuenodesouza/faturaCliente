@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { BuscaCepService } from 'src/app/busca-cep.service';
-import { Cliente} from './../../_model/cliente';
+
 
 
 @Component({
@@ -11,17 +11,18 @@ import { Cliente} from './../../_model/cliente';
 })
 export class CadastroComponent implements OnInit {
 
-  cliente: Cliente;
+
+  textinput: FormControl;
 
   formulario = new FormGroup({
-    cnpj: new FormControl(null),
-    nomeEmpresarial: new FormControl(null),
-    logradouro: new FormControl(null),
-    numero: new FormControl(null),
-    cep: new FormControl(null),
-    bairro: new FormControl(null),
-    estado: new FormControl(null),
-    UF: new FormControl(null)
+    cnpj: new FormControl('', [Validators.required , Validators.maxLength(8)]),
+    nomeEmpresarial: new FormControl('' , [Validators.required]),
+    cep: new FormControl('' , [Validators.required]),
+    logradouro: new FormControl('' , [Validators.required]),
+    numero: new FormControl(''),
+    bairro: new FormControl('' , [Validators.required]),
+    localidade: new FormControl('' , [Validators.required]),
+    uf: new FormControl('' , [Validators.required])
   });
 
   constructor(private buscaCep: BuscaCepService) { }
@@ -29,12 +30,19 @@ export class CadastroComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  buscarCep(cep: string): any{
+  buscarCep(cep: string): any {
+
     this.buscaCep.buscarCEP(cep).subscribe(
-      (resposta) => { 
-        this.formulario.value.bairro = resposta.bairro;
-        console.log(resposta.bairro);
-      }
-    );
+      (resposta: any) => {
+
+        this.formulario.controls.cep.setValue(resposta.cep),
+        this.formulario.controls.logradouro.setValue(resposta.logradouro),
+        this.formulario.controls.bairro.setValue(resposta.bairro),
+        this.formulario.controls.localidade.setValue(resposta.localidade),
+        this.formulario.controls.uf.setValue(resposta.uf);
+
+      } );
+
   }
 }
+

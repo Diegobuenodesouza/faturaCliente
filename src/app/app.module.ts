@@ -11,7 +11,7 @@ import { LoginComponent } from './pagina-login/login/login.component';
 import { BannerComponent } from './pagina-login/banner/banner.component';
 import { PaginaLoginComponent } from './pagina-login/pagina-login.component';
 import { ClientesComponent } from './home/clientes/clientes.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 import {HttpClientModule  } from '@angular/common/http';
