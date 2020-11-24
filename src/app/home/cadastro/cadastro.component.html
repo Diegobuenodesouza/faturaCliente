@@ -8,7 +8,9 @@
       <div class="form-group">
         <div class="row col-4">        
           <label>CNPJ</label>
-          <input class="form-control" type="text" formControlName="cnpj" >
+          <input class="form-control"  type="text" mask="000.000.000-00||00.000.000/0000-00" formControlName="cnpj"
+          placeholder="Digite o CPF ou CNPJ"  >    
+        
         </div>      
       </div>
       
@@ -18,14 +20,16 @@
         <div class="col-8">
           <div class="form-group">
             <label>Nome Empresarial</label>
-            <input class="form-control" formControlName="nomeEmpresarial"   type="text"  >
+            <input class="form-control" formControlName="nomeEmpresarial" 
+            placeholder="Digite a razão social" type="text"  >
           </div>
         </div>
         
         <div class="col-4">
           <div class="form-group">
             <label>CEP</label>
-            <input class="form-control"  type="text" formControlName="cep" (blur)="buscarCep($event.target.value)" >
+            <input class="form-control"  placeholder="00000-000" mask="00000-000" 
+             type="text" formControlName="cep" (blur)="buscarCep($event.target.value)" >
           </div>
         </div>
         
@@ -36,7 +40,8 @@
         <div class="col-2">
           <div class="form-group">
             <label>Número</label>
-            <input class="form-control" type="text"   formControlName="numero">
+            <input class="form-control" type="text"  
+            placeholder="Número" formControlName="numero">
           </div>
         </div>
         
@@ -99,5 +104,4 @@
   
   
 </div>
-
 </div>

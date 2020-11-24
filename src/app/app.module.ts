@@ -16,6 +16,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import {HttpClientModule  } from '@angular/common/http';
 import { BuscaCepService} from './busca-cep.service';
+import { NgxMaskModule } from 'ngx-mask';
 
 @NgModule({
   declarations: [
@@ -34,8 +35,9 @@ import { BuscaCepService} from './busca-cep.service';
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
+    NgxMaskModule.forRoot()
   ],
-  providers: [ BuscaCepService ],
+  providers: [ BuscaCepService  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

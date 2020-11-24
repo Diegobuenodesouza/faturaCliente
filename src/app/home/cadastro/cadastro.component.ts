@@ -3,7 +3,6 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { BuscaCepService } from 'src/app/busca-cep.service';
 
 
-
 @Component({
   selector: 'app-cadastro',
   templateUrl: './cadastro.component.html',
@@ -12,10 +11,11 @@ import { BuscaCepService } from 'src/app/busca-cep.service';
 export class CadastroComponent implements OnInit {
 
 
+
   textinput: FormControl;
 
   formulario = new FormGroup({
-    cnpj: new FormControl('', [Validators.required , Validators.maxLength(8)]),
+    cnpj: new FormControl('', [Validators.required ]),
     nomeEmpresarial: new FormControl('' , [Validators.required]),
     cep: new FormControl('' , [Validators.required]),
     logradouro: new FormControl('' , [Validators.required]),
@@ -25,7 +25,7 @@ export class CadastroComponent implements OnInit {
     uf: new FormControl('' , [Validators.required])
   });
 
-  constructor(private buscaCep: BuscaCepService) { }
+  constructor(private buscaCep: BuscaCepService ) { }
 
   ngOnInit(): void {
   }
@@ -42,7 +42,9 @@ export class CadastroComponent implements OnInit {
         this.formulario.controls.uf.setValue(resposta.uf);
 
       } );
-
   }
+
+  
+
 }
 
