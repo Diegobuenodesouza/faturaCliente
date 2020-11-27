@@ -11,7 +11,7 @@ import { BuscaCepService } from 'src/app/busca-cep.service';
 export class CadastroComponent implements OnInit {
 
 
-
+  erroCep =  false;
   textinput: FormControl;
 
   formulario = new FormGroup({
@@ -34,17 +34,20 @@ export class CadastroComponent implements OnInit {
 
     this.buscaCep.buscarCEP(cep).subscribe(
       (resposta: any) => {
-
-        this.formulario.controls.cep.setValue(resposta.cep),
-        this.formulario.controls.logradouro.setValue(resposta.logradouro),
-        this.formulario.controls.bairro.setValue(resposta.bairro),
-        this.formulario.controls.localidade.setValue(resposta.localidade),
-        this.formulario.controls.uf.setValue(resposta.uf);
-
-      } );
+        if (resposta.erro === true){
+          this.erroCep = true ;
+        }
+        else{
+          this.formulario.controls.cep.setValue(resposta.cep),
+          this.formulario.controls.logradouro.setValue(resposta.logradouro),
+          this.formulario.controls.bairro.setValue(resposta.bairro),
+          this.formulario.controls.localidade.setValue(resposta.localidade),
+          this.formulario.controls.uf.setValue(resposta.uf);
+          this.erroCep = false;
+        }
+      },
+      (): any => { this.erroCep = true; }
+      );
   }
-
-  
-
 }
 
