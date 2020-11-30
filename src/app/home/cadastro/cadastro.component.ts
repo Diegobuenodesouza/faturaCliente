@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { BuscaCepService } from 'src/app/busca-cep.service';
+import { Cliente} from './../../_model/cliente';
 
 
 @Component({
@@ -10,7 +11,8 @@ import { BuscaCepService } from 'src/app/busca-cep.service';
 })
 export class CadastroComponent implements OnInit {
 
-
+  textovalidacao: string;
+  cliente: Cliente;
   erroCep =  false;
   textinput: FormControl;
 
@@ -28,12 +30,14 @@ export class CadastroComponent implements OnInit {
   constructor(private buscaCep: BuscaCepService ) { }
 
   ngOnInit(): void {
+
   }
 
   buscarCep(cep: string): any {
 
     this.buscaCep.buscarCEP(cep).subscribe(
-      (resposta: any) => {
+      (resposta: any): void => {
+
         if (resposta.erro === true){
           this.erroCep = true ;
         }
@@ -49,5 +53,32 @@ export class CadastroComponent implements OnInit {
       (): any => { this.erroCep = true; }
       );
   }
-}
 
+  cadastrar(): void {
+
+    this.cliente = new Cliente(
+      this.formulario.value.cnpj,
+      this.formulario.value.nomeEmpresarial,
+      this.formulario.value.cep,
+      this.formulario.value.logradouro,
+      this.formulario.value.numero,
+      this.formulario.value.bairro,
+      this.formulario.value.localidade,
+      this.formulario.value.uf,
+      []
+  );
+    console.log(this.cliente);
+  }
+
+  teste(campo: string): string {
+    if (this.formulario.controls.cnpj.touched === false){
+      return '';
+    }
+    if (this.formulario.controls.cnpj.invalid === true && this.formulario.controls.cnpj.touched === true) {
+      return 'is-invalid';
+    }
+    else{
+      return 'is-valid';
+    }
+  }
+}

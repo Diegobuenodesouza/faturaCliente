@@ -4,18 +4,17 @@
   
   
   <div class="shadow-lg p-3 mb-5 bg-white rounded">
-    <form [formGroup]="formulario">
+    <form [formGroup]="formulario" (ngSubmit)="cadastrar()">
       <div class="form-group">
         <div class="row col-4">        
           <label>CPF/CNPJ</label>
-          <input class="form-control" formControlName="cnpj"
+          <input class="form-control" formControlName="cnpj" 
           [ngClass]="{
             'is-invalid': formulario.get('cnpj').touched && formulario.get('cnpj').invalid,
             'is-valid': formulario.get('cnpj').valid
-          }" 
-          
-          type="text" mask="000.000.000-00||00.000.000/0000-00" 
-          placeholder="Digite o CPF ou CNPJ"  >    
+          }"          
+          placeholder="00.000.000/0000-00"
+          type="text" mask="000.000.000-00||00.000.000/0000-00"   >    
           
           <div class="invalid-feedback">Campo CPF/CNPJ deve ser preenchido</div>
           
@@ -28,16 +27,15 @@
         <div class="col-8">
           <div class="form-group">
             <label>Nome ou Razão Social</label>
-            <input class="form-control " formControlName="nomeEmpresarial" 
+            <input class="form-control " formControlName="nomeEmpresarial"
             [ngClass]="{
               'is-invalid': formulario.get('nomeEmpresarial').touched && formulario.get('nomeEmpresarial').invalid,
               'is-valid': formulario.get('nomeEmpresarial').valid
-            }"             
-            placeholder="Digite a razão social" type="text"  > 
+            }"
+  
+             type="text"  > 
             <div class="invalid-feedback">Campo nome ou nome empresarial deve ser preenchido</div>
-            
           </div>
-          
         </div>
         
         <div class="col-4">
@@ -59,15 +57,20 @@
           <div class="col-2">
             <div class="form-group">
               <label>Número</label>
-              <input class="form-control" type="number"  
-              placeholder="Número" formControlName="numero">
+              <input class="form-control" type="text"  formControlName="numero">
             </div>
           </div>
           
           <div class="col-5">
             <div class="form-group">
               <label>Logradouro</label>
-              <input class="form-control" type="text"  formControlName="logradouro" disabled >
+              <input class="form-control" type="text"  formControlName="logradouro"
+              [ngClass]="{
+                'is-invalid': formulario.get('logradouro').touched && formulario.get('logradouro').invalid,
+                'is-valid': formulario.get('logradouro').valid
+              }"            
+              >
+              <div class="invalid-feedback">Campo logradouro deve ser preenchido</div>
             </div>
           </div>
           
@@ -75,7 +78,13 @@
           <div class="col-5">
             <div class="form-group">
               <label>Bairro</label>
-              <input class="form-control" type="text" formControlName="bairro"  disabled >
+              <input class="form-control" type="text" formControlName="bairro"
+              [ngClass]="{
+                'is-invalid': formulario.get('bairro').touched && formulario.get('bairro').invalid,
+                'is-valid': formulario.get('bairro').valid
+              }"   
+              >
+              <div class="invalid-feedback">Campo bairro deve ser preenchido</div>
             </div>
           </div>
         </div>
@@ -85,21 +94,33 @@
           <div class="col-6">
             <div class="form-group">
               <label>Municipio</label>
-              <input class="form-control" type="text"  formControlName="localidade"  disabled >
+              <input class="form-control" type="text"  formControlName="localidade" 
+              [ngClass]="{
+                'is-invalid': formulario.get('localidade').touched && formulario.get('localidade').invalid,
+                'is-valid': formulario.get('localidade').valid
+              }" 
+              >
+              <div class="invalid-feedback">Campo localidade deve ser preenchido</div>
             </div>
           </div>
           
-          <div class="col-1">
+          <div class="col-2">
             <div class="form-group">
               <label>UF</label>
-              <input class="form-control" type="text" formControlName="uf" disabled >
+              <input class="form-control" type="text" formControlName="uf" 
+              [ngClass]="{
+                'is-invalid': formulario.get('uf').touched && formulario.get('uf').invalid,
+                'is-valid': formulario.get('uf').valid
+              }" 
+              >
+              <div class="invalid-feedback">Campo UF deve ser preenchido</div>
             </div>
           </div>
           
-          <div class="col-5">
+          <div class="col-4">
             <div class="form-group">
-              <div class="col d-flex justify-content-between altura">
-                <button type="button" class="btn btn-success" [disabled]="formulario.invalid">            
+              <div class="col d-flex justify-content-end altura">
+                <button type="submit" class="btn btn-success" [disabled]="formulario.invalid">            
                   Salvar
                   <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-bookmark-check-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" d="M4 0a2 2 0 0 0-2 2v13.5a.5.5 0 0 0 .74.439L8 13.069l5.26 2.87A.5.5 0 0 0 14 15.5V2a2 2 0 0 0-2-2H4zm6.854 5.854a.5.5 0 0 0-.708-.708L7.5 7.793 6.354 6.646a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z"/>
@@ -116,4 +137,10 @@
       
     </div>
   </div>
+
+  <div class="container">
+    <input type="text" class="form-control" required
+    [ngClass]="teste('cnpj')"
+    >
+  </div> 
   
