@@ -1,9 +1,36 @@
 <div class="container">
-    <div class="row">   
-        
-        <div class="col-10">
+    <div class="row centralizar" >        
+        <div class="col-12">
             <h3 class="text-center">Lista de clientes</h3>
         </div>
+    </div>
+    <div class="row">
+        <table class="table table-striped">
+            <thead >
+                <tr class="centralizar">
+                    <th scope="col">CPF / CNPJ</th>
+                    <th scope="col">Nome Empresarial</th>
+                    <th scope="col">Localidade</th>
+                    <th scope="col">Valor Fatura</th>
+                    <th scope="col">Opções</th>
+
+                </tr>
+            </thead>
+            <tbody *ngFor="let cliente of clientes" class="table-sm">
+                <tr class="centralizar">
+                    <th scope="row">{{ cliente.cnpj }}</th>
+                    <td>{{ cliente.nomeEmpresarial }}</td> 
+                    <td>{{ cliente.localidade }}</td>
+                    <td> {{ somarServicos(cliente)  | currency : 'BRL'}}</td>
+                    <td> 
+                        <button class="btn btn-info" >Imprimir</button>
+                        <button class="btn btn-warning">Editar</button>
+                        <button class="btn btn-danger">Excluir</button>
+                    </td>
+                </tr>                
+            </tbody>
+        </table>
+        
     </div>
 </div>
 

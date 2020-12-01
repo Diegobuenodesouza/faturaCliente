@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
+import {HttpClientModule  } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { TopoComponent } from './home/topo/topo.component';
@@ -11,11 +12,12 @@ import { LoginComponent } from './pagina-login/login/login.component';
 import { BannerComponent } from './pagina-login/banner/banner.component';
 import { PaginaLoginComponent } from './pagina-login/pagina-login.component';
 import { ClientesComponent } from './home/clientes/clientes.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {  ReactiveFormsModule } from '@angular/forms';
 
 
-import {HttpClientModule  } from '@angular/common/http';
 import { BuscaCepService} from './busca-cep.service';
+import { ConsultaClientesService } from './consulta-clientes.service';
+
 import { NgxMaskModule } from 'ngx-mask';
 
 @NgModule({
@@ -37,7 +39,7 @@ import { NgxMaskModule } from 'ngx-mask';
     HttpClientModule,
     NgxMaskModule.forRoot()
   ],
-  providers: [ BuscaCepService  ],
+  providers: [ BuscaCepService , ConsultaClientesService  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

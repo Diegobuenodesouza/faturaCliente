@@ -1,0 +1,50 @@
+{
+    "clientes" : [
+        {
+            "id" : 1,
+            "cnpj": "472874461000150",
+            "nomeEmpresarial" : "Jedal Redentor",
+            "cep" : "05160340",
+            "logradouro" : "Rua Constante",
+            "numero" : "350",
+            "bairro" : "Parte Industril",
+            "localidade" : "Osasco",
+            "UF" : "SP",
+            "listaServico" : [
+                { 
+                    "descricao" : "PIS",
+                    "valor" : 25.00,
+                    "compentencia" : "Agosto" 
+                },
+                {
+                    "descricao" : "COFINS",
+                    "valor" : 125.00,
+                    "compentencia" : "Agosto" 
+                }
+            ]
+        },
+        {
+            "id" : 2,
+            "cnpj": "39432946843",
+            "nomeEmpresarial" : "Diego Bueno de Souza",
+            "cep" : "05160340",
+            "logradouro" : "Rua Moxoto",
+            "numero" : "38",
+            "bairro" : "Pirituba",
+            "localidade" : "São Paulo",
+            "UF" : "SP",
+            "listaServico" : [
+                { 
+                    "descricao" : "Energia",
+                    "valor" : 5.00,
+                    "compentencia" : "Agosto" 
+                },
+                {
+                    "descricao" : "Agua",
+                    "valor" : 25.00,
+                    "compentencia" : "Agosto" 
+                }
+            ]
+        }
+    ]
+}

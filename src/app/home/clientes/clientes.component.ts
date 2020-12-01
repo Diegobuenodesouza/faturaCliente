@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ConsultaClientesService } from 'src/app/consulta-clientes.service';
+import { Cliente } from 'src/app/_model/cliente';
+import { Servico } from 'src/app/_model/servico';
 
 @Component({
   selector: 'app-clientes',
@@ -8,11 +10,22 @@ import { Router } from '@angular/router';
 })
 export class ClientesComponent implements OnInit {
 
+  clientes: Cliente;
 
-  constructor(private route: Router) { }
+  constructor(private consultaCliente: ConsultaClientesService) { }
 
   ngOnInit(): void {
+    this.consultaCliente.getClientes().subscribe(
+      (clientes) => { this.clientes = clientes; }
+    );
   }
 
+  somarServicos(cliente: Cliente): number {
+    let total = 0;
+    cliente.listaServico.forEach((servico: Servico) => {
+      total += servico.valor;
+    });
+    return total;
+  }
 
 }
