@@ -1,4 +1,5 @@
 import { HttpClient } from '@angular/common/http';
+import { core } from '@angular/compiler';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Cliente } from './_model/cliente';
@@ -16,5 +17,11 @@ export class ConsultaClientesService {
     return this.http.get(this.URL);
   }
 
-  
+  getIdCliente(id: number): Observable<any>{
+    return this.http.get(`${this.URL}/${id}`);
+  }
+
+  postCliente(cliente: Cliente): void {
+    this.http.post(this.URL, cliente).subscribe();
+  }
 }

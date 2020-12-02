@@ -23,9 +23,11 @@
                     <td>{{ cliente.localidade }}</td>
                     <td> {{ somarServicos(cliente)  | currency : 'BRL'}}</td>
                     <td> 
-                        <button class="btn btn-info" >Imprimir</button>
-                        <button class="btn btn-warning">Editar</button>
-                        <button class="btn btn-danger">Excluir</button>
+                        <button class="btn btn-info btn-sm" >Imprimir</button>                        
+                        <button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#exampleModal" 
+                            (click)="imprimirIdCliente(cliente.id)" 
+                        >Editar</button>
+                        <button class="btn btn-danger btn-sm">Excluir</button>
                     </td>
                 </tr>                
             </tbody>
@@ -35,6 +37,6 @@
 </div>
 
 
-
+<app-editar-cliente  *ngIf="clienteId !== undefined" [clienteId]="clienteId"></app-editar-cliente>
 
 

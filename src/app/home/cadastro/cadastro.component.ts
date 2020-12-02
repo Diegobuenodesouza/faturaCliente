@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { BuscaCepService } from 'src/app/busca-cep.service';
+import { ConsultaClientesService } from 'src/app/consulta-clientes.service';
 import { Cliente} from './../../_model/cliente';
 
 
@@ -27,7 +29,11 @@ export class CadastroComponent implements OnInit {
     uf: new FormControl('' , [Validators.required])
   });
 
-  constructor(private buscaCep: BuscaCepService ) { }
+  constructor(
+    private buscaCep: BuscaCepService,
+    private consultaCliente: ConsultaClientesService,
+    private router: Router
+    ) { }
 
   ngOnInit(): void {
 
@@ -57,6 +63,7 @@ export class CadastroComponent implements OnInit {
   cadastrar(): void {
 
     this.cliente = new Cliente(
+      this.formulario.value.id,
       this.formulario.value.cnpj,
       this.formulario.value.nomeEmpresarial,
       this.formulario.value.cep,
@@ -67,18 +74,7 @@ export class CadastroComponent implements OnInit {
       this.formulario.value.uf,
       []
   );
-    console.log(this.cliente);
-  }
-
-  teste(campo: string): string {
-    if (this.formulario.controls.cnpj.touched === false){
-      return '';
-    }
-    if (this.formulario.controls.cnpj.invalid === true && this.formulario.controls.cnpj.touched === true) {
-      return 'is-invalid';
-    }
-    else{
-      return 'is-valid';
-    }
+    this.consultaCliente.postCliente(this.cliente);   
+    this.router.navigate(['/home']);
   }
 }

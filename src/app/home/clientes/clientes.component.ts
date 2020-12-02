@@ -10,7 +10,8 @@ import { Servico } from 'src/app/_model/servico';
 })
 export class ClientesComponent implements OnInit {
 
-  clientes: Cliente;
+  clientes: Cliente[];
+  clienteId: number;
 
   constructor(private consultaCliente: ConsultaClientesService) { }
 
@@ -26,6 +27,11 @@ export class ClientesComponent implements OnInit {
       total += servico.valor;
     });
     return total;
+  }
+
+  imprimirIdCliente(idcliente: any): void {
+    this.clienteId = idcliente;
+    console.log(idcliente);
   }
 
 }

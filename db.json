@@ -1,50 +1,74 @@
 {
-    "clientes" : [
+  "clientes": [
+    {
+      "id": 1,
+      "cnpj": "472874461000150",
+      "nomeEmpresarial": "Jedal Redentor",
+      "cep": "05160340",
+      "logradouro": "Rua Constante",
+      "numero": "350",
+      "bairro": "Parte Industril",
+      "localidade": "Osasco",
+      "UF": "SP",
+      "listaServico": [
         {
-            "id" : 1,
-            "cnpj": "472874461000150",
-            "nomeEmpresarial" : "Jedal Redentor",
-            "cep" : "05160340",
-            "logradouro" : "Rua Constante",
-            "numero" : "350",
-            "bairro" : "Parte Industril",
-            "localidade" : "Osasco",
-            "UF" : "SP",
-            "listaServico" : [
-                { 
-                    "descricao" : "PIS",
-                    "valor" : 25.00,
-                    "compentencia" : "Agosto" 
-                },
-                {
-                    "descricao" : "COFINS",
-                    "valor" : 125.00,
-                    "compentencia" : "Agosto" 
-                }
-            ]
+          "descricao": "PIS",
+          "valor": 25,
+          "compentencia": "Agosto"
         },
         {
-            "id" : 2,
-            "cnpj": "39432946843",
-            "nomeEmpresarial" : "Diego Bueno de Souza",
-            "cep" : "05160340",
-            "logradouro" : "Rua Moxoto",
-            "numero" : "38",
-            "bairro" : "Pirituba",
-            "localidade" : "São Paulo",
-            "UF" : "SP",
-            "listaServico" : [
-                { 
-                    "descricao" : "Energia",
-                    "valor" : 5.00,
-                    "compentencia" : "Agosto" 
-                },
-                {
-                    "descricao" : "Agua",
-                    "valor" : 25.00,
-                    "compentencia" : "Agosto" 
-                }
-            ]
+          "descricao": "COFINS",
+          "valor": 125,
+          "compentencia": "Agosto"
         }
-    ]
+      ]
+    },
+    {
+      "id": 2,
+      "cnpj": "39432946843",
+      "nomeEmpresarial": "Diego Bueno de Souza",
+      "cep": "05160340",
+      "logradouro": "Rua Moxoto",
+      "numero": "38",
+      "bairro": "Pirituba",
+      "localidade": "São Paulo",
+      "UF": "SP",
+      "listaServico": [
+        {
+          "descricao": "Energia",
+          "valor": 5,
+          "compentencia": "Agosto"
+        },
+        {
+          "descricao": "Agua",
+          "valor": 25,
+          "compentencia": "Agosto"
+        }
+      ]
+    },
+    {
+      "cnpj": "12312312312312",
+      "nomeEmpresarial": "123123123123123",
+      "cep": "05160-340",
+      "logradouro": "Rua Moxotó",
+      "numero": "123",
+      "bairro": "Jaraguá",
+      "localidade": "São Paulo",
+      "UF": "SP",
+      "listaServico": [],
+      "id": 3
+    },
+    {
+      "cnpj": "47287164646446",
+      "nomeEmpresarial": "Meg Bueno de Souza",
+      "cep": "05110-000",
+      "logradouro": "Avenida Mutinga",
+      "numero": "3123",
+      "bairro": "Jardim Santo Elias",
+      "localidade": "São Paulo",
+      "UF": "SP",
+      "listaServico": [],
+      "id": 4
+    }
+  ]
 }

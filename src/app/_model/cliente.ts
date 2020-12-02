@@ -3,7 +3,8 @@ import { Servico } from './servico';
 export class Cliente{
 
     constructor(
-        public CNPJ: string,
+        id: number,
+        public cnpj: string,
         public nomeEmpresarial: string,
         public cep: string,
         public logradouro: string,

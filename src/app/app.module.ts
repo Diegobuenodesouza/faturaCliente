@@ -19,6 +19,7 @@ import { BuscaCepService} from './busca-cep.service';
 import { ConsultaClientesService } from './consulta-clientes.service';
 
 import { NgxMaskModule } from 'ngx-mask';
+import { EditarClienteComponent } from './home/clientes/editar-cliente/editar-cliente.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { NgxMaskModule } from 'ngx-mask';
     LoginComponent,
     BannerComponent,
     PaginaLoginComponent,
-    ClientesComponent
+    ClientesComponent,
+    EditarClienteComponent
   ],
   imports: [
     BrowserModule,

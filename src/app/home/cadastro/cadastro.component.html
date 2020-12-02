@@ -1,7 +1,5 @@
-<div class="container">
-  
-  <br>
-  
+<div class="container">  
+  <br>  
   
   <div class="shadow-lg p-3 mb-5 bg-white rounded">
     <form [formGroup]="formulario" (ngSubmit)="cadastrar()">
@@ -32,8 +30,8 @@
               'is-invalid': formulario.get('nomeEmpresarial').touched && formulario.get('nomeEmpresarial').invalid,
               'is-valid': formulario.get('nomeEmpresarial').valid
             }"
-  
-             type="text"  > 
+            
+            type="text"  > 
             <div class="invalid-feedback">Campo nome ou nome empresarial deve ser preenchido</div>
           </div>
         </div>
@@ -132,15 +130,9 @@
         </div>
         
         
-      </form>
-      
+      </form>     
       
     </div>
   </div>
 
-  <div class="container">
-    <input type="text" class="form-control" required
-    [ngClass]="teste('cnpj')"
-    >
-  </div> 
-  
+
