@@ -13,15 +13,21 @@ export class ConsultaClientesService {
 
   constructor(private http: HttpClient) { }
 
-  getClientes(): Observable<any>{
-    return this.http.get(this.URL);
+  getClientes(): Promise<Cliente[]>{
+    return this.http.get<Cliente[]>(this.URL)
+    .toPromise()
+    .then((resposta: any) => resposta);
   }
 
-  getIdCliente(id: number): Observable<any>{
-    return this.http.get(`${this.URL}/${id}`);
+  getIdCliente(id: number): Observable<Cliente>{
+    return this.http.get<Cliente>(`${this.URL}/${id}`);
   }
 
-  postCliente(cliente: Cliente): void {
-    this.http.post(this.URL, cliente).subscribe();
+  postCliente(cliente: Cliente): Observable<any> {
+    return this.http.post(this.URL, cliente);
+  }
+
+  deleteCliente(id: number): Observable<any> {
+    return this.http.delete(`${this.URL}/${id}`);
   }
 }

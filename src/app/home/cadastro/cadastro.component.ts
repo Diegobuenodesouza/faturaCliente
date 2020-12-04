@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BuscaCepService } from 'src/app/busca-cep.service';
@@ -16,7 +17,7 @@ export class CadastroComponent implements OnInit {
   textovalidacao: string;
   cliente: Cliente;
   erroCep =  false;
-  textinput: FormControl;
+
 
   formulario = new FormGroup({
     cnpj: new FormControl('', [Validators.required ]),
@@ -74,7 +75,8 @@ export class CadastroComponent implements OnInit {
       this.formulario.value.uf,
       []
   );
-    this.consultaCliente.postCliente(this.cliente);   
-    this.router.navigate(['/home']);
+    this.consultaCliente.postCliente(this.cliente).subscribe(
+      () => { console.log('cadastro realizado com sucesso'), this.router.navigate(['home' , 'clientes']); }
+    );
   }
 }

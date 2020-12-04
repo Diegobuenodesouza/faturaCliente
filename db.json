@@ -45,30 +45,6 @@
           "compentencia": "Agosto"
         }
       ]
-    },
-    {
-      "cnpj": "12312312312312",
-      "nomeEmpresarial": "123123123123123",
-      "cep": "05160-340",
-      "logradouro": "Rua Moxotó",
-      "numero": "123",
-      "bairro": "Jaraguá",
-      "localidade": "São Paulo",
-      "UF": "SP",
-      "listaServico": [],
-      "id": 3
-    },
-    {
-      "cnpj": "47287164646446",
-      "nomeEmpresarial": "Meg Bueno de Souza",
-      "cep": "05110-000",
-      "logradouro": "Avenida Mutinga",
-      "numero": "3123",
-      "bairro": "Jardim Santo Elias",
-      "localidade": "São Paulo",
-      "UF": "SP",
-      "listaServico": [],
-      "id": 4
     }
   ]
 }

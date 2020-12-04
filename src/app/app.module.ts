@@ -20,6 +20,7 @@ import { ConsultaClientesService } from './consulta-clientes.service';
 
 import { NgxMaskModule } from 'ngx-mask';
 import { EditarClienteComponent } from './home/clientes/editar-cliente/editar-cliente.component';
+import { DeletarClienteComponent } from './home/deletar-cliente/deletar-cliente.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { EditarClienteComponent } from './home/clientes/editar-cliente/editar-cl
     BannerComponent,
     PaginaLoginComponent,
     ClientesComponent,
-    EditarClienteComponent
+    EditarClienteComponent,
+    DeletarClienteComponent
   ],
   imports: [
     BrowserModule,

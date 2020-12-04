@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges } from '@angular/core';
 import { ConsultaClientesService } from 'src/app/consulta-clientes.service';
 import { Cliente } from 'src/app/_model/cliente';
 import { Servico } from 'src/app/_model/servico';
@@ -10,15 +10,20 @@ import { Servico } from 'src/app/_model/servico';
 })
 export class ClientesComponent implements OnInit {
 
-  clientes: Cliente[];
+  clientes: Cliente[] = [];
   clienteId: number;
 
   constructor(private consultaCliente: ConsultaClientesService) { }
 
   ngOnInit(): void {
-    this.consultaCliente.getClientes().subscribe(
-      (clientes) => { this.clientes = clientes; }
-    );
+    this.buscarCliente();
+  }
+
+ 
+
+  buscarCliente(): void{
+  this.consultaCliente.getClientes()
+  .then((resposta: any) => this.clientes = resposta);
   }
 
   somarServicos(cliente: Cliente): number {
@@ -29,9 +34,13 @@ export class ClientesComponent implements OnInit {
     return total;
   }
 
-  imprimirIdCliente(idcliente: any): void {
+  passarId(idcliente: any): void {
     this.clienteId = idcliente;
-    console.log(idcliente);
   }
 
+  deletarClinete(id: number): void {
+    this.consultaCliente.deleteCliente(id).subscribe(
+      () => { this.buscarCliente(), console.log('deletado com sucesso'); }
+    );
+  }
 }
