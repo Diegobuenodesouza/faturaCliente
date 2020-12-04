@@ -1,7 +1,8 @@
 
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { BuscaCepService } from 'src/app/busca-cep.service';
 import { ConsultaClientesService } from 'src/app/consulta-clientes.service';
 import { Cliente} from './../../_model/cliente';
@@ -27,17 +28,18 @@ export class CadastroComponent implements OnInit {
     numero: new FormControl(''),
     bairro: new FormControl('' , [Validators.required]),
     localidade: new FormControl('' , [Validators.required]),
-    uf: new FormControl('' , [Validators.required])
+    uf: new FormControl('' , [Validators.required, Validators.maxLength(2), Validators.minLength(2)])
   });
 
   constructor(
     private buscaCep: BuscaCepService,
     private consultaCliente: ConsultaClientesService,
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService,
     ) { }
 
   ngOnInit(): void {
-
+    
   }
 
   buscarCep(cep: string): any {
@@ -76,7 +78,8 @@ export class CadastroComponent implements OnInit {
       []
   );
     this.consultaCliente.postCliente(this.cliente).subscribe(
-      () => { console.log('cadastro realizado com sucesso'), this.router.navigate(['home' , 'clientes']); }
+      () => {this.router.navigate(['home' , 'clientes']); }
     );
+    this.toastr.success('Cadastro realizado com sucesso');
   }
 }

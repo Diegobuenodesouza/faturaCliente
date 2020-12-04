@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { ConsultaClientesService } from 'src/app/consulta-clientes.service';
 import { Cliente } from 'src/app/_model/cliente';
 import { Servico } from 'src/app/_model/servico';
@@ -16,6 +16,7 @@ export class ClientesComponent implements OnInit {
   constructor(private consultaCliente: ConsultaClientesService) { }
 
   ngOnInit(): void {
+
     this.consultaCliente.getClientes()
     .then((resposta: any) => this.clientes = resposta);
   }
@@ -31,4 +32,5 @@ export class ClientesComponent implements OnInit {
   passarId(idcliente: any): void {
     this.clienteId = idcliente;
   }
+
 }

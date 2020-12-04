@@ -1,7 +1,7 @@
-<div class="container">  
+<div class="container " >  
   <br>  
   
-  <div class="shadow-lg p-3 mb-5 bg-white rounded">
+  <div class="shadow-lg p-3 mb-5 bg-black rounded" style="border: 0.5px rgba(122, 120, 120, 0.603) solid;">
     <form [formGroup]="formulario" (ngSubmit)="cadastrar()">
       <div class="form-group">
         <div class="row col-4">        
@@ -14,7 +14,8 @@
           placeholder="00.000.000/0000-00"
           type="text" mask="000.000.000-00||00.000.000/0000-00"   >    
           
-          <div class="invalid-feedback">Campo CPF/CNPJ deve ser preenchido</div>
+
+          <div class="invalid-feedback ">Campo CPF/CNPJ deve ser preenchido</div>
           
         </div>      
       </div>

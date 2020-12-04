@@ -1,5 +1,6 @@
 
 import { Component, Input,  OnInit, Output , EventEmitter, OnChanges } from '@angular/core';
+import {  ToastrService } from 'ngx-toastr';
 import { ConsultaClientesService } from 'src/app/consulta-clientes.service';
 import { Cliente } from 'src/app/_model/cliente';
 
@@ -15,7 +16,8 @@ export class DeletarClienteComponent implements OnInit, OnChanges{
   @Output() listanovamente = new EventEmitter();
 
   constructor(
-    private consultaCliente: ConsultaClientesService
+    private consultaCliente: ConsultaClientesService,
+    private toastr: ToastrService
     ) { }
 
   ngOnInit(): void {
@@ -29,7 +31,8 @@ export class DeletarClienteComponent implements OnInit, OnChanges{
 
   excluirCliente(): void{
     this.consultaCliente.deleteCliente(this.clienteId).subscribe(
-      () => { console.log('deletado com sucesso'), this.listanovamente.emit()}
+      () => { this.listanovamente.emit()}
     );
+    this.toastr.info('Cliente exluido com sucesso');
   }
 }
