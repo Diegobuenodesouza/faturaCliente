@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container"  >
     <div class="row centralizar" >        
         <div class="col-12">
             <h3 class="text-center">Lista de clientes</h3>
@@ -30,7 +30,6 @@
                         <button class="btn btn-danger btn-sm"
                         data-toggle="modal" data-target="#deleteModal"
                         (click)="passarId(cliente.id)"
-                        (click)="deletarClinete(cliente.id)"
                         >Excluir</button>
                     </td>
                 </tr>                
@@ -42,7 +41,7 @@
 
 
 <app-editar-cliente  *ngIf="clienteId !== undefined" [clienteId]="clienteId"  ></app-editar-cliente>
-<!-- <app-deletar-cliente *ngIf="clienteId !== undefined"  [clienteId]="clienteId"  ></app-deletar-cliente> -->
+<app-deletar-cliente *ngIf="clienteId !== undefined"  [clienteId]="clienteId"  (listanovamente)="ngOnInit()"></app-deletar-cliente>
 
 
 

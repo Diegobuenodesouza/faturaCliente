@@ -16,14 +16,8 @@ export class ClientesComponent implements OnInit {
   constructor(private consultaCliente: ConsultaClientesService) { }
 
   ngOnInit(): void {
-    this.buscarCliente();
-  }
-
- 
-
-  buscarCliente(): void{
-  this.consultaCliente.getClientes()
-  .then((resposta: any) => this.clientes = resposta);
+    this.consultaCliente.getClientes()
+    .then((resposta: any) => this.clientes = resposta);
   }
 
   somarServicos(cliente: Cliente): number {
@@ -36,11 +30,5 @@ export class ClientesComponent implements OnInit {
 
   passarId(idcliente: any): void {
     this.clienteId = idcliente;
-  }
-
-  deletarClinete(id: number): void {
-    this.consultaCliente.deleteCliente(id).subscribe(
-      () => { this.buscarCliente(), console.log('deletado com sucesso'); }
-    );
   }
 }
