@@ -21,7 +21,7 @@ import { ConsultaClientesService } from './consulta-clientes.service';
 
 import { NgxMaskModule } from 'ngx-mask';
 import { EditarClienteComponent } from './home/clientes/editar-cliente/editar-cliente.component';
-import { DeletarClienteComponent } from './home/deletar-cliente/deletar-cliente.component';
+import { DeletarClienteComponent } from './home/clientes/deletar-cliente/deletar-cliente.component';
 import { CpfcnpjPipePipe } from './pipe/cpfcnpj-pipe.pipe';
 
 

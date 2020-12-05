@@ -23,10 +23,8 @@
                     <td>{{ cliente.localidade }}</td>
                     <td> {{ somarServicos(cliente)  | currency : 'BRL'}}</td>
                     <td> 
-                        <button  type="button" class="btn btn-info btn-sm" data-toggle="tooltip" 
-                        >Imprimir</button>      
-
-                        <button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#exampleModal" 
+                      
+                        <button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#editarModal" 
                             (click)="passarId(cliente.id)" 
                             >Editar</button>
 
