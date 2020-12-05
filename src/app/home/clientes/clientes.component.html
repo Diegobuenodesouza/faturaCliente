@@ -18,7 +18,7 @@
             </thead>
             <tbody *ngFor="let cliente of clientes" class="table-sm">
                 <tr class="centralizar">
-                    <th scope="row">{{ cliente.cnpj }}</th>
+                    <th scope="row">{{ cliente.cnpj | cpfcnpjPipe }}</th>
                     <td>{{ cliente.nomeEmpresarial }}</td> 
                     <td>{{ cliente.localidade }}</td>
                     <td> {{ somarServicos(cliente)  | currency : 'BRL'}}</td>

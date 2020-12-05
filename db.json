@@ -2,7 +2,7 @@
   "clientes": [
     {
       "id": 1,
-      "cnpj": "472874461000150",
+      "cnpj": "47287446000150",
       "nomeEmpresarial": "Jedal Redentor",
       "cep": "05160340",
       "logradouro": "Rua Constante",
@@ -45,6 +45,18 @@
           "compentencia": "Agosto"
         }
       ]
+    },
+    {
+      "cnpj": "47287461000150",
+      "nomeEmpresarial": "123123",
+      "cep": "05160-340",
+      "logradouro": "Rua Moxotó",
+      "numero": "1231",
+      "bairro": "Jaraguá",
+      "localidade": "São Paulo",
+      "UF": "SP",
+      "listaServico": [],
+      "id": 3
     }
   ]
 }
