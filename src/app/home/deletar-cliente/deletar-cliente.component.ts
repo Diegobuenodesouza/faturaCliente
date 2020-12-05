@@ -33,6 +33,6 @@ export class DeletarClienteComponent implements OnInit, OnChanges{
     this.consultaCliente.deleteCliente(this.clienteId).subscribe(
       () => { this.listanovamente.emit()}
     );
-    this.toastr.info('Cliente exluido com sucesso');
+    this.toastr.info('Cliente excluido com sucesso');
   }
 }

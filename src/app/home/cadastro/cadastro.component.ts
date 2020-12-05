@@ -39,7 +39,7 @@ export class CadastroComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
-    
+
   }
 
   buscarCep(cep: string): any {

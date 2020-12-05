@@ -3,13 +3,13 @@
     {
       "id": 1,
       "cnpj": "47287446000150",
-      "nomeEmpresarial": "Jedal Redentor",
-      "cep": "05160340",
-      "logradouro": "Rua Constante",
+      "nomeEmpresarial": "Tibia Forever",
+      "cep": "05160100",
+      "logradouro": "Rua mutinga",
       "numero": "350",
-      "bairro": "Parte Industril",
-      "localidade": "Osasco",
-      "UF": "SP",
+      "bairro": "Pirutuba",
+      "localidade": "Sao Paulo",
+      "UF": "BA",
       "listaServico": [
         {
           "descricao": "PIS",
@@ -26,7 +26,7 @@
     {
       "id": 2,
       "cnpj": "39432946843",
-      "nomeEmpresarial": "Diego Bueno de Souza",
+      "nomeEmpresarial": "Camila Almeida",
       "cep": "05160340",
       "logradouro": "Rua Moxoto",
       "numero": "38",
@@ -47,11 +47,11 @@
       ]
     },
     {
-      "cnpj": "47287461000150",
-      "nomeEmpresarial": "123123",
+      "cnpj": "23423423423423",
+      "nomeEmpresarial": "1111",
       "cep": "05160-340",
       "logradouro": "Rua Moxotó",
-      "numero": "1231",
+      "numero": "123",
       "bairro": "Jaraguá",
       "localidade": "São Paulo",
       "UF": "SP",

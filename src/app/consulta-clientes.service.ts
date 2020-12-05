@@ -30,4 +30,8 @@ export class ConsultaClientesService {
   deleteCliente(id: number): Observable<any> {
     return this.http.delete(`${this.URL}/${id}`);
   }
+
+  putCliente(id: number, cliente: Cliente): Observable<any>{
+    return this.http.put(`${this.URL}/${id}` , cliente);
+  }
 }
