@@ -23,6 +23,7 @@ import { NgxMaskModule } from 'ngx-mask';
 import { EditarClienteComponent } from './home/clientes/editar-cliente/editar-cliente.component';
 import { DeletarClienteComponent } from './home/clientes/deletar-cliente/deletar-cliente.component';
 import { CpfcnpjPipePipe } from './pipe/cpfcnpj-pipe.pipe';
+import { ServicosClienteComponent } from './home/clientes/servicos-cliente/servicos-cliente.component';
 
 
 
@@ -39,7 +40,8 @@ import { CpfcnpjPipePipe } from './pipe/cpfcnpj-pipe.pipe';
     ClientesComponent,
     EditarClienteComponent,
     DeletarClienteComponent,
-    CpfcnpjPipePipe
+    CpfcnpjPipePipe,
+    ServicosClienteComponent
   ],
   imports: [
     BrowserModule,

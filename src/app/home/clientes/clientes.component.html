@@ -28,7 +28,9 @@
                             (click)="passarId(cliente.id)" 
                             >Editar</button>
 
-                        <button class="btn btn-success btn-sm">Serviços</button>
+                        <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#servicosModal"
+                        (click)="passarId(cliente.id)"
+                        >Serviços</button>
 
                         <button class="btn btn-danger btn-sm"
                         data-toggle="modal" data-target="#deleteModal"
@@ -45,7 +47,7 @@
 
 <app-editar-cliente  *ngIf="clienteId !== undefined" [clienteId]="clienteId"  (atualizarLista)=ngOnInit() ></app-editar-cliente>
 <app-deletar-cliente *ngIf="clienteId !== undefined"  [clienteId]="clienteId"  (listanovamente)="ngOnInit()"></app-deletar-cliente>
-
+<app-servicos-cliente *ngIf="clienteId !== undefined"  [clienteId]="clienteId" ></app-servicos-cliente>
 
 
 

@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, OnChanges, Output, EventEmitter  } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import { ConsultaClientesService } from 'src/app/consulta-clientes.service';
 import { Cliente } from 'src/app/_model/cliente';
 
@@ -28,6 +29,7 @@ export class EditarClienteComponent implements OnInit, OnChanges {
 
   constructor(
     private consultaCliente: ConsultaClientesService,
+    private toastr: ToastrService
     ) { }
 
   ngOnInit(): void {}
@@ -60,7 +62,7 @@ export class EditarClienteComponent implements OnInit, OnChanges {
     this.cliente.UF = this.formularioEditar.value.uf;
 
     this.consultaCliente.putCliente(this.clienteId, this.cliente).subscribe(
-      () => { this.atualizarLista.emit(); }
+      () => { this.atualizarLista.emit();  this.toastr.success('Cliente alterado com sucesso') }
     );
 
   }
