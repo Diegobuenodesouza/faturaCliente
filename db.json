@@ -14,12 +14,12 @@
         {
           "descricao": "PIS",
           "valor": 25,
-          "compentencia": "Agosto"
+          "vencimento": "01/01/2020"
         },
         {
           "descricao": "COFINS",
           "valor": 125,
-          "compentencia": "Agosto"
+          "vencimento": "01/01/2020"
         }
       ]
     },
@@ -37,22 +37,22 @@
         {
           "descricao": "Energia",
           "valor": 5,
-          "compentencia": "Agosto"
+          "vencimento": "01/01/2020"
         },
         {
           "descricao": "Agua",
           "valor": 25,
-          "compentencia": "Agosto"
+          "vencimento": "01/01/2020"
         }
       ]
     },
     {
-      "cnpj": "05164035656565",
-      "nomeEmpresarial": "Diego Bueno de Souza",
-      "cep": "05160-340",
-      "logradouro": "Rua Moxotó",
-      "numero": "31",
-      "bairro": "Jaraguá",
+      "cnpj": "54545454545445",
+      "nomeEmpresarial": "Diego Bueno",
+      "cep": "05110-000",
+      "logradouro": "Avenida Mutinga",
+      "numero": "13",
+      "bairro": "Jardim Santo Elias",
       "localidade": "São Paulo",
       "UF": "SP",
       "listaServico": [],

@@ -7,20 +7,45 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
+     
       <div class="modal-body">
-        <h1>numero Id: {{ clienteId}}</h1>
-        <div *ngFor="let servicos of cliente.listaServico">
-          <p>{{ servicos.descricao }}</p>
-          <p>{{ servicos.valor  |  currency:'BRL' }}</p>
-          <p>{{ servicos.compentencia }}</p>
-          <hr>
-        </div>
-        <div class="d-flex justify-content-end"> {{ somaValores(cliente) | currency: 'BRL' }} </div>
+        
+        <form [formGroup]="formulario"  *ngIf="formulario">
+          
+          <p>Nome: {{ cliente.nomeEmpresarial }}</p>
+          <p>CPF / CNPJ : {{ cliente.cnpj |  cpfcnpjPipe}}</p>
+
+          <div *ngIf="listaServico.controls.length ===0">
+            <p class="alert alert-danger" style="text-align: center;"> Sem Serviço</p>
+          </div>
+         
+          <div formArrayName="listaServico">
+            <div *ngFor="let servico of listaServico.controls; let i=index" > 
+              <div class="row">
+                <div class="col-6">
+                  <label class="label-control">Descrição</label>
+                  <input formControlName="descricao" class="form-control">
+                </div>
+                <div class="col-3">
+                  <label class="label-control">Valor R$</label>
+                  <input formControlName="valor" type="number" class="form-control">
+                </div>
+                <div class="col-3">
+                  <label class="label-control">Vencimento</label>
+                  <input formControlName="vencimento"  class="form-control">
+                </div>
+              </div>
+              
+            </div>
+          </div>
+
+
+      </form>
+        
         
       </div>
       <div class="modal-footer d-flex justify-content-between">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Voltar</button>
-        <button type="button" class="btn btn-success">Imprimir Fatura</button>
+        <button type="button" class="btn btn-success">Salvar</button>
       </div>
     </div>
   </div>

@@ -62,9 +62,7 @@ export class EditarClienteComponent implements OnInit, OnChanges {
     this.cliente.UF = this.formularioEditar.value.uf;
 
     this.consultaCliente.putCliente(this.clienteId, this.cliente).subscribe(
-      () => { this.atualizarLista.emit();  this.toastr.success('Cliente alterado com sucesso') }
+      () => { this.atualizarLista.emit();  this.toastr.success('Cliente alterado com sucesso'); }
     );
-
   }
-
 }
