@@ -1,8 +1,8 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import { ConsultaClientesService } from 'src/app/consulta-clientes.service';
 import { Cliente } from 'src/app/_model/cliente';
 import { Servico } from 'src/app/_model/servico';
+import { Component, Input, OnChanges, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-servicos-cliente',
@@ -49,6 +49,15 @@ export class ServicosClienteComponent implements OnInit, OnChanges {
       serv.setValue(servico);
       this.listaServico.push(serv)      
     })
+  }
+
+  removeServico(index: number) {
+    this.listaServico.removeAt(index);
+  }
+
+  addServico() {
+    let serv = this.formBuilder.group(new Servico)
+    this.listaServico.push(serv)
   }
 
 }

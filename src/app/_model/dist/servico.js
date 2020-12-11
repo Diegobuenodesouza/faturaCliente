@@ -5,7 +5,7 @@ var Servico = /** @class */ (function () {
     function Servico(descricao, valor, vencimento) {
         if (descricao === void 0) { descricao = ''; }
         if (valor === void 0) { valor = 0; }
-        if (vencimento === void 0) { vencimento = new Date(2020, 1, 1); }
+        if (vencimento === void 0) { vencimento = ''; }
         this.descricao = descricao;
         this.valor = valor;
         this.vencimento = vencimento;
