@@ -29,6 +29,7 @@ var ServicosClienteComponent = /** @class */ (function () {
                     listaServico: new forms_1.FormArray([])
                 }),
                 _this.setListaServico();
+            _this.somaFatura();
         });
     };
     Object.defineProperty(ServicosClienteComponent.prototype, "listaServico", {
@@ -48,10 +49,26 @@ var ServicosClienteComponent = /** @class */ (function () {
     };
     ServicosClienteComponent.prototype.removeServico = function (index) {
         this.listaServico.removeAt(index);
+        this.somaFatura();
     };
     ServicosClienteComponent.prototype.addServico = function () {
         var serv = this.formBuilder.group(new servico_1.Servico);
         this.listaServico.push(serv);
+    };
+    ServicosClienteComponent.prototype.somaFatura = function () {
+        var total = 0;
+        this.cliente.listaServico.forEach(function (servico) {
+            total += servico.valor;
+        });
+        return total;
+    };
+    ServicosClienteComponent.prototype.atualizarLista = function () {
+        var _this = this;
+        var listaServicoFormulario = this.formulario.controls.listaServico.value;
+        listaServicoFormulario.forEach(function (servico) {
+            _this.cliente.listaServico.push(new servico_1.Servico(servico.descricao, servico.valor, servico.vencimento));
+        });
+        this.somaFatura();
     };
     __decorate([
         core_1.Input()

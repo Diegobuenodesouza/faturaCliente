@@ -1,8 +1,9 @@
-import { FormArray, FormBuilder, FormControl, FormGroup} from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import { ConsultaClientesService } from 'src/app/consulta-clientes.service';
 import { Cliente } from 'src/app/_model/cliente';
 import { Servico } from 'src/app/_model/servico';
 import { Component, Input, OnChanges, OnInit} from '@angular/core';
+import { TypeCheckCompiler } from '@angular/compiler/src/view_compiler/type_check_compiler';
 
 @Component({
   selector: 'app-servicos-cliente',
@@ -14,6 +15,8 @@ export class ServicosClienteComponent implements OnInit, OnChanges {
   @Input() clienteId: number;
   cliente = new Cliente(0, '', '', '', '', '', '', '', '', []);
   formulario: FormGroup;
+  
+  
 
   constructor(
     private consultaCliente: ConsultaClientesService,
@@ -33,6 +36,9 @@ export class ServicosClienteComponent implements OnInit, OnChanges {
           listaServico: new FormArray([])      
         }),
         this.setListaServico();
+        this.somaFatura();
+        
+        
        }
     );    
         
@@ -53,11 +59,32 @@ export class ServicosClienteComponent implements OnInit, OnChanges {
 
   removeServico(index: number) {
     this.listaServico.removeAt(index);
+    this.somaFatura();
   }
 
   addServico() {
     let serv = this.formBuilder.group(new Servico)
     this.listaServico.push(serv)
+  }
+
+  somaFatura() : number{
+    let total: number = 0
+    this.cliente.listaServico.forEach((servico: Servico) =>{
+      total += servico.valor
+    })
+    return total
+    
+  }
+
+  atualizarLista(): void{
+   let listaServicoFormulario = this.formulario.controls.listaServico.value
+   
+   listaServicoFormulario.forEach((servico: Servico) => {
+     this.cliente.listaServico.push(new Servico(
+       servico.descricao, servico.valor, servico.vencimento
+     ))
+   })
+   this.somaFatura()
   }
 
 }

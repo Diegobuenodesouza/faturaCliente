@@ -12,8 +12,15 @@
         
         <form [formGroup]="formulario"  *ngIf="formulario">
           
-          <p>Nome: {{ cliente.nomeEmpresarial }}</p>
-          <p>CPF / CNPJ : {{ cliente.cnpj |  cpfcnpjPipe}}</p>
+          <div class="row">
+            <div class="col-6">
+              <p>Nome: {{ cliente.nomeEmpresarial }}</p>
+              <p>CPF / CNPJ : {{ cliente.cnpj |  cpfcnpjPipe}}</p>
+            </div>
+            <div class="col->6">
+              Valor total <b>{{ somaFatura() | currency: "BRL"}}</b>
+            </div>
+          </div>
           
           <div *ngIf="listaServico.controls.length ===0">
             <p class="alert alert-danger" style="text-align: center;"> Sem Serviço</p>
@@ -24,15 +31,20 @@
               <div class="row">
                 <div class="col-6">
                   <label class="label-control">Descrição</label>
-                  <input formControlName="descricao" class="form-control">
-                </div>
-                <div class="col-2">
-                  <label class="label-control">Valor R$</label>
-                  <input formControlName="valor" type="number" class="form-control">
+                  <input formControlName="descricao" class="form-control" type="text" required>
                 </div>
                 <div class="col-3">
-                  <label class="label-control">Vencimento</label>
-                  <input formControlName="vencimento"  class="form-control">
+                  <div class="form-group">
+                    <label class="label-control">Vencimento</label>
+                    <input formControlName="vencimento"  class="form-control" type="date" required>
+                    <div class="invalid-feedback"> Campo deve ser preenchido </div>
+                  </div>
+                </div>
+                <div class="col-2">
+                  <div class="form-group">
+                    <label class="label-control">Valor R$</label>
+                    <input formControlName="valor" type="number" (blur)="atualizarLista()" class="form-control" required>
+                  </div>
                 </div>
                 <div class="col-1" >
                   <button class="btn btn-danger" style="margin-top: 31px;" (click)="removeServico(i)">X</button>
@@ -40,7 +52,9 @@
                 </div>
               </div>              
             </div>
-            <button (click)="addServico()" class="btn btn-info"> + Servico </button>
+            <div class="d-flex justify-content-end margemBtn" >
+              <button  (click)="addServico()" class="btn btn-info"> + Servico </button>
+            </div>
           </div>
           
           
