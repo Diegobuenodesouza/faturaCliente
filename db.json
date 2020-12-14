@@ -37,12 +37,12 @@
         {
           "descricao": "Energia",
           "valor": 5,
-          "vencimento": "01/01/2020"
+          "vencimento": "2020-01-01"
         },
         {
           "descricao": "Agua",
           "valor": 25,
-          "vencimento": "01/01/2020"
+          "vencimento": "2020-09-30"
         }
       ]
     },
@@ -55,8 +55,37 @@
       "bairro": "Jardim Santo Elias",
       "localidade": "São Paulo",
       "UF": "SP",
-      "listaServico": [],
+      "listaServico": [
+        {
+          "descricao": "Diego",
+          "valor": 41,
+          "vencimento": "2020-01-01"
+        },
+        {
+          "descricao": "PIS",
+          "valor": 25,
+          "vencimento": "2020-01-01"
+        }
+      ],
       "id": 3
+    },
+    {
+      "cnpj": "12312312312311",
+      "nomeEmpresarial": "Camila Souza",
+      "cep": "05160-340",
+      "logradouro": "Rua Moxotó",
+      "numero": "123",
+      "bairro": "Jaraguá",
+      "localidade": "São Paulo",
+      "UF": "SP",
+      "listaServico": [
+        {
+          "descricao": "Testes",
+          "valor": 12,
+          "vencimento": "2020-01-01"
+        }
+      ],
+      "id": 4
     }
   ]
 }

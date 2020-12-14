@@ -34,4 +34,6 @@ export class ConsultaClientesService {
   putCliente(id: number, cliente: Cliente): Observable<any>{
     return this.http.put(`${this.URL}/${id}` , cliente);
   }
+
+  
 }

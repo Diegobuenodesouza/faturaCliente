@@ -2,8 +2,8 @@ import { FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angu
 import { ConsultaClientesService } from 'src/app/consulta-clientes.service';
 import { Cliente } from 'src/app/_model/cliente';
 import { Servico } from 'src/app/_model/servico';
-import { Component, Input, OnChanges, OnInit} from '@angular/core';
-import { TypeCheckCompiler } from '@angular/compiler/src/view_compiler/type_check_compiler';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angular/core';
+
 
 @Component({
   selector: 'app-servicos-cliente',
@@ -15,12 +15,13 @@ export class ServicosClienteComponent implements OnInit, OnChanges {
   @Input() clienteId: number;
   cliente = new Cliente(0, '', '', '', '', '', '', '', '', []);
   formulario: FormGroup;
-  
+  @Output() listaNovamente = new EventEmitter();
   
 
   constructor(
     private consultaCliente: ConsultaClientesService,
     private formBuilder: FormBuilder,
+    
     ) { }
 
   ngOnInit(): void {
@@ -36,9 +37,7 @@ export class ServicosClienteComponent implements OnInit, OnChanges {
           listaServico: new FormArray([])      
         }),
         this.setListaServico();
-        this.somaFatura();
-        
-        
+        this.somaFatura(); 
        }
     );    
         
@@ -59,6 +58,7 @@ export class ServicosClienteComponent implements OnInit, OnChanges {
 
   removeServico(index: number) {
     this.listaServico.removeAt(index);
+    this.atualizarLista();
     this.somaFatura();
   }
 
@@ -77,8 +77,8 @@ export class ServicosClienteComponent implements OnInit, OnChanges {
   }
 
   atualizarLista(): void{
-   let listaServicoFormulario = this.formulario.controls.listaServico.value
-   
+   this.cliente.listaServico = []
+   let listaServicoFormulario = this.formulario.controls.listaServico.value   
    listaServicoFormulario.forEach((servico: Servico) => {
      this.cliente.listaServico.push(new Servico(
        servico.descricao, servico.valor, servico.vencimento
@@ -87,4 +87,10 @@ export class ServicosClienteComponent implements OnInit, OnChanges {
    this.somaFatura()
   }
 
+  atualizaCliente() : void {
+    this.consultaCliente.putCliente(this.clienteId, this.cliente).subscribe(
+      () => {  this.listaNovamente.emit() }
+    );
+  }
 }
+

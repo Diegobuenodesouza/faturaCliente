@@ -16,6 +16,7 @@ var ServicosClienteComponent = /** @class */ (function () {
         this.consultaCliente = consultaCliente;
         this.formBuilder = formBuilder;
         this.cliente = new cliente_1.Cliente(0, '', '', '', '', '', '', '', '', []);
+        this.listaNovamente = new core_1.EventEmitter();
     }
     ServicosClienteComponent.prototype.ngOnInit = function () {
     };
@@ -49,6 +50,7 @@ var ServicosClienteComponent = /** @class */ (function () {
     };
     ServicosClienteComponent.prototype.removeServico = function (index) {
         this.listaServico.removeAt(index);
+        this.atualizarLista();
         this.somaFatura();
     };
     ServicosClienteComponent.prototype.addServico = function () {
@@ -64,15 +66,23 @@ var ServicosClienteComponent = /** @class */ (function () {
     };
     ServicosClienteComponent.prototype.atualizarLista = function () {
         var _this = this;
+        this.cliente.listaServico = [];
         var listaServicoFormulario = this.formulario.controls.listaServico.value;
         listaServicoFormulario.forEach(function (servico) {
             _this.cliente.listaServico.push(new servico_1.Servico(servico.descricao, servico.valor, servico.vencimento));
         });
         this.somaFatura();
     };
+    ServicosClienteComponent.prototype.atualizaCliente = function () {
+        var _this = this;
+        this.consultaCliente.putCliente(this.clienteId, this.cliente).subscribe(function () { _this.listaNovamente.emit(); });
+    };
     __decorate([
         core_1.Input()
     ], ServicosClienteComponent.prototype, "clienteId");
+    __decorate([
+        core_1.Output()
+    ], ServicosClienteComponent.prototype, "listaNovamente");
     ServicosClienteComponent = __decorate([
         core_1.Component({
             selector: 'app-servicos-cliente',
