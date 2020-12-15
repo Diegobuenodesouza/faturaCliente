@@ -12,14 +12,9 @@
       "UF": "BA",
       "listaServico": [
         {
-          "descricao": "PIS",
-          "valor": 25,
-          "vencimento": "01/01/2020"
-        },
-        {
           "descricao": "COFINS",
-          "valor": 125,
-          "vencimento": "01/01/2020"
+          "valor": 32.3,
+          "vencimento": "2020-11-25"
         }
       ]
     },
@@ -63,7 +58,7 @@
         },
         {
           "descricao": "PIS",
-          "valor": 25,
+          "valor": 26,
           "vencimento": "2020-01-01"
         }
       ],
@@ -80,9 +75,14 @@
       "UF": "SP",
       "listaServico": [
         {
-          "descricao": "Testes",
-          "valor": 12,
-          "vencimento": "2020-01-01"
+          "descricao": "PIS ",
+          "valor": 35,
+          "vencimento": "2020-12-14"
+        },
+        {
+          "descricao": "COFINS",
+          "valor": 35,
+          "vencimento": "2020-12-14"
         }
       ],
       "id": 4

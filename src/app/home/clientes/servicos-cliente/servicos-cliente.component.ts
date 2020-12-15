@@ -33,7 +33,7 @@ export class ServicosClienteComponent implements OnInit, OnChanges {
         this.cliente = resposta, 
         this.formulario = new FormGroup({
           cnpj: new FormControl(this.cliente.cnpj),
-          nomeEmpresarial: new FormControl(this.cliente.nomeEmpresarial),
+          nomeEmpresarial: new FormControl(this.cliente.nomeEmpresarial ),
           listaServico: new FormArray([])      
         }),
         this.setListaServico();
@@ -64,7 +64,7 @@ export class ServicosClienteComponent implements OnInit, OnChanges {
 
   addServico() {
     let serv = this.formBuilder.group(new Servico)
-    this.listaServico.push(serv)
+    this.listaServico.push(serv )
   }
 
   somaFatura() : number{
