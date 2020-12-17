@@ -8,9 +8,9 @@
         </button>
       </div>
       
-      <div class="modal-body">
+      <div class="modal-body"   >
         
-        <form [formGroup]="formulario"  *ngIf="formulario" >
+        <form [formGroup]="formulario" *ngIf="formulario" >
           
           <div class="row">
             <div class="col-6">
@@ -27,10 +27,10 @@
           </div>
           
           <div class="row" *ngIf="listaServico.controls.length > 0">
-            <div class="col-7">
+            <div class="col-6">
               <label class="label-control">Descrição</label>
             </div>
-            <div class="col-2">
+            <div class="col-3">
               <label class="label-control">Vencimento</label>
             </div>
             <div class="col-2">
@@ -42,7 +42,7 @@
           <div formArrayName="listaServico">
             <div *ngFor="let servico of listaServico.controls; let i=index" [formGroupName]="i"> 
               <div class="row">
-                <div class="col-7"> 
+                <div class="col-6"> 
                   <div class="form-group">                 
                     <input formControlName="descricao" class="form-control" type="text" required minlength="3">
                     <div *ngIf="servico.controls.descricao.invalid === true && servico.controls.descricao.touched" > 
@@ -50,7 +50,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-2">
+                <div class="col-3">
                   <div class="form-group">                    
                     <input formControlName="vencimento"  class="form-control" type="date" required>
                     <div class="invalid-feedback"> Campo deve ser preenchido </div>
@@ -58,9 +58,9 @@
                       <div class="alert alert-danger"> Campo deve ser prenchido </div>  
                     </div>
                   </div>
-                </div>
+                </div>  
                 <div class="col-2">
-                  <div class="form-group">                    
+                  <div class="form-group" style="margin-bottom: 0;">                    
                     <input formControlName="valor" type="number" (blur)="atualizarLista()" class="form-control" required>
                   </div>
                   <div *ngIf="servico.controls.valor.invalid === true && servico.controls.valor.touched" > 
@@ -85,10 +85,10 @@
             </div>
           </div>
           
-          
-          <div class="modal-footer d-flex justify-content-between">
-            <button type="button" class="btn btn-success"   data-dismiss="modal" (click)="atualizaCliente()">Salvar</button>
+          <div class="modal-footer d-flex justify-content-between" >
+            <button type="button" class="btn btn-success" [disabled]="formulario.status === 'INVALID' || listaServico.controls.length === 0"   data-dismiss="modal" (click)="atualizaCliente()">Salvar</button>
           </div>
+         
           
         </form>       
         

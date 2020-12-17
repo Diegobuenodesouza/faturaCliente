@@ -3,6 +3,7 @@ import { ConsultaClientesService } from 'src/app/consulta-clientes.service';
 import { Cliente } from 'src/app/_model/cliente';
 import { Servico } from 'src/app/_model/servico';
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -13,14 +14,15 @@ import { Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angul
 export class ServicosClienteComponent implements OnInit, OnChanges {
 
   @Input() clienteId: number;
+  @Output() listaNovamente = new EventEmitter();
   cliente = new Cliente(0, '', '', '', '', '', '', '', '', []);
   formulario: FormGroup;
-  @Output() listaNovamente = new EventEmitter();
   
 
   constructor(
     private consultaCliente: ConsultaClientesService,
     private formBuilder: FormBuilder,
+    private toastr: ToastrService
     
     ) { }
 
@@ -38,9 +40,9 @@ export class ServicosClienteComponent implements OnInit, OnChanges {
         }),
         this.setListaServico();
         this.somaFatura(); 
+
        }
-    );    
-        
+    );           
     
   }
 
@@ -64,7 +66,8 @@ export class ServicosClienteComponent implements OnInit, OnChanges {
 
   addServico() {
     let serv = this.formBuilder.group(new Servico)
-    this.listaServico.push(serv )
+    this.listaServico.push(serv)
+    
   }
 
   somaFatura() : number{
@@ -84,12 +87,13 @@ export class ServicosClienteComponent implements OnInit, OnChanges {
        servico.descricao, servico.valor, servico.vencimento
      ))
    })
-   this.somaFatura()
-  }
+   this.somaFatura()  }
+
+  
 
   atualizaCliente() : void {
     this.consultaCliente.putCliente(this.clienteId, this.cliente).subscribe(
-      () => {  this.listaNovamente.emit() }
+      () => { this.toastr.success('Servico atualizado com sucesso'),  this.listaNovamente.emit() }
     );
   }
 }

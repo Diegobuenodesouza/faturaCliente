@@ -14,9 +14,7 @@ var ConsultaClientesService = /** @class */ (function () {
         this.URL = 'http://localhost:3000/clientes';
     }
     ConsultaClientesService.prototype.getClientes = function () {
-        return this.http.get(this.URL)
-            .toPromise()
-            .then(function (resposta) { return resposta; });
+        return this.http.get(this.URL);
     };
     ConsultaClientesService.prototype.getIdCliente = function (id) {
         return this.http.get(this.URL + "/" + id);

@@ -12,11 +12,12 @@ var cliente_1 = require("src/app/_model/cliente");
 var servico_1 = require("src/app/_model/servico");
 var core_1 = require("@angular/core");
 var ServicosClienteComponent = /** @class */ (function () {
-    function ServicosClienteComponent(consultaCliente, formBuilder) {
+    function ServicosClienteComponent(consultaCliente, formBuilder, toastr) {
         this.consultaCliente = consultaCliente;
         this.formBuilder = formBuilder;
-        this.cliente = new cliente_1.Cliente(0, '', '', '', '', '', '', '', '', []);
+        this.toastr = toastr;
         this.listaNovamente = new core_1.EventEmitter();
+        this.cliente = new cliente_1.Cliente(0, '', '', '', '', '', '', '', '', []);
     }
     ServicosClienteComponent.prototype.ngOnInit = function () {
     };
@@ -75,7 +76,7 @@ var ServicosClienteComponent = /** @class */ (function () {
     };
     ServicosClienteComponent.prototype.atualizaCliente = function () {
         var _this = this;
-        this.consultaCliente.putCliente(this.clienteId, this.cliente).subscribe(function () { _this.listaNovamente.emit(); });
+        this.consultaCliente.putCliente(this.clienteId, this.cliente).subscribe(function () { _this.toastr.success('Servico atualizado com sucesso'), _this.listaNovamente.emit(); });
     };
     __decorate([
         core_1.Input()

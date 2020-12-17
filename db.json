@@ -86,6 +86,36 @@
         }
       ],
       "id": 4
+    },
+    {
+      "cnpj": "54949874979712",
+      "nomeEmpresarial": "Python ",
+      "cep": "05141-100",
+      "logradouro": "Rua Marcos Frankenthal",
+      "numero": "123",
+      "bairro": "Chácara Inglesa",
+      "localidade": "São Paulo",
+      "UF": "SP",
+      "listaServico": [],
+      "id": 5
+    },
+    {
+      "cnpj": "54545142351423",
+      "nomeEmpresarial": "Angular ",
+      "cep": "05160-100",
+      "logradouro": "Rua Manuel Joaquim de Góis",
+      "numero": "1",
+      "bairro": "Jaraguá",
+      "localidade": "São Paulo",
+      "UF": "SP",
+      "listaServico": [
+        {
+          "descricao": "Angular If Else",
+          "valor": 500,
+          "vencimento": "2020-01-01"
+        }
+      ],
+      "id": 6
     }
   ]
 }

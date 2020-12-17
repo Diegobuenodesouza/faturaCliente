@@ -24,6 +24,7 @@ import { EditarClienteComponent } from './home/clientes/editar-cliente/editar-cl
 import { DeletarClienteComponent } from './home/clientes/deletar-cliente/deletar-cliente.component';
 import { CpfcnpjPipePipe } from './pipe/cpfcnpj-pipe.pipe';
 import { ServicosClienteComponent } from './home/clientes/servicos-cliente/servicos-cliente.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 
@@ -41,10 +42,12 @@ import { ServicosClienteComponent } from './home/clientes/servicos-cliente/servi
     EditarClienteComponent,
     DeletarClienteComponent,
     CpfcnpjPipePipe,
-    ServicosClienteComponent
+    ServicosClienteComponent,
+    
   ],
   imports: [
     BrowserModule,
+    NgxPaginationModule,
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,

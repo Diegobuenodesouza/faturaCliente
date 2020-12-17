@@ -13,25 +13,25 @@
                     <th scope="col">Localidade</th>
                     <th scope="col">Valor Fatura</th>
                     <th scope="col">Opções</th>
-
+                    
                 </tr>
             </thead>
-            <tbody *ngFor="let cliente of clientes" class="table-sm">
+            <tbody  class="table-sm"   *ngFor="let cliente of clientes | paginate: { itemsPerPage: contador, currentPage: pag }">
                 <tr class="centralizar">
                     <th scope="row">{{ cliente.cnpj | cpfcnpjPipe }}</th>
                     <td>{{ cliente.nomeEmpresarial }}</td> 
                     <td>{{ cliente.localidade }}</td>
                     <td> {{ somarServicos(cliente)  | currency : 'BRL'}}</td>
                     <td> 
-                      
+                        
                         <button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#editarModal" 
-                            (click)="passarId(cliente.id)" 
-                            >Editar</button>
-
+                        (click)="passarId(cliente.id)" 
+                        >Editar</button>
+                        
                         <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#servicosModal"
                         (click)="passarId(cliente.id)"
                         >Serviços</button>
-
+                        
                         <button class="btn btn-danger btn-sm"
                         data-toggle="modal" data-target="#deleteModal"
                         (click)="passarId(cliente.id)"
@@ -39,9 +39,19 @@
                     </td>
                 </tr>                
             </tbody>
-        </table>
+            
+        </table>  
+      
         
     </div>
+    <div class="text-center" >
+        <pagination-controls 
+        
+		(pageChange)="pag
+		= $event" 
+		previousLabel="Anterior"
+		nextLabel="Próximo"></pagination-controls>
+		</div>
 </div>
 
 

@@ -13,10 +13,8 @@ export class ConsultaClientesService {
 
   constructor(private http: HttpClient) { }
 
-  getClientes(): Promise<Cliente[]>{
-    return this.http.get<Cliente[]>(this.URL)
-    .toPromise()
-    .then((resposta: any) => resposta);
+  getClientes(): Observable<Cliente[]>{
+    return this.http.get<Cliente[]>(this.URL)    
   }
 
   getIdCliente(id: number): Observable<Cliente>{

@@ -12,13 +12,16 @@ export class ClientesComponent implements OnInit {
 
   clientes: Cliente[] = [];
   clienteId: number;
+  pag: number = 1;
+  contador = 5;
 
   constructor(private consultaCliente: ConsultaClientesService) { }
 
   ngOnInit(): void {
 
-    this.consultaCliente.getClientes()
-    .then((resposta: any) => this.clientes = resposta);
+    this.consultaCliente.getClientes().subscribe(
+      (resposta: Cliente[]) => this.clientes = resposta.sort((a, b) => (a.nomeEmpresarial > b.nomeEmpresarial) ? 1 : -1)
+      );    
   }
 
   somarServicos(cliente: Cliente): number {
