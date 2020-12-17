@@ -3,9 +3,11 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Editar Cliente</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+        <div *ngIf="formularioEditar.valid"> 
+          <button type="button" class="btn btn-info"  data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">X</span>
+          </button>
+        </div>
       </div>
       <div class="modal-body">
         
@@ -16,16 +18,18 @@
           <div class="shadow-none p-3 mb-5 bg-black rounded" style="border: 0.5px rgba(122, 120, 120, 0.603) solid;">
             <form [formGroup]="formularioEditar">
               <div class="form-group">
-                <div class="row col-4">   
-
-                  <label class="control-label">CPF/CNPJ</label>
-                  <h4> {{ formularioEditar.value.cnpj | cpfcnpjPipe  }} </h4>
+                <div class="row col-12">   
+                  
+                  <label class="control-label">Nome: <h4> {{ formularioEditar.value.nomeEmpresarial }}</h4></label>
+                  <hr>
+                  <label class="control-label">CPF/CNPJ: <h4> {{ formularioEditar.value.cnpj | cpfcnpjPipe  }}  </h4></label><br>
+                 
                   <div class="invalid-feedback ">Campo CPF/CNPJ deve ser preenchido</div>                    
                 </div>      
               </div>
-
+              
               <div class="row"> 
-        
+                
                 <div class="col-8">
                   <div class="form-group">
                     <label>Nome ou Razão Social</label>
@@ -41,83 +45,83 @@
                     <label>CEP</label>
                     <input class="form-control "  placeholder="00000-000" mask="00000-000" 
                     (blur)="buscarCep($event.target.value)"
-                      type="text" formControlName="cep" >
-                      <div *ngIf="formularioEditar.controls.cep.status === 'INVALID'" class="alert alert-danger" > 
-                        Campo deve ser preenchido
-                      </div>
-                    </div>
-                  </div>
-                  
-                </div>
-                
-                <div class="row">
-                  
-                  <div class="col-2">
-                    <div class="form-group">
-                      <label>Número</label>
-                      <input class="form-control" type="text"  formControlName="numero">
-                      
-                    </div>
-                  </div>
-                  
-                  <div class="col-5">
-                    <div class="form-group">
-                      <label>Logradouro</label>
-                      <input class="form-control" type="text"  formControlName="logradouro">
-                      <div *ngIf="formularioEditar.controls.logradouro.status === 'INVALID'" class="alert alert-danger" > 
-                        Campo deve ser preenchido
-                      </div>
-                    </div>
-                  </div>
-                  
-                  
-                  <div class="col-5">
-                    <div class="form-group">
-                      <label>Bairro</label>
-                      <input class="form-control" type="text" formControlName="bairro"                       
-                      >
-                      <div *ngIf="formularioEditar.controls.bairro.status === 'INVALID'" class="alert alert-danger" > 
-                        Campo deve ser preenchido
-                      </div>
+                    type="text" formControlName="cep" >
+                    <div *ngIf="formularioEditar.controls.cep.status === 'INVALID'" class="alert alert-danger" > 
+                      Campo deve ser preenchido
                     </div>
                   </div>
                 </div>
                 
-                <div class="row">
-                  
-                  <div class="col-6">
-                    <div class="form-group">
-                      <label>Municipio</label>
-                      <input class="form-control" type="text"  formControlName="localidade"                 
-                      >
-                      <div *ngIf="formularioEditar.controls.localidade.status === 'INVALID'" class="alert alert-danger" > 
-                        Campo deve ser preenchido
-                      </div>
-                    </div>
+              </div>
+              
+              <div class="row">
+                
+                <div class="col-2">
+                  <div class="form-group">
+                    <label>Número</label>
+                    <input class="form-control" type="text"  formControlName="numero">
+                    
                   </div>
-                  
-                  <div class="col-3">
-                    <div class="form-group">
-                      <label>UF</label>
-                      <input class="form-control" type="text" formControlName="uf" 
-                     
-                      >
-                      <div *ngIf="formularioEditar.controls.uf.status === 'INVALID'" class="alert alert-danger" > 
-                        Campo deve ser preenchido
-                      </div>
+                </div>
+                
+                <div class="col-5">
+                  <div class="form-group">
+                    <label>Logradouro</label>
+                    <input class="form-control" type="text"  formControlName="logradouro">
+                    <div *ngIf="formularioEditar.controls.logradouro.status === 'INVALID'" class="alert alert-danger" > 
+                      Campo deve ser preenchido
                     </div>
                   </div>
                 </div>
-                <div class="d-flex justify-content-end">
-                  <button type="submit"  class="btn btn-success" 
-                  (click)="alterarCliente()"
-                   [disabled]="formularioEditar.invalid"
-                   data-dismiss="modal"
-                   >Alterar</button>
+                
+                
+                <div class="col-5">
+                  <div class="form-group">
+                    <label>Bairro</label>
+                    <input class="form-control" type="text" formControlName="bairro"                       
+                    >
+                    <div *ngIf="formularioEditar.controls.bairro.status === 'INVALID'" class="alert alert-danger" > 
+                      Campo deve ser preenchido
+                    </div>
+                  </div>
                 </div>
-
-              </form>
-            </div>
+              </div>
+              
+              <div class="row">
+                
+                <div class="col-6">
+                  <div class="form-group">
+                    <label>Municipio</label>
+                    <input class="form-control" type="text"  formControlName="localidade"                 
+                    >
+                    <div *ngIf="formularioEditar.controls.localidade.status === 'INVALID'" class="alert alert-danger" > 
+                      Campo deve ser preenchido
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="col-3">
+                  <div class="form-group">
+                    <label>UF</label>
+                    <input class="form-control" type="text" formControlName="uf" 
+                    
+                    >
+                    <div *ngIf="formularioEditar.controls.uf.status === 'INVALID'" class="alert alert-danger" > 
+                      Campo deve ser preenchido
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="d-flex justify-content-end">
+                <button type="submit"  class="btn btn-success" 
+                (click)="alterarCliente()"
+                [disabled]="formularioEditar.invalid"
+                data-dismiss="modal"
+                >Alterar</button>
+              </div>
+              
+            </form>
+          </div>
         </div>        
       </div>
     </div>

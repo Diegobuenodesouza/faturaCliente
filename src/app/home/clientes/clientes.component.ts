@@ -13,7 +13,7 @@ export class ClientesComponent implements OnInit {
   clientes: Cliente[] = [];
   clienteId: number;
   pag: number = 1;
-  contador = 5;
+  contador = 8;
 
   constructor(private consultaCliente: ConsultaClientesService) { }
 

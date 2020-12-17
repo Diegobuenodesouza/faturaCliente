@@ -76,7 +76,7 @@ var ServicosClienteComponent = /** @class */ (function () {
     };
     ServicosClienteComponent.prototype.atualizaCliente = function () {
         var _this = this;
-        this.consultaCliente.putCliente(this.clienteId, this.cliente).subscribe(function () { _this.toastr.success('Servico atualizado com sucessos'), _this.listaNovamente.emit(); });
+        this.consultaCliente.putCliente(this.clienteId, this.cliente).subscribe(function () { _this.toastr.success('Servicos atualizado com sucessos'), _this.listaNovamente.emit(); });
     };
     __decorate([
         core_1.Input()

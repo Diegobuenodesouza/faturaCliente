@@ -101,6 +101,11 @@
           "descricao": "C# ",
           "valor": 35,
           "vencimento": "2020-12-17"
+        },
+        {
+          "descricao": "Python ",
+          "valor": 75,
+          "vencimento": "2020-12-16"
         }
       ],
       "id": 5
@@ -127,6 +132,30 @@
         }
       ],
       "id": 6
+    },
+    {
+      "cnpj": "54748751454545",
+      "nomeEmpresarial": "Palmeiras",
+      "cep": "05160-340",
+      "logradouro": "Rua Moxotó",
+      "numero": "35",
+      "bairro": "Jaraguá",
+      "localidade": "São Paulo",
+      "UF": "SP",
+      "listaServico": [],
+      "id": 7
+    },
+    {
+      "cnpj": "12312312312312",
+      "nomeEmpresarial": "Ryzen",
+      "cep": "05160-340",
+      "logradouro": "Rua Moxotó",
+      "numero": "2",
+      "bairro": "Jaraguá",
+      "localidade": "São Paulo",
+      "UF": "SP",
+      "listaServico": [],
+      "id": 8
     }
   ]
 }

@@ -13,7 +13,7 @@ var ClientesComponent = /** @class */ (function () {
         this.consultaCliente = consultaCliente;
         this.clientes = [];
         this.pag = 1;
-        this.contador = 5;
+        this.contador = 8;
     }
     ClientesComponent.prototype.ngOnInit = function () {
         var _this = this;
