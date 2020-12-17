@@ -11,6 +11,7 @@ var forms_1 = require("@angular/forms");
 var cliente_1 = require("src/app/_model/cliente");
 var servico_1 = require("src/app/_model/servico");
 var core_1 = require("@angular/core");
+var jspdf_1 = require("jspdf");
 var ServicosClienteComponent = /** @class */ (function () {
     function ServicosClienteComponent(consultaCliente, formBuilder, toastr) {
         this.consultaCliente = consultaCliente;
@@ -77,6 +78,23 @@ var ServicosClienteComponent = /** @class */ (function () {
     ServicosClienteComponent.prototype.atualizaCliente = function () {
         var _this = this;
         this.consultaCliente.putCliente(this.clienteId, this.cliente).subscribe(function () { _this.toastr.success('Servicos atualizado com sucessos'), _this.listaNovamente.emit(); });
+    };
+    ServicosClienteComponent.prototype.gerarPDF = function () {
+        var doc = new jspdf_1.jsPDF();
+        doc.line(10, 10, 200, 10);
+        doc.line(10, 60, 200, 60);
+        doc.line(10, 10, 10, 60);
+        doc.line(200, 10, 200, 60);
+        var altura = 20;
+        var indice = 1;
+        var listaFruta = ['Maça', 'Uva', 'Melancia', 'Banana'];
+        listaFruta.forEach(function (fruta) {
+            doc.text('Indice: ' + indice.toString(), 20, altura);
+            doc.text(fruta, 50, altura);
+            altura += 10;
+            indice++;
+        });
+        doc.output('dataurlnewwindow');
     };
     __decorate([
         core_1.Input()

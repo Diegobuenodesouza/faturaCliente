@@ -4,6 +4,7 @@ import { Cliente } from 'src/app/_model/cliente';
 import { Servico } from 'src/app/_model/servico';
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
+import { jsPDF } from "jspdf";
 
 
 @Component({
@@ -95,6 +96,29 @@ export class ServicosClienteComponent implements OnInit, OnChanges {
     this.consultaCliente.putCliente(this.clienteId, this.cliente).subscribe(
       () => { this.toastr.success('Servicos atualizado com sucessos'),  this.listaNovamente.emit() }
     );
+  }
+
+  gerarPDF() {
+    let doc = new jsPDF();
+    
+    doc.line(10,10,200,10)
+    doc.line(10,60,200,60)
+    doc.line(10,10,10,60)
+    doc.line(200,10,200,60)
+    
+    let altura: number = 20
+    let indice: number = 1
+    let listaFruta = ['Maça', 'Uva', 'Melancia' , 'Banana']
+    listaFruta.forEach((fruta: string) => {
+      doc.text('Indice: ' +indice.toString(), 20 , altura)
+      doc.text(fruta, 50, altura )
+      altura += 10
+      indice++
+
+    })
+
+    doc.output('dataurlnewwindow')
+
   }
 }
 

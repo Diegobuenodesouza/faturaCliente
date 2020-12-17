@@ -15,13 +15,18 @@
           "descricao": "COFINS",
           "valor": 32.3,
           "vencimento": "2020-11-25"
+        },
+        {
+          "descricao": "",
+          "valor": 350,
+          "vencimento": ""
         }
       ]
     },
     {
       "id": 2,
       "cnpj": "39432946843",
-      "nomeEmpresarial": "Camila Almeida doSantos",
+      "nomeEmpresarial": "Python ",
       "cep": "05160340",
       "logradouro": "Rua Moxoto",
       "numero": "38",
@@ -78,11 +83,6 @@
           "descricao": "PIS ",
           "valor": 35,
           "vencimento": "2020-12-14"
-        },
-        {
-          "descricao": "COFINS",
-          "valor": 35,
-          "vencimento": "2020-12-14"
         }
       ],
       "id": 4
@@ -112,9 +112,9 @@
     },
     {
       "cnpj": "54545142351423",
-      "nomeEmpresarial": "Angular ",
-      "cep": "05160-100",
-      "logradouro": "Rua Manuel Joaquim de Góis",
+      "nomeEmpresarial": "Diego Bueno",
+      "cep": "05160-340",
+      "logradouro": "Rua Moxotó",
       "numero": "1",
       "bairro": "Jaraguá",
       "localidade": "São Paulo",
