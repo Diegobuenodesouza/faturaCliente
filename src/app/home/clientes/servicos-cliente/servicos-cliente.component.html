@@ -61,7 +61,7 @@
                 </div>  
                 <div class="col-2">
                   <div class="form-group" style="margin-bottom: 0;">                    
-                    <input formControlName="valor" type="number" (blur)="atualizarLista()" class="form-control" required>
+                    <input formControlName="valor" type="number" (blur)="atualizarLista()" class="form-control" required >
                   </div>
                   <div *ngIf="servico.controls.valor.invalid === true && servico.controls.valor.touched" > 
                     <div class="alert alert-danger"> Campo deve ser prenchido </div>  

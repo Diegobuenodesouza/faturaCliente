@@ -16,11 +16,10 @@
           <div class="shadow-none p-3 mb-5 bg-black rounded" style="border: 0.5px rgba(122, 120, 120, 0.603) solid;">
             <form [formGroup]="formularioEditar">
               <div class="form-group">
-                <div class="row col-4">        
-                  <label>CPF/CNPJ</label>
-                  <input class="form-control" formControlName="cnpj"    disabled                
-                  placeholder="00.000.000/0000-00"
-                  type="text">
+                <div class="row col-4">   
+
+                  <label class="control-label">CPF/CNPJ</label>
+                  <h4> {{ formularioEditar.value.cnpj | cpfcnpjPipe  }} </h4>
                   <div class="invalid-feedback ">Campo CPF/CNPJ deve ser preenchido</div>                    
                 </div>      
               </div>
@@ -30,11 +29,10 @@
                 <div class="col-8">
                   <div class="form-group">
                     <label>Nome ou Razão Social</label>
-                    <input class="form-control " formControlName="nomeEmpresarial"
-                    
-                    
-                    type="text"  > 
-                    <div class="invalid-feedback">Campo nome ou nome empresarial deve ser preenchido</div>
+                    <input class="form-control " formControlName="nomeEmpresarial"  type="text"  > 
+                    <div *ngIf="formularioEditar.controls.nomeEmpresarial.status === 'INVALID'" class="alert alert-danger" > 
+                      Campo deve ser preenchido
+                    </div>
                   </div>
                 </div>
                 
@@ -42,9 +40,11 @@
                   <div class="form-group">
                     <label>CEP</label>
                     <input class="form-control "  placeholder="00000-000" mask="00000-000" 
-                    
+                    (blur)="buscarCep($event.target.value)"
                       type="text" formControlName="cep" >
-                      <div class="invalid-feedback"> Cep inválido</div>
+                      <div *ngIf="formularioEditar.controls.cep.status === 'INVALID'" class="alert alert-danger" > 
+                        Campo deve ser preenchido
+                      </div>
                     </div>
                   </div>
                   
@@ -56,15 +56,17 @@
                     <div class="form-group">
                       <label>Número</label>
                       <input class="form-control" type="text"  formControlName="numero">
+                      
                     </div>
                   </div>
                   
                   <div class="col-5">
                     <div class="form-group">
                       <label>Logradouro</label>
-                      <input class="form-control" type="text"  formControlName="logradouro"                                
-                      >
-                      <div class="invalid-feedback">Campo logradouro deve ser preenchido</div>
+                      <input class="form-control" type="text"  formControlName="logradouro">
+                      <div *ngIf="formularioEditar.controls.logradouro.status === 'INVALID'" class="alert alert-danger" > 
+                        Campo deve ser preenchido
+                      </div>
                     </div>
                   </div>
                   
@@ -74,7 +76,9 @@
                       <label>Bairro</label>
                       <input class="form-control" type="text" formControlName="bairro"                       
                       >
-                      <div class="invalid-feedback">Campo bairro deve ser preenchido</div>
+                      <div *ngIf="formularioEditar.controls.bairro.status === 'INVALID'" class="alert alert-danger" > 
+                        Campo deve ser preenchido
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -86,17 +90,21 @@
                       <label>Municipio</label>
                       <input class="form-control" type="text"  formControlName="localidade"                 
                       >
-                      <div class="invalid-feedback">Campo localidade deve ser preenchido</div>
+                      <div *ngIf="formularioEditar.controls.localidade.status === 'INVALID'" class="alert alert-danger" > 
+                        Campo deve ser preenchido
+                      </div>
                     </div>
                   </div>
                   
-                  <div class="col-2">
+                  <div class="col-3">
                     <div class="form-group">
                       <label>UF</label>
                       <input class="form-control" type="text" formControlName="uf" 
                      
                       >
-                      <div class="invalid-feedback">Campo UF deve ser preenchido</div>
+                      <div *ngIf="formularioEditar.controls.uf.status === 'INVALID'" class="alert alert-danger" > 
+                        Campo deve ser preenchido
+                      </div>
                     </div>
                   </div>
                 </div>

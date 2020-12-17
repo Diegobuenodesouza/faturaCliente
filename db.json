@@ -96,7 +96,13 @@
       "bairro": "Chácara Inglesa",
       "localidade": "São Paulo",
       "UF": "SP",
-      "listaServico": [],
+      "listaServico": [
+        {
+          "descricao": "C# ",
+          "valor": 35,
+          "vencimento": "2020-12-17"
+        }
+      ],
       "id": 5
     },
     {
@@ -113,6 +119,11 @@
           "descricao": "Angular If Else",
           "valor": 500,
           "vencimento": "2020-01-01"
+        },
+        {
+          "descricao": "Angular NgIf",
+          "valor": 150,
+          "vencimento": "2020-05-01"
         }
       ],
       "id": 6

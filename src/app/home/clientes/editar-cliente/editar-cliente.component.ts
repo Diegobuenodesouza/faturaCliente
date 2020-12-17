@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, OnChanges, Output, EventEmitter  } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { BuscaCepService } from 'src/app/busca-cep.service';
 import { ConsultaClientesService } from 'src/app/consulta-clientes.service';
 import { Cliente } from 'src/app/_model/cliente';
 
@@ -13,6 +14,7 @@ export class EditarClienteComponent implements OnInit, OnChanges {
 
   @Input() clienteId: number;
   @Output() atualizarLista = new EventEmitter();
+  erroCep =  false;
   cliente: Cliente;
   formularioEditar = new FormGroup({
     cnpj: new FormControl('', [Validators.required ]),
@@ -29,7 +31,8 @@ export class EditarClienteComponent implements OnInit, OnChanges {
 
   constructor(
     private consultaCliente: ConsultaClientesService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private buscaCep: BuscaCepService,
     ) { }
 
   ngOnInit(): void {}
@@ -65,4 +68,26 @@ export class EditarClienteComponent implements OnInit, OnChanges {
       () => { this.atualizarLista.emit();  this.toastr.success('Cliente alterado com sucesso'); }
     );
   }
+
+  buscarCep(cep: string): any {
+
+    this.buscaCep.buscarCEP(cep).subscribe(
+      (resposta: any): void => {
+
+        if (resposta.erro === true){
+          this.erroCep = true ;
+        }
+        else{
+          this.formularioEditar.controls.cep.setValue(resposta.cep),
+          this.formularioEditar.controls.logradouro.setValue(resposta.logradouro),
+          this.formularioEditar.controls.bairro.setValue(resposta.bairro),
+          this.formularioEditar.controls.localidade.setValue(resposta.localidade),
+          this.formularioEditar.controls.uf.setValue(resposta.uf);
+          this.erroCep = false;
+        }
+      },
+      (): any => { this.erroCep = true; }
+      );
+  }
+
 }
