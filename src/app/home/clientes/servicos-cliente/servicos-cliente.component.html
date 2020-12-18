@@ -89,12 +89,16 @@
           
           <div class="modal-footer d-flex justify-content-between" >
             <button type="button" class="btn btn-success" [disabled]="formulario.status === 'INVALID' || listaServico.controls.length === 0"   data-dismiss="modal" (click)="atualizaCliente()">Salvar</button>
-          </div>
+                 
          
+            <button class="btn btn-info" (click)="gerarPDF()"> Gerar Fatura</button>
+        </div>
+
+        
           
         </form>       
 
-        <button class="btn btn-info" (click)="gerarPDF()"> Gerar Fatura</button>
+        
         
       </div>
       

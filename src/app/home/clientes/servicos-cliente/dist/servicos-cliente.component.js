@@ -81,20 +81,50 @@ var ServicosClienteComponent = /** @class */ (function () {
     };
     ServicosClienteComponent.prototype.gerarPDF = function () {
         var doc = new jspdf_1.jsPDF();
-        doc.line(10, 10, 200, 10);
+        doc.rect(10, 20, 190, 230);
+        doc.setFont('Courier New');
+        doc.setFont('bold');
+        doc.line(47, 31, 132, 31);
+        doc.text('Controller Assessoria Contábil Ltd', 47, 30);
+        doc.setFontSize(10);
+        doc.setFont('normal');
+        doc.text('CNPJ: 62.031.950/0001-30', 70, 40);
+        doc.text('AVENIDA MUTINGA, 2717 - PIRITUBA - SÃO PAULO/SP CEP 05110-000', 29, 48);
+        doc.text('FONE: (11) 2364-2206 (11) 2364-2207 e-mail: ctrlgda@uol.com.br', 42, 56);
+        doc.line(160, 20, 160, 60);
         doc.line(10, 60, 200, 60);
-        doc.line(10, 10, 10, 60);
-        doc.line(200, 10, 200, 60);
-        var altura = 20;
-        var indice = 1;
-        var listaFruta = ['Maça', 'Uva', 'Melancia', 'Banana'];
-        listaFruta.forEach(function (fruta) {
-            doc.text('Indice: ' + indice.toString(), 20, altura);
-            doc.text(fruta, 50, altura);
-            altura += 10;
-            indice++;
-        });
-        doc.output('dataurlnewwindow');
+        // Parte do Recibo
+        doc.setFont('bold');
+        doc.setFontSize(25);
+        doc.text('RECIBO 06-2020', 12, 70);
+        doc.setFontSize(16);
+        doc.text(' R$', 150, 70);
+        doc.rect(161, 63, 37, 9);
+        doc.text(' aqui valor', 162, 70);
+        doc.setFont('normal');
+        doc.setFontSize(10);
+        // Fim Parte do Recibo
+        doc.rect(12, 104, 25, 8);
+        doc.text('Código', 14, 109);
+        doc.rect(41, 104, 117, 8);
+        doc.text('Descrição', 43, 109);
+        doc.rect(162, 104, 36, 8);
+        doc.text('Valor R$', 164, 109);
+        doc.line(10, 102, 200, 102);
+        doc.line(10, 114, 200, 114);
+        doc.line(39, 102, 39, 200); // linha meio tabela
+        doc.line(160, 102, 160, 215); // linha meio tabela
+        doc.line(10, 200, 200, 200);
+        doc.line(10, 215, 200, 215);
+        doc.setFont('bold');
+        doc.text('TOTAL R$', 162, 205);
+        doc.setFont('normal');
+        doc.text('SÃO PAULO, 30 de Junho de 2020', 12, 222);
+        doc.setFont('bold');
+        doc.line(90, 232, 180, 232);
+        doc.text('CONTROLE ASSESSORIA CONTÁBIL LTDA', 100, 238);
+        doc.text('CNPJ: 62.031.950/001-30', 117, 244);
+        doc.save('dataurlnewwindow');
     };
     __decorate([
         core_1.Input()
