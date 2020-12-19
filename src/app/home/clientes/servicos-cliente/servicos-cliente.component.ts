@@ -7,6 +7,7 @@ import { ToastrService } from 'ngx-toastr';
 import { jsPDF } from "jspdf";
 
 
+
 @Component({
   selector: 'app-servicos-cliente',
   templateUrl: './servicos-cliente.component.html',
@@ -19,6 +20,7 @@ export class ServicosClienteComponent implements OnInit, OnChanges {
   cliente = new Cliente(0, '', '', '', '', '', '', '', '', []);
   formulario: FormGroup;
   
+ 
 
   constructor(
     private consultaCliente: ConsultaClientesService,
@@ -28,9 +30,8 @@ export class ServicosClienteComponent implements OnInit, OnChanges {
     ) { }
 
   ngOnInit(): void {
-
-      
-     }
+    
+  }
 
   ngOnChanges(): void {
     this.consultaCliente.getIdCliente(this.clienteId).subscribe(
@@ -39,6 +40,9 @@ export class ServicosClienteComponent implements OnInit, OnChanges {
         this.formulario = new FormGroup({
           cnpj: new FormControl(this.cliente.cnpj),
           nomeEmpresarial: new FormControl(this.cliente.nomeEmpresarial ),
+          competencia: new FormControl('', [Validators.required]),
+          dataVencimentoRecibo: new FormControl('', [Validators.required]),
+          dataDeEmissao: new FormControl('', [Validators.required]),
           listaServico: new FormArray([])      
         }),
         this.setListaServico();
@@ -69,8 +73,7 @@ export class ServicosClienteComponent implements OnInit, OnChanges {
 
   addServico() {
     let serv = this.formBuilder.group(new Servico)
-    this.listaServico.push(serv)
-    
+    this.listaServico.push(serv)    
   }
 
   somaFatura() : number{
@@ -90,17 +93,83 @@ export class ServicosClienteComponent implements OnInit, OnChanges {
        servico.descricao, servico.valor, servico.vencimento
      ))
    })
-   this.somaFatura()  }
-
-  
+   this.somaFatura()  
+  }  
 
   atualizaCliente() : void {
     this.consultaCliente.putCliente(this.clienteId, this.cliente).subscribe(
-      () => { this.toastr.success('Servicos atualizado com sucessos'),  this.listaNovamente.emit() }
+      () => { this.toastr.success('Servicos atualizado com sucessos'),  this.listaNovamente.emit() ,this.atualizarLista() }
     );
   }
 
+  corrigirData(data: string): string {
+    let dataCerta = ''
+    dataCerta += data.substring(5,7) + '-'
+    dataCerta += data.substring(0,4)
+    return dataCerta
+  }
+
+  retornaMesCompetencia(data: string): string {
+    let ano = data.substring(0,4);
+    switch (data.substring(5,7)) {
+      case '01':
+          return 'JANEIRO/' + ano
+          break;
+      case '02':
+          return 'FEVEREIRO/' + ano
+          break;
+      case '03':
+          return 'MARÇO/' + ano
+          break;
+      case '04':
+          return 'ABRIL/' + ano
+          break;
+      case '05':
+            return 'MAIO/' + ano
+            break;
+      case '06':
+            return 'JUNHO/' + ano
+            break;
+      case '07':
+          return 'JULHO/' + ano
+          break;
+      case '08':
+          return 'AGOSTO/' + ano
+          break;
+      case '09':
+          return 'SETEMBRO/' + ano
+          break;
+      case '10':
+          return 'OUTUBRO/' + ano
+          break;
+      case '11':
+            return 'NOVEMBRO/' + ano
+            break;
+      case '12':
+            return 'DEZEMBRO/' + ano
+            break;    
+      
+  }
+  
+  }
+
+  dataEmissao(data: string) : string {
+    let dataDeEmissao = ''
+    dataDeEmissao += data.substring(8,10) + ' de ' +  this.retornaMesCompetencia(data).toLowerCase().split('/')[0] + ' de ' + data.substring(0,4)
+    return dataDeEmissao
+  }
+
+  editarCpfCnpj(dado: string): string {
+    if (dado.length === 11) {
+      return dado.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/g, '\$1.\$2.\$3\-\$4');
+    }
+    if (dado.length === 14) {
+      return dado.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/g, '\$1.\$2.\$3\/\$4\-\$5');
+    }
+  }
+
   gerarPDF() {
+    this.atualizaCliente()
     let doc = new jsPDF()
     doc.rect(10,20,190,230)
     doc.setFont('Courier New')
@@ -121,8 +190,10 @@ export class ServicosClienteComponent implements OnInit, OnChanges {
     // Parte do Recibo
     doc.setFont('bold')
     doc.setFontSize(23)
-    doc.text('RECIBO 06-2020', 12, 70)    
 
+    let dataCompentecia = this.formulario.controls.competencia.value
+    doc.text('RECIBO ' +  this.corrigirData(dataCompentecia), 12, 70)    
+    
 
     doc.setFontSize(16)
     doc.text( ' R$', 150,70)
@@ -140,7 +211,10 @@ export class ServicosClienteComponent implements OnInit, OnChanges {
     + this.cliente.localidade + '/' 
     + this.cliente.UF + ' - CEP '
     + this.cliente.cep , 12 , 88)
-    doc.text('CPF/CNPJ: ' + this.cliente.cnpj + ' COMPETÊNCIA JUNHO/2020 VENCIMENTO: 10/07/2020' , 12, 96)
+    let dataVencimentoRecibo: Date = new Date(this.formulario.controls.dataVencimentoRecibo.value)
+    dataVencimentoRecibo.setDate(dataVencimentoRecibo.getDate() + 1)
+
+    doc.text('CPF/CNPJ: ' + this.editarCpfCnpj(this.cliente.cnpj) + ' COMPETÊNCIA ' + this.retornaMesCompetencia(dataCompentecia) + ' - VENCIMENTO: ' + dataVencimentoRecibo.toLocaleDateString() , 12, 96)
 
     
     
@@ -162,22 +236,29 @@ export class ServicosClienteComponent implements OnInit, OnChanges {
     
     let indice: number = 1
     let altura = 120
+    doc.setFontSize(8)
     this.cliente.listaServico.forEach((servico: Servico) =>{
       let data: Date = new Date(servico.vencimento)
+      data.setDate(data.getDate() + 1)
       doc.text( '0'+ indice , 14 , altura )
-      doc.text(servico.descricao + ' - ' + data.toLocaleDateString(), 42, altura)
+      doc.text(servico.descricao.toUpperCase() + ' COMPETÊNCIA ' + this.retornaMesCompetencia(dataCompentecia) + ' VENCIMENTO: ' + data.toLocaleDateString(), 42, altura)
       doc.text(servico.valor.toFixed(2).replace('.', ','), 163, altura)
-      altura += 8
+      altura += 7
       indice++
     })
 
     // Fim do Servicos
-
+    doc.setFontSize(10)
     doc.line(10,102,200,102) 
     doc.line(10,114,200,114)
 
     doc.line(39,102,39,200) // linha meio tabela
     doc.line(160,102,160,215)// linha meio tabela
+
+    doc.setLineWidth(2.0)
+    doc.rect(165,25,30,30)
+    doc.setLineWidth(0)
+
 
     doc.line(10,200,200,200)
     doc.line(10,215,200,215)
@@ -187,7 +268,8 @@ export class ServicosClienteComponent implements OnInit, OnChanges {
     doc.text(this.somaFatura().toFixed(2).replace('.', ','), 163, 210)
     doc.setFont('normal')
 
-    doc.text('SÃO PAULO, 30 de Junho de 2020', 12,222 )
+    
+    doc.text('SÃO PAULO, ' + this.dataEmissao(this.formulario.controls.dataDeEmissao.value), 12,222 )    
     doc.setFont('bold')
     doc.line(90,232,180,232)
     doc.text('CONTROLE ASSESSORIA CONTÁBIL LTDA' , 100,238)

@@ -26,7 +26,7 @@ var ConsultaClientesService = /** @class */ (function () {
         return this.http["delete"](this.URL + "/" + id);
     };
     ConsultaClientesService.prototype.putCliente = function (id, cliente) {
-        return this.http.put(this.URL + "/" + id, cliente);
+        return this.http.patch(this.URL + "/" + id, cliente);
     };
     ConsultaClientesService = __decorate([
         core_1.Injectable({

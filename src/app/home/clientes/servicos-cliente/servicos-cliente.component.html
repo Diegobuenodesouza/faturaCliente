@@ -10,18 +10,37 @@
         </div>
       </div>
       
-      <div class="modal-body"   >
+      <div class="modal-body"   >        
         
         <form [formGroup]="formulario" *ngIf="formulario" >
           
           <div class="row">
-            <div class="col-6">
+            <div class="col-5">
               <p>Nome: {{ cliente.nomeEmpresarial }}</p>
               <p>CPF / CNPJ : {{ cliente.cnpj |  cpfcnpjPipe}}</p>
             </div>
-            <div class="col->6">
-              Valor total: <b> <div class="alert alert-warning">{{ somaFatura() | currency: "BRL"}}</div></b>
+            
+            <div class="col-2">
+              Valor total: <b> <div style="font-size: 18px;margin-top: 12px;">{{ somaFatura() | currency: "BRL"}}</div></b>
             </div>
+            
+            <div class="col-5">
+              <div class="form-group">
+                <div class="input-group mb-4">
+                  <span class="input-group-text" >Competência</span>
+                  <input type="month" class="form-control" formControlName="competencia"  >
+                </div>
+                <div class="input-group mb-4">
+                  <span class="input-group-text" >Data Vencimento Recibo</span>
+                  <input type="date" class="form-control"  formControlName="dataVencimentoRecibo">
+                </div>
+                <div class="input-group mb-4">
+                  <span class="input-group-text" >Data de Emissão</span>
+                  <input type="date" class="form-control"  formControlName="dataDeEmissao">
+                </div>
+              </div>
+            </div>
+            
           </div>
           
           <div *ngIf="listaServico.controls.length ===0">
@@ -82,22 +101,22 @@
                 
               </div>              
             </div>
-            <div class="d-flex justify-content-end margemBtn" >
-              <button  (click)="addServico()" class="btn btn-info"> + Servico </button>
+            <div class="d-flex justify-content-star margemBtn" >
+              <a  (click)="addServico()" class="btn btn-link"> <b>+ Servico </b> </a>
             </div>
           </div>
           
-          <div class="modal-footer d-flex justify-content-between" >
-            <button type="button" class="btn btn-success" [disabled]="formulario.status === 'INVALID' || listaServico.controls.length === 0"   data-dismiss="modal" (click)="atualizaCliente()">Salvar</button>
-                 
-         
-            <button class="btn btn-info" (click)="gerarPDF()"> Gerar Fatura</button>
-        </div>
-
-        
+          <div class="modal-footer d-flex justify-content-between">
+            <button type="button" class="btn btn-success" [disabled]="formulario.controls.listaServico.status === 'INVALID' || listaServico.controls.length === 0"  (click)="atualizaCliente()">Salvar</button>
+            
+            
+            <button class="btn btn-info" (click)="gerarPDF()" [disabled]="formulario.invalid"> Gerar Fatura</button>
+          </div>
+          
+          
           
         </form>       
-
+        
         
         
       </div>

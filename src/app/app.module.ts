@@ -32,6 +32,9 @@ import localePtBr from '@angular/common/locales/pt'
 registerLocaleData(localePtBr);
 
 
+
+
+
 @NgModule({
   declarations: [
     AppComponent,

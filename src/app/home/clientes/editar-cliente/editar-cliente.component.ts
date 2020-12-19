@@ -16,6 +16,7 @@ export class EditarClienteComponent implements OnInit, OnChanges {
   @Output() atualizarLista = new EventEmitter();
   erroCep =  false;
   cliente: Cliente;
+  
   formularioEditar = new FormGroup({
     cnpj: new FormControl('', [Validators.required ]),
     nomeEmpresarial: new FormControl('' , [Validators.required]),
