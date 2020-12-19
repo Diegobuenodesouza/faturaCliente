@@ -26,6 +26,10 @@ import { CpfcnpjPipePipe } from './pipe/cpfcnpj-pipe.pipe';
 import { ServicosClienteComponent } from './home/clientes/servicos-cliente/servicos-cliente.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 
+import { LOCALE_ID } from '@angular/core';
+import { registerLocaleData } from '@angular/common'
+import localePtBr from '@angular/common/locales/pt'
+registerLocaleData(localePtBr);
 
 
 @NgModule({
@@ -56,7 +60,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
   ],
-  providers: [ BuscaCepService , ConsultaClientesService  ],
+  providers: [ { provide: LOCALE_ID, useValue : 'pt-BR' } ,, BuscaCepService , ConsultaClientesService  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

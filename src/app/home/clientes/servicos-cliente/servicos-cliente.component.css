@@ -6,9 +6,3 @@
     font-family: 'Courier New', Courier, monospace;
     font-size: large ;
 }
-
-.alert-danger {
-    padding: 1px;
-    box-shadow: 1px 1px 1px black;
-    margin-top: 1px;
-}

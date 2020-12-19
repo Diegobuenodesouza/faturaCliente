@@ -17,16 +17,16 @@
           "vencimento": "2020-11-25"
         },
         {
-          "descricao": "",
-          "valor": 350,
-          "vencimento": ""
+          "descricao": "DARFK",
+          "valor": 312,
+          "vencimento": "2020-12-08"
         }
       ]
     },
     {
       "id": 2,
       "cnpj": "39432946843",
-      "nomeEmpresarial": "Python ",
+      "nomeEmpresarial": "Python Industria e Comercio LTDA",
       "cep": "05160340",
       "logradouro": "Rua Moxoto",
       "numero": "38",
@@ -83,6 +83,11 @@
           "descricao": "PIS ",
           "valor": 35,
           "vencimento": "2020-12-14"
+        },
+        {
+          "descricao": "COFINS",
+          "valor": 350,
+          "vencimento": "2020-12-02"
         }
       ],
       "id": 4
@@ -106,6 +111,16 @@
           "descricao": "Python ",
           "valor": 75,
           "vencimento": "2020-12-16"
+        },
+        {
+          "descricao": "Angular",
+          "valor": 15,
+          "vencimento": "2020-12-16"
+        },
+        {
+          "descricao": "Java",
+          "valor": 25,
+          "vencimento": "2020-12-23"
         }
       ],
       "id": 5

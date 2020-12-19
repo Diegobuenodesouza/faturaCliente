@@ -28,7 +28,9 @@ export class ServicosClienteComponent implements OnInit, OnChanges {
     ) { }
 
   ngOnInit(): void {
-  }
+
+      
+     }
 
   ngOnChanges(): void {
     this.consultaCliente.getIdCliente(this.clienteId).subscribe(
@@ -105,25 +107,43 @@ export class ServicosClienteComponent implements OnInit, OnChanges {
 
     
     doc.setFont('bold')
-    doc.line(47,31,132,31)
+    doc.line(47,31,126,31)
     doc.text('Controller Assessoria Contábil Ltd', 47,30)
     doc.setFontSize(10)
-    doc.setFont('normal')
+    
     doc.text('CNPJ: 62.031.950/0001-30', 70,40)
     doc.text('AVENIDA MUTINGA, 2717 - PIRITUBA - SÃO PAULO/SP CEP 05110-000' ,29,48 )
     doc.text('FONE: (11) 2364-2206 (11) 2364-2207 e-mail: ctrlgda@uol.com.br' ,42,56)
+    doc.setFont('normal')
     doc.line(160,20,160,60)
     doc.line(10,60,200,60)
 
     // Parte do Recibo
     doc.setFont('bold')
-    doc.setFontSize(25)
-    doc.text('RECIBO 06-2020', 12, 70)
+    doc.setFontSize(23)
+    doc.text('RECIBO 06-2020', 12, 70)    
+
+
     doc.setFontSize(16)
     doc.text( ' R$', 150,70)
+    doc.text( this.somaFatura().toFixed(2).replace('.', ',') , 164,70,)
     doc.rect(161,63,37,9)
-    doc.text( ' aqui valor', 162,70,)
+
+    
+
+    doc.setFontSize(10)
     doc.setFont('normal')
+    doc.text(this.cliente.nomeEmpresarial, 12 , 80)
+    doc.text(this.cliente.logradouro + ', ' 
+    + this.cliente.numero
+    + ' - ' + this.cliente.bairro + ' - ' 
+    + this.cliente.localidade + '/' 
+    + this.cliente.UF + ' - CEP '
+    + this.cliente.cep , 12 , 88)
+    doc.text('CPF/CNPJ: ' + this.cliente.cnpj + ' COMPETÊNCIA JUNHO/2020 VENCIMENTO: 10/07/2020' , 12, 96)
+
+    
+    
     doc.setFontSize(10)
 
     // Fim Parte do Recibo
@@ -137,6 +157,22 @@ export class ServicosClienteComponent implements OnInit, OnChanges {
     doc.rect(162,104,36,8)
     doc.text( 'Valor R$',164,109)
 
+    // Inicio do Servicos
+
+    
+    let indice: number = 1
+    let altura = 120
+    this.cliente.listaServico.forEach((servico: Servico) =>{
+      let data: Date = new Date(servico.vencimento)
+      doc.text( '0'+ indice , 14 , altura )
+      doc.text(servico.descricao + ' - ' + data.toLocaleDateString(), 42, altura)
+      doc.text(servico.valor.toFixed(2).replace('.', ','), 163, altura)
+      altura += 8
+      indice++
+    })
+
+    // Fim do Servicos
+
     doc.line(10,102,200,102) 
     doc.line(10,114,200,114)
 
@@ -148,6 +184,7 @@ export class ServicosClienteComponent implements OnInit, OnChanges {
 
     doc.setFont('bold')
     doc.text('TOTAL R$' ,162,205 )
+    doc.text(this.somaFatura().toFixed(2).replace('.', ','), 163, 210)
     doc.setFont('normal')
 
     doc.text('SÃO PAULO, 30 de Junho de 2020', 12,222 )
@@ -156,7 +193,7 @@ export class ServicosClienteComponent implements OnInit, OnChanges {
     doc.text('CONTROLE ASSESSORIA CONTÁBIL LTDA' , 100,238)
     doc.text('CNPJ: 62.031.950/001-30', 117,244)
     
-    doc.save('dataurlnewwindow')
+    doc.output('dataurlnewwindow')
   }
 }
 
