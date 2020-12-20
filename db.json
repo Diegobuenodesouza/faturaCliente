@@ -47,29 +47,6 @@
       ]
     },
     {
-      "cnpj": "54545454545445",
-      "nomeEmpresarial": "Diego Bueno",
-      "cep": "05110-000",
-      "logradouro": "Avenida Mutinga",
-      "numero": "13",
-      "bairro": "Jardim Santo Elias",
-      "localidade": "São Paulo",
-      "UF": "SP",
-      "listaServico": [
-        {
-          "descricao": "Diego",
-          "valor": 41,
-          "vencimento": "2020-01-01"
-        },
-        {
-          "descricao": "PIS",
-          "valor": 26,
-          "vencimento": "2020-01-01"
-        }
-      ],
-      "id": 3
-    },
-    {
       "cnpj": "12312312312311",
       "nomeEmpresarial": "Camila Souza",
       "cep": "05160-340",
@@ -91,6 +68,11 @@
         },
         {
           "descricao": "DAS",
+          "valor": 200,
+          "vencimento": "2020-12-14"
+        },
+        {
+          "descricao": "SENHO",
           "valor": 200,
           "vencimento": "2020-12-14"
         }
@@ -149,18 +131,6 @@
       "id": 6
     },
     {
-      "cnpj": "54748751454545",
-      "nomeEmpresarial": "Palmeiras",
-      "cep": "05160-340",
-      "logradouro": "Rua Moxotó",
-      "numero": "35",
-      "bairro": "Jaraguá",
-      "localidade": "São Paulo",
-      "UF": "SP",
-      "listaServico": [],
-      "id": 7
-    },
-    {
       "cnpj": "12312312312312",
       "nomeEmpresarial": "Ryzen",
       "cep": "05160-340",
@@ -171,18 +141,6 @@
       "UF": "SP",
       "listaServico": [],
       "id": 8
-    },
-    {
-      "cnpj": "58145341253412",
-      "nomeEmpresarial": "Faculdade bla bla",
-      "cep": "05160-180",
-      "logradouro": "Rua João Florêncio Pereira",
-      "numero": "123",
-      "bairro": "Jaraguá",
-      "localidade": "São Paulo",
-      "UF": "SP",
-      "listaServico": [],
-      "id": 9
     }
   ]
 }

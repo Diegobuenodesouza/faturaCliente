@@ -1,4 +1,6 @@
 import { Component,  OnInit} from '@angular/core';
+import { debounceTime } from 'rxjs/internal/operators/debounceTime';
+import { distinctUntilChanged } from 'rxjs/internal/operators/distinctUntilChanged';
 import { ConsultaClientesService } from 'src/app/consulta-clientes.service';
 import { Cliente } from 'src/app/_model/cliente';
 import { Servico } from 'src/app/_model/servico';
@@ -10,20 +12,45 @@ import { Servico } from 'src/app/_model/servico';
 })
 export class ClientesComponent implements OnInit{
 
-  clientes: Cliente[] = [];
+  clientes: Cliente[];
   clienteId: number;
   pag: number = 1;
   contador = 8;
+  textoBusca: string
+  
+  
+  constructor(
+    private consultaCliente: ConsultaClientesService,
+    
+    ) { }
 
-  constructor(private consultaCliente: ConsultaClientesService) { }
+  ngOnInit(): void {        
+    this.clienteId = undefined   
+     this.listarClientes()
 
-  ngOnInit(): void {
 
-    this.clienteId = undefined
+  } 
 
-      this.consultaCliente.getClientes().subscribe(
+  listarClientes(): void {
+    this.consultaCliente.getClientes().subscribe(
       (resposta: Cliente[]) => this.clientes = resposta.sort((a, b) => (a.nomeEmpresarial > b.nomeEmpresarial) ? 1 : -1)
-      );    
+      );   
+  }
+
+  buscarCliente(nome: string): void {
+    if( nome.length === 0) {
+      this.listarClientes()
+    }
+    else{
+      this.filtrarCliente(nome)
+    }
+  }
+ 
+
+  filtrarCliente(nome: string) : void{
+    this.consultaCliente.getClienteNomeempresarial(nome).subscribe(
+      (resposta) => this.clientes = resposta.sort((a,b) => (a.nomeEmpresarial - b.nomeEmpresaril)? 1 : -1)
+    );
   }
 
   somarServicos(cliente: Cliente): number {
@@ -38,8 +65,8 @@ export class ClientesComponent implements OnInit{
     this.clienteId = idcliente;    
   }
 
-  
-
- 
+  buscar(evento: any): void{
+    console.log('teste')
+  }
 
 }

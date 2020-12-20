@@ -28,6 +28,9 @@ var ConsultaClientesService = /** @class */ (function () {
     ConsultaClientesService.prototype.putCliente = function (id, cliente) {
         return this.http.patch(this.URL + "/" + id, cliente);
     };
+    ConsultaClientesService.prototype.getClienteNomeempresarial = function (busca) {
+        return this.http.get(this.URL + "?nomeEmpresarial_like=" + busca);
+    };
     ConsultaClientesService = __decorate([
         core_1.Injectable({
             providedIn: 'root'

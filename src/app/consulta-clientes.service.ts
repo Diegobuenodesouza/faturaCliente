@@ -3,6 +3,7 @@ import { core } from '@angular/compiler';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Cliente } from './_model/cliente';
+import { debounceTime, map,  retry } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class ConsultaClientesService {
   constructor(private http: HttpClient) { }
 
   getClientes(): Observable<Cliente[]>{
-    return this.http.get<Cliente[]>(this.URL)    
+    return this.http.get<Cliente[]>(this.URL)
   }
 
   getIdCliente(id: number): Observable<Cliente>{
@@ -33,5 +34,8 @@ export class ConsultaClientesService {
     return this.http.patch(`${this.URL}/${id}` , cliente);
   }
 
+  getClienteNomeempresarial(busca: string) : Observable<any>{
+    return this.http.get<Cliente[]>(`${this.URL}?nomeEmpresarial_like=${busca}`)
+  }
   
 }

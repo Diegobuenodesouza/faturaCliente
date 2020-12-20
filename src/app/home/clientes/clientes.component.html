@@ -1,9 +1,27 @@
 <div class="container"  >
-    <div class="row centralizar" >        
-        <div class="col-12">
-            <h3 class="text-center">Lista de clientes</h3>
+    <div class="row d-flex justify-content-between" >        
+        <div class="col-6">   
+            <div class="form-group">      
+                <h3 class="teXT">Lista de clientes </h3>
+            </div>
+        </div>
+        
+        <div class="col-3">
+            <div class="form-group">               
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Buscar Cliente" (keyup)="buscarCliente($event.target.value)" >
+                    <span class="input-group-text" id="basic-addon1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"/>
+                            <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
+                        </svg>
+                    </span>
+                </div>                
+            </div>
         </div>
     </div>
+
+    
     <div class="row">
         <table class="table table-striped">
             <thead >
@@ -41,17 +59,17 @@
             </tbody>
             
         </table>  
-      
+        
         
     </div>
     <div class="text-center" >
         <pagination-controls 
         
-		(pageChange)="pag
-		= $event" 
-		previousLabel="Anterior"
-		nextLabel="Próximo"></pagination-controls>
-		</div>
+        (pageChange)="pag
+        = $event" 
+        previousLabel="Anterior"
+        nextLabel="Próximo"></pagination-controls>
+    </div>
 </div>
 
 
