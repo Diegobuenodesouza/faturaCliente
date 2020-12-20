@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import { Component,  OnInit} from '@angular/core';
 import { ConsultaClientesService } from 'src/app/consulta-clientes.service';
 import { Cliente } from 'src/app/_model/cliente';
 import { Servico } from 'src/app/_model/servico';
@@ -8,7 +8,7 @@ import { Servico } from 'src/app/_model/servico';
   templateUrl: './clientes.component.html',
   styleUrls: ['./clientes.component.css']
 })
-export class ClientesComponent implements OnInit {
+export class ClientesComponent implements OnInit{
 
   clientes: Cliente[] = [];
   clienteId: number;
@@ -19,7 +19,9 @@ export class ClientesComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.consultaCliente.getClientes().subscribe(
+    this.clienteId = undefined
+
+      this.consultaCliente.getClientes().subscribe(
       (resposta: Cliente[]) => this.clientes = resposta.sort((a, b) => (a.nomeEmpresarial > b.nomeEmpresarial) ? 1 : -1)
       );    
   }
@@ -33,7 +35,11 @@ export class ClientesComponent implements OnInit {
   }
 
   passarId(idcliente: any): void {
-    this.clienteId = idcliente;
+    this.clienteId = idcliente;    
   }
+
+  
+
+ 
 
 }

@@ -87,7 +87,12 @@
         {
           "descricao": "COFINS",
           "valor": 350,
-          "vencimento": "2020-12-02"
+          "vencimento": "2020-12-14"
+        },
+        {
+          "descricao": "DAS",
+          "valor": 200,
+          "vencimento": "2020-12-14"
         }
       ],
       "id": 4
@@ -136,14 +141,9 @@
       "UF": "SP",
       "listaServico": [
         {
-          "descricao": "Angular If Else",
-          "valor": 500,
-          "vencimento": "2020-12-31"
-        },
-        {
           "descricao": "Angular",
-          "valor": 1500,
-          "vencimento": "2020-05-25"
+          "valor": 150,
+          "vencimento": "2020-12-31"
         }
       ],
       "id": 6

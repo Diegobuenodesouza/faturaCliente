@@ -107,10 +107,10 @@
           </div>
           
           <div class="modal-footer d-flex justify-content-between">
-            <button type="button" class="btn btn-success" [disabled]="formulario.controls.listaServico.status === 'INVALID' || listaServico.controls.length === 0"  (click)="atualizaCliente()">Salvar</button>
+            <button type="button" class="btn btn-success" [disabled]="formulario.controls.listaServico.status === 'INVALID' || listaServico.controls.length === 0" data-dismiss="modal" (click)="atualizaCliente()">Salvar</button>
             
             
-            <button class="btn btn-info" (click)="gerarPDF()" [disabled]="formulario.invalid"> Gerar Fatura</button>
+            <button class="btn btn-info" (click)="gerarPDF()" [disabled]="formulario.invalid"  data-dismiss="modal" > Gerar Fatura</button>
           </div>
           
           

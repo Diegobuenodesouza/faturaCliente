@@ -17,6 +17,7 @@ var ClientesComponent = /** @class */ (function () {
     }
     ClientesComponent.prototype.ngOnInit = function () {
         var _this = this;
+        this.clienteId = undefined;
         this.consultaCliente.getClientes().subscribe(function (resposta) { return _this.clientes = resposta.sort(function (a, b) { return (a.nomeEmpresarial > b.nomeEmpresarial) ? 1 : -1; }); });
     };
     ClientesComponent.prototype.somarServicos = function (cliente) {

@@ -14,7 +14,7 @@ var EditarClienteComponent = /** @class */ (function () {
         this.consultaCliente = consultaCliente;
         this.toastr = toastr;
         this.buscaCep = buscaCep;
-        this.atualizarLista = new core_1.EventEmitter();
+        this.listanovamente = new core_1.EventEmitter();
         this.erroCep = false;
         this.formularioEditar = new forms_1.FormGroup({
             cnpj: new forms_1.FormControl('', [forms_1.Validators.required]),
@@ -51,7 +51,7 @@ var EditarClienteComponent = /** @class */ (function () {
         this.cliente.bairro = this.formularioEditar.value.bairro;
         this.cliente.localidade = this.formularioEditar.value.localidade;
         this.cliente.UF = this.formularioEditar.value.uf;
-        this.consultaCliente.putCliente(this.clienteId, this.cliente).subscribe(function () { _this.atualizarLista.emit(); _this.toastr.success('Cliente alterado com sucesso'); });
+        this.consultaCliente.putCliente(this.clienteId, this.cliente).subscribe(function () { _this.listanovamente.emit(); _this.toastr.success('Cliente alterado com sucesso'); });
     };
     EditarClienteComponent.prototype.buscarCep = function (cep) {
         var _this = this;
@@ -74,7 +74,7 @@ var EditarClienteComponent = /** @class */ (function () {
     ], EditarClienteComponent.prototype, "clienteId");
     __decorate([
         core_1.Output()
-    ], EditarClienteComponent.prototype, "atualizarLista");
+    ], EditarClienteComponent.prototype, "listanovamente");
     EditarClienteComponent = __decorate([
         core_1.Component({
             selector: 'app-editar-cliente',

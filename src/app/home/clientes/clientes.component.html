@@ -55,7 +55,7 @@
 </div>
 
 
-<app-editar-cliente  *ngIf="clienteId !== undefined" [clienteId]="clienteId"  (atualizarLista)=ngOnInit() ></app-editar-cliente>
+<app-editar-cliente  *ngIf="clienteId !== undefined" [clienteId]="clienteId"  (listanovamente)=ngOnInit()   ></app-editar-cliente>
 <app-deletar-cliente *ngIf="clienteId !== undefined"  [clienteId]="clienteId"  (listanovamente)="ngOnInit()"></app-deletar-cliente>
 <app-servicos-cliente *ngIf="clienteId !== undefined"  [clienteId]="clienteId"  (listaNovamente)="ngOnInit()"></app-servicos-cliente>
 

@@ -13,7 +13,7 @@ import { Cliente } from 'src/app/_model/cliente';
 export class EditarClienteComponent implements OnInit, OnChanges {
 
   @Input() clienteId: number;
-  @Output() atualizarLista = new EventEmitter();
+  @Output() listanovamente = new EventEmitter();
   erroCep =  false;
   cliente: Cliente;
   
@@ -44,7 +44,6 @@ export class EditarClienteComponent implements OnInit, OnChanges {
     );
   }
 
-
   atualizarInput(cliente: Cliente): any{
     this.formularioEditar.controls.cnpj.setValue(cliente.cnpj);
     this.formularioEditar.controls.nomeEmpresarial.setValue(cliente.nomeEmpresarial);
@@ -55,7 +54,6 @@ export class EditarClienteComponent implements OnInit, OnChanges {
     this.formularioEditar.controls.localidade.setValue(cliente.localidade);
     this.formularioEditar.controls.uf.setValue(cliente.UF);
   }
-
   alterarCliente(): void {
     this.cliente.nomeEmpresarial = this.formularioEditar.value.nomeEmpresarial;
     this.cliente.cep = this.formularioEditar.value.cep;
@@ -66,7 +64,7 @@ export class EditarClienteComponent implements OnInit, OnChanges {
     this.cliente.UF = this.formularioEditar.value.uf;
 
     this.consultaCliente.putCliente(this.clienteId, this.cliente).subscribe(
-      () => { this.atualizarLista.emit();  this.toastr.success('Cliente alterado com sucesso'); }
+      () => { this.listanovamente.emit();  this.toastr.success('Cliente alterado com sucesso'); }
     );
   }
 
