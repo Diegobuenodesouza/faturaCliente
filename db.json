@@ -70,11 +70,6 @@
           "descricao": "DAS",
           "valor": 200,
           "vencimento": "2020-12-14"
-        },
-        {
-          "descricao": "SENHO",
-          "valor": 200,
-          "vencimento": "2020-12-14"
         }
       ],
       "id": 4
@@ -139,8 +134,31 @@
       "bairro": "Jaraguá",
       "localidade": "São Paulo",
       "UF": "SP",
-      "listaServico": [],
+      "listaServico": [
+        {
+          "descricao": "teste",
+          "valor": 30,
+          "vencimento": "92020-01-30"
+        },
+        {
+          "descricao": "teste3",
+          "valor": 360,
+          "vencimento": "2020-01-30"
+        }
+      ],
       "id": 8
+    },
+    {
+      "cnpj": "65656565656888",
+      "nomeEmpresarial": "Palmeiras Libertadores",
+      "cep": "05160-340",
+      "logradouro": "Rua Moxotó",
+      "numero": "38",
+      "bairro": "Jaraguá",
+      "localidade": "São Paulo",
+      "UF": "SP",
+      "listaServico": [],
+      "id": 9
     }
   ]
 }

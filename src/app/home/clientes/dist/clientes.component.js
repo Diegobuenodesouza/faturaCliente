@@ -11,6 +11,7 @@ var core_1 = require("@angular/core");
 var ClientesComponent = /** @class */ (function () {
     function ClientesComponent(consultaCliente) {
         this.consultaCliente = consultaCliente;
+        this.clientes = [];
         this.pag = 1;
         this.contador = 8;
     }
@@ -32,7 +33,7 @@ var ClientesComponent = /** @class */ (function () {
     };
     ClientesComponent.prototype.filtrarCliente = function (nome) {
         var _this = this;
-        this.consultaCliente.getClienteNomeempresarial(nome).subscribe(function (resposta) { return _this.clientes = resposta.sort(function (a, b) { return (a.nomeEmpresarial - b.nomeEmpresaril) ? 1 : -1; }); });
+        this.consultaCliente.getClienteNomeempresarial(nome).subscribe(function (resposta) { _this.clientes = resposta.sort(function (a, b) { return (a.nomeEmpresarial - b.nomeEmpresaril) ? 1 : -1; }); });
     };
     ClientesComponent.prototype.somarServicos = function (cliente) {
         var total = 0;

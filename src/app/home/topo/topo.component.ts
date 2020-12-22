@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AutenticacaoService } from 'src/app/_model/autenticacao.service';
 
 @Component({
   selector: 'app-topo',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TopoComponent implements OnInit {
 
-  constructor() { }
+  constructor(private autenticacao: AutenticacaoService) { }
 
   ngOnInit(): void {
+  }
+
+  logout(): void{
+    this.autenticacao.logout();
   }
 
 }

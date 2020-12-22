@@ -20,7 +20,8 @@
             </div>
         </div>
     </div>
-
+    
+    
     
     <div class="row">
         <table class="table table-striped">
@@ -62,7 +63,14 @@
         
         
     </div>
-    <div class="text-center" >
+    
+    
+    <div class="alert alert-danger" *ngIf="clientes.length === 0 " style="text-align: center;">
+        Nenhum cliente encontrado
+    </div>
+    
+    
+    <div class="text-center"  >
         <pagination-controls 
         
         (pageChange)="pag

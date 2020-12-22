@@ -32,6 +32,8 @@ var deletar_cliente_component_1 = require("./home/clientes/deletar-cliente/delet
 var cpfcnpj_pipe_pipe_1 = require("./pipe/cpfcnpj-pipe.pipe");
 var servicos_cliente_component_1 = require("./home/clientes/servicos-cliente/servicos-cliente.component");
 var ngx_pagination_1 = require("ngx-pagination");
+var autenticacao_service_1 = require("./_model/autenticacao.service");
+var autenticacao_guard_service_1 = require("./_model/autenticacao-guard.service");
 var core_2 = require("@angular/core");
 var common_2 = require("@angular/common");
 var pt_1 = require("@angular/common/locales/pt");
@@ -67,7 +69,7 @@ var AppModule = /** @class */ (function () {
                 animations_1.BrowserAnimationsModule,
                 ngx_toastr_1.ToastrModule.forRoot(),
             ],
-            providers: [{ provide: core_2.LOCALE_ID, useValue: 'pt-BR' }, , busca_cep_service_1.BuscaCepService, consulta_clientes_service_1.ConsultaClientesService],
+            providers: [{ provide: core_2.LOCALE_ID, useValue: 'pt-BR' }, autenticacao_service_1.AutenticacaoService, autenticacao_guard_service_1.AutenticacaoGuardService, busca_cep_service_1.BuscaCepService, consulta_clientes_service_1.ConsultaClientesService],
             bootstrap: [app_component_1.AppComponent]
         })
     ], AppModule);

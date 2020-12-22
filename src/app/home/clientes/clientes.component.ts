@@ -12,13 +12,11 @@ import { Servico } from 'src/app/_model/servico';
 })
 export class ClientesComponent implements OnInit{
 
-  clientes: Cliente[];
+  clientes: Cliente[] = [];
   clienteId: number;
   pag: number = 1;
   contador = 8;
-  textoBusca: string
-  
-  
+      
   constructor(
     private consultaCliente: ConsultaClientesService,
     
@@ -41,7 +39,8 @@ export class ClientesComponent implements OnInit{
     if( nome.length === 0) {
       this.listarClientes()
     }
-    else{
+    
+    else{      
       this.filtrarCliente(nome)
     }
   }
@@ -49,7 +48,7 @@ export class ClientesComponent implements OnInit{
 
   filtrarCliente(nome: string) : void{
     this.consultaCliente.getClienteNomeempresarial(nome).subscribe(
-      (resposta) => this.clientes = resposta.sort((a,b) => (a.nomeEmpresarial - b.nomeEmpresaril)? 1 : -1)
+      (resposta) => { this.clientes = resposta.sort((a,b) => (a.nomeEmpresarial - b.nomeEmpresaril)? 1 : -1)}
     );
   }
 

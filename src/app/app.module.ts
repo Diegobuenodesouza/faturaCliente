@@ -25,6 +25,9 @@ import { DeletarClienteComponent } from './home/clientes/deletar-cliente/deletar
 import { CpfcnpjPipePipe } from './pipe/cpfcnpj-pipe.pipe';
 import { ServicosClienteComponent } from './home/clientes/servicos-cliente/servicos-cliente.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+ 
+import { AutenticacaoService} from './_model/autenticacao.service';
+import { AutenticacaoGuardService }  from './_model/autenticacao-guard.service';
 
 import { LOCALE_ID } from '@angular/core';
 import { registerLocaleData } from '@angular/common'
@@ -63,7 +66,7 @@ registerLocaleData(localePtBr);
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
   ],
-  providers: [ { provide: LOCALE_ID, useValue : 'pt-BR' } ,, BuscaCepService , ConsultaClientesService  ],
+  providers: [ { provide: LOCALE_ID, useValue : 'pt-BR' } ,AutenticacaoService, AutenticacaoGuardService, BuscaCepService , ConsultaClientesService  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
