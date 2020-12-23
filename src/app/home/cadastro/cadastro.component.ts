@@ -6,7 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { BuscaCepService } from 'src/app/busca-cep.service';
 import { ConsultaClientesService } from 'src/app/consulta-clientes.service';
 import { Cliente} from './../../_model/cliente';
-
+import { BdService } from './../../_model/bd.service';
 
 @Component({
   selector: 'app-cadastro',
@@ -36,6 +36,7 @@ export class CadastroComponent implements OnInit {
     private consultaCliente: ConsultaClientesService,
     private router: Router,
     private toastr: ToastrService,
+    private bdService: BdService
     ) { }
 
   ngOnInit(): void {
@@ -64,7 +65,7 @@ export class CadastroComponent implements OnInit {
   }
 
   cadastrar(): void {
-
+    
     this.cliente = new Cliente(
       this.formulario.value.id,
       this.formulario.value.cnpj,
@@ -75,11 +76,12 @@ export class CadastroComponent implements OnInit {
       this.formulario.value.bairro,
       this.formulario.value.localidade,
       this.formulario.value.uf,
-      []
-  );
-    this.consultaCliente.postCliente(this.cliente).subscribe(
-      () => {this.router.navigate(['home' , 'clientes']); }
-    );
-    this.toastr.success('Cadastro realizado com sucesso');
+      []);
+
+      this.bdService.publicar(this.cliente)
+  //   this.consultaCliente.postCliente(this.cliente).subscribe(
+  //     () => {this.router.navigate(['home' , 'clientes']); }
+  //   );
+  //   this.toastr.success('Cadastro realizado com sucesso');
   }
 }

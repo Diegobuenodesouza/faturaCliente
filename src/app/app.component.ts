@@ -15,15 +15,15 @@ export class AppComponent implements OnInit{
     var firebaseConfig = {
       apiKey: "AIzaSyA6ORHgUVL1jBtygpoJAf9A4gEyTsgXnXo",
       authDomain: "fatura-cliente-portfolio.firebaseapp.com",
+      databaseURL: "https://fatura-cliente-portfolio-default-rtdb.firebaseio.com",
       projectId: "fatura-cliente-portfolio",
       storageBucket: "fatura-cliente-portfolio.appspot.com",
       messagingSenderId: "885236908456",
       appId: "1:885236908456:web:2f02b3737e784e0017dd9d",
       measurementId: "G-TQTQKDW4MY"
     };
-    
-    firebase.initializeApp(firebaseConfig)    
-    
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
   }
 }
 

@@ -8,16 +8,24 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 exports.__esModule = true;
 exports.ClientesComponent = void 0;
 var core_1 = require("@angular/core");
+var firebase = require("firebase");
 var ClientesComponent = /** @class */ (function () {
-    function ClientesComponent(consultaCliente) {
+    function ClientesComponent(consultaCliente, bdService) {
         this.consultaCliente = consultaCliente;
+        this.bdService = bdService;
         this.clientes = [];
         this.pag = 1;
         this.contador = 8;
+        this.cnpj = '47287461000150';
     }
     ClientesComponent.prototype.ngOnInit = function () {
+        var _this = this;
         this.clienteId = undefined;
+        firebase.auth().onAuthStateChanged(function (user) {
+            _this.email = user.email;
+        });
         this.listarClientes();
+        this.consultarTodosCliente();
     };
     ClientesComponent.prototype.listarClientes = function () {
         var _this = this;
@@ -47,6 +55,12 @@ var ClientesComponent = /** @class */ (function () {
     };
     ClientesComponent.prototype.buscar = function (evento) {
         console.log('teste');
+    };
+    ClientesComponent.prototype.consultaclientedb = function (cnpj) {
+        this.bdService.consultarCliente(cnpj);
+    };
+    ClientesComponent.prototype.consultarTodosCliente = function () {
+        this.bdService.consultarTodosCliente();
     };
     ClientesComponent = __decorate([
         core_1.Component({

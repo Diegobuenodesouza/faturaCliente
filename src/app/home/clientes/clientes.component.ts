@@ -1,7 +1,7 @@
 import { Component,  OnInit} from '@angular/core';
-import { debounceTime } from 'rxjs/internal/operators/debounceTime';
-import { distinctUntilChanged } from 'rxjs/internal/operators/distinctUntilChanged';
+import * as firebase from 'firebase'
 import { ConsultaClientesService } from 'src/app/consulta-clientes.service';
+import { BdService } from 'src/app/_model/bd.service';
 import { Cliente } from 'src/app/_model/cliente';
 import { Servico } from 'src/app/_model/servico';
 
@@ -16,15 +16,22 @@ export class ClientesComponent implements OnInit{
   clienteId: number;
   pag: number = 1;
   contador = 8;
+  email: string
       
   constructor(
     private consultaCliente: ConsultaClientesService,
+    private bdService: BdService
     
     ) { }
 
   ngOnInit(): void {        
     this.clienteId = undefined   
+
+    firebase.auth().onAuthStateChanged((user) =>{
+      this.email = user.email
+    })
      this.listarClientes()
+     this.consultarTodosCliente()
 
 
   } 
@@ -66,6 +73,17 @@ export class ClientesComponent implements OnInit{
 
   buscar(evento: any): void{
     console.log('teste')
+  }
+
+  cnpj = '47287461000150'
+
+  consultaclientedb(cnpj: string): void{
+    this.bdService.consultarCliente(cnpj)
+  }
+
+
+  consultarTodosCliente(): void{
+    this.bdService.consultarTodosCliente();
   }
 
 }
