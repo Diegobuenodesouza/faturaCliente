@@ -11,11 +11,8 @@ var core_1 = require("@angular/core");
 var forms_1 = require("@angular/forms");
 var cliente_1 = require("./../../_model/cliente");
 var CadastroComponent = /** @class */ (function () {
-    function CadastroComponent(buscaCep, consultaCliente, router, toastr, bdService) {
+    function CadastroComponent(buscaCep, bdService) {
         this.buscaCep = buscaCep;
-        this.consultaCliente = consultaCliente;
-        this.router = router;
-        this.toastr = toastr;
         this.bdService = bdService;
         this.erroCep = false;
         this.formulario = new forms_1.FormGroup({
@@ -50,10 +47,6 @@ var CadastroComponent = /** @class */ (function () {
     CadastroComponent.prototype.cadastrar = function () {
         this.cliente = new cliente_1.Cliente(this.formulario.value.id, this.formulario.value.cnpj, this.formulario.value.nomeEmpresarial, this.formulario.value.cep, this.formulario.value.logradouro, this.formulario.value.numero, this.formulario.value.bairro, this.formulario.value.localidade, this.formulario.value.uf, []);
         this.bdService.publicar(this.cliente);
-        //   this.consultaCliente.postCliente(this.cliente).subscribe(
-        //     () => {this.router.navigate(['home' , 'clientes']); }
-        //   );
-        //   this.toastr.success('Cadastro realizado com sucesso');
     };
     CadastroComponent = __decorate([
         core_1.Component({

@@ -13,7 +13,7 @@ import { Servico } from 'src/app/_model/servico';
 export class ClientesComponent implements OnInit{
 
   clientes: Cliente[] = [];
-  clienteId: number;
+  cnpjcliente: string;
   pag: number = 1;
   contador = 8;
   email: string
@@ -25,31 +25,25 @@ export class ClientesComponent implements OnInit{
     ) { }
 
   ngOnInit(): void {        
-    this.clienteId = undefined   
+    this.cnpjcliente = undefined   
 
     firebase.auth().onAuthStateChanged((user) =>{
       this.email = user.email
-    })
-     this.listarClientes()
+    })     
      this.consultarTodosCliente()    
      
   } 
 
-  listarClientes(): void {
-    this.consultaCliente.getClientes().subscribe(
-      (resposta: Cliente[]) => this.clientes = resposta.sort((a, b) => (a.nomeEmpresarial > b.nomeEmpresarial) ? 1 : -1)
-      );   
-  }
 
-  buscarCliente(nome: string): void {
-    if( nome.length === 0) {
-      this.listarClientes()
-    }
-    
-    else{      
-      this.filtrarCliente(nome)
-    }
-  }
+
+  // buscarCliente(nome: string): void {
+  //   if( nome.length === 0) {
+  //     this.listarClientes()
+  //   }    
+  //   else{      
+  //     this.filtrarCliente(nome)
+  //   }
+  // }
  
 
   filtrarCliente(nome: string) : void{
@@ -66,24 +60,15 @@ export class ClientesComponent implements OnInit{
     return total;
   }
 
-  passarId(idcliente: any): void {
-    this.clienteId = idcliente;    
+  passarId(cnpjcliente: any): void {
+    this.cnpjcliente = cnpjcliente;    
   }
 
   buscar(evento: any): void{
     console.log('teste')
   }
-
-  cnpj = '47287461000150'
-
-  consultaclientedb(cnpj: string): void{
-    this.bdService.consultarCliente(cnpj)
-  }
-
-
+  
   consultarTodosCliente(): void{
-    this.listaFirebase = this.bdService.consultarTodosCliente();  
-    
+    this.listaFirebase = this.bdService.getAllClientes(); 
   }
-
 }

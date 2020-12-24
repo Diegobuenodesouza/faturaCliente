@@ -10,10 +10,10 @@ exports.EditarClienteComponent = void 0;
 var core_1 = require("@angular/core");
 var forms_1 = require("@angular/forms");
 var EditarClienteComponent = /** @class */ (function () {
-    function EditarClienteComponent(consultaCliente, toastr, buscaCep) {
-        this.consultaCliente = consultaCliente;
-        this.toastr = toastr;
+    function EditarClienteComponent(buscaCep, bdService, toastr) {
         this.buscaCep = buscaCep;
+        this.bdService = bdService;
+        this.toastr = toastr;
         this.listanovamente = new core_1.EventEmitter();
         this.erroCep = false;
         this.formularioEditar = new forms_1.FormGroup({
@@ -30,17 +30,22 @@ var EditarClienteComponent = /** @class */ (function () {
     EditarClienteComponent.prototype.ngOnInit = function () { };
     EditarClienteComponent.prototype.ngOnChanges = function () {
         var _this = this;
-        this.consultaCliente.getIdCliente(this.clienteId).subscribe(function (resposta) { _this.cliente = resposta, _this.atualizarInput(resposta); });
+        this.bdService.getClienteCNPJ(this.cnpjcliente).then(function (snapshot) {
+            snapshot.forEach(function (childSnapshot) {
+                _this.cliente = childSnapshot.val(),
+                    _this.atualizarInput();
+            });
+        });
     };
-    EditarClienteComponent.prototype.atualizarInput = function (cliente) {
-        this.formularioEditar.controls.cnpj.setValue(cliente.cnpj);
-        this.formularioEditar.controls.nomeEmpresarial.setValue(cliente.nomeEmpresarial);
-        this.formularioEditar.controls.cep.setValue(cliente.cep);
-        this.formularioEditar.controls.logradouro.setValue(cliente.logradouro);
-        this.formularioEditar.controls.numero.setValue(cliente.numero);
-        this.formularioEditar.controls.bairro.setValue(cliente.bairro);
-        this.formularioEditar.controls.localidade.setValue(cliente.localidade);
-        this.formularioEditar.controls.uf.setValue(cliente.UF);
+    EditarClienteComponent.prototype.atualizarInput = function () {
+        this.formularioEditar.controls.cnpj.setValue(this.cliente.cnpj);
+        this.formularioEditar.controls.nomeEmpresarial.setValue(this.cliente.nomeEmpresarial);
+        this.formularioEditar.controls.cep.setValue(this.cliente.cep);
+        this.formularioEditar.controls.logradouro.setValue(this.cliente.logradouro);
+        this.formularioEditar.controls.numero.setValue(this.cliente.numero);
+        this.formularioEditar.controls.bairro.setValue(this.cliente.bairro);
+        this.formularioEditar.controls.localidade.setValue(this.cliente.localidade);
+        this.formularioEditar.controls.uf.setValue(this.cliente.UF);
     };
     EditarClienteComponent.prototype.alterarCliente = function () {
         var _this = this;
@@ -51,7 +56,8 @@ var EditarClienteComponent = /** @class */ (function () {
         this.cliente.bairro = this.formularioEditar.value.bairro;
         this.cliente.localidade = this.formularioEditar.value.localidade;
         this.cliente.UF = this.formularioEditar.value.uf;
-        this.consultaCliente.putCliente(this.clienteId, this.cliente).subscribe(function () { _this.listanovamente.emit(); _this.toastr.success('Cliente alterado com sucesso'); });
+        this.bdService.putCliente(this.cliente.cnpj, this.cliente)
+            .then(function () { _this.toastr.info('Cliente atualizado com sucesso'), _this.listanovamente.emit(); });
     };
     EditarClienteComponent.prototype.buscarCep = function (cep) {
         var _this = this;
@@ -71,7 +77,7 @@ var EditarClienteComponent = /** @class */ (function () {
     };
     __decorate([
         core_1.Input()
-    ], EditarClienteComponent.prototype, "clienteId");
+    ], EditarClienteComponent.prototype, "cnpjcliente");
     __decorate([
         core_1.Output()
     ], EditarClienteComponent.prototype, "listanovamente");

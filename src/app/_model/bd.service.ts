@@ -1,14 +1,18 @@
 import { Injectable } from '@angular/core';
 import { Cliente } from './cliente';
 import * as firebase from 'firebase'
-import { map } from 'rxjs/internal/operators/map';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class BdService {
   
-  constructor() { }
+  constructor( 
+    private router: Router,
+    private toastr: ToastrService,) { }
   
   publicar(cliente: Cliente): void{    
     firebase.database().ref(`clientes/${btoa(cliente.cnpj)}`)
@@ -20,17 +24,23 @@ export class BdService {
       numero: cliente.numero,
       bairro: cliente.bairro,
       localidade: cliente.localidade,
-      UF: cliente.UF      
-    })     
-  }
-  
-  consultarCliente(cnpj: string): void{
-    
-  }
-  
-  consultarTodosCliente(): Cliente[] {
+      UF: cliente.UF,    
+      listaServico:  {}  
+    })
+    .once('value')
+    .then(() => { 
+      this.toastr.success('Cliente cadastro com sucesso'),
+      this.router.navigate(['/home'])
+    })
+  }  
 
+  getClienteCNPJ(cnpj: string): Promise<Cliente>{
+     return firebase.database().ref(`clientes/${btoa(cnpj)}`).once('value')   
+  }
+
+  getAllClientes(): Cliente[] {
     let lista : Array<Cliente> = []
+
     firebase.database().ref('/clientes').once('value')
     .then((snapshot : any) => {
       snapshot.forEach(( childSnapshot: any) => {
@@ -50,8 +60,15 @@ export class BdService {
         )
         lista.push(cliente)
       })      
-    })
-    console.log(lista)
+    })    
     return lista
   }  
+
+  delCliente(cnpj: string): Promise<Cliente>{
+    return firebase.database().ref(`clientes/${btoa(cnpj)}`).remove()
+  }
+
+  putCliente(cnpj: string, cliente: Cliente) : Promise<any> {
+    return firebase.database().ref(`clientes/${btoa(cnpj)}`).update(cliente)    
+  }
 }

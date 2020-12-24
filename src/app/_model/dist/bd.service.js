@@ -11,9 +11,12 @@ var core_1 = require("@angular/core");
 var cliente_1 = require("./cliente");
 var firebase = require("firebase");
 var BdService = /** @class */ (function () {
-    function BdService() {
+    function BdService(router, toastr) {
+        this.router = router;
+        this.toastr = toastr;
     }
     BdService.prototype.publicar = function (cliente) {
+        var _this = this;
         firebase.database().ref("clientes/" + btoa(cliente.cnpj))
             .push({
             cnpj: cliente.cnpj,
@@ -23,12 +26,19 @@ var BdService = /** @class */ (function () {
             numero: cliente.numero,
             bairro: cliente.bairro,
             localidade: cliente.localidade,
-            UF: cliente.UF
+            UF: cliente.UF,
+            listaServico: {}
+        })
+            .once('value')
+            .then(function () {
+            _this.toastr.success('Cliente cadastro com sucesso'),
+                _this.router.navigate(['/home']);
         });
     };
-    BdService.prototype.consultarCliente = function (cnpj) {
+    BdService.prototype.getClienteCNPJ = function (cnpj) {
+        return firebase.database().ref("clientes/" + btoa(cnpj)).once('value');
     };
-    BdService.prototype.consultarTodosCliente = function () {
+    BdService.prototype.getAllClientes = function () {
         var lista = [];
         firebase.database().ref('/clientes').once('value')
             .then(function (snapshot) {
@@ -39,8 +49,13 @@ var BdService = /** @class */ (function () {
                 lista.push(cliente);
             });
         });
-        console.log(lista);
         return lista;
+    };
+    BdService.prototype.delCliente = function (cnpj) {
+        return firebase.database().ref("clientes/" + btoa(cnpj)).remove();
+    };
+    BdService.prototype.putCliente = function (cnpj, cliente) {
+        return firebase.database().ref("clientes/" + btoa(cnpj)).update(cliente);
     };
     BdService = __decorate([
         core_1.Injectable({

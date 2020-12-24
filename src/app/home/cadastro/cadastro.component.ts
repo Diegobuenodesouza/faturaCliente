@@ -33,9 +33,6 @@ export class CadastroComponent implements OnInit {
 
   constructor(
     private buscaCep: BuscaCepService,
-    private consultaCliente: ConsultaClientesService,
-    private router: Router,
-    private toastr: ToastrService,
     private bdService: BdService
     ) { }
 
@@ -78,10 +75,6 @@ export class CadastroComponent implements OnInit {
       this.formulario.value.uf,
       []);
 
-      this.bdService.publicar(this.cliente)
-  //   this.consultaCliente.postCliente(this.cliente).subscribe(
-  //     () => {this.router.navigate(['home' , 'clientes']); }
-  //   );
-  //   this.toastr.success('Cadastro realizado com sucesso');
+    this.bdService.publicar(this.cliente)
   }
 }

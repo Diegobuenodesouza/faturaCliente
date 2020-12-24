@@ -17,29 +17,23 @@ var ClientesComponent = /** @class */ (function () {
         this.pag = 1;
         this.contador = 8;
         this.listaFirebase = [];
-        this.cnpj = '47287461000150';
     }
     ClientesComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.clienteId = undefined;
+        this.cnpjcliente = undefined;
         firebase.auth().onAuthStateChanged(function (user) {
             _this.email = user.email;
         });
-        this.listarClientes();
         this.consultarTodosCliente();
     };
-    ClientesComponent.prototype.listarClientes = function () {
-        var _this = this;
-        this.consultaCliente.getClientes().subscribe(function (resposta) { return _this.clientes = resposta.sort(function (a, b) { return (a.nomeEmpresarial > b.nomeEmpresarial) ? 1 : -1; }); });
-    };
-    ClientesComponent.prototype.buscarCliente = function (nome) {
-        if (nome.length === 0) {
-            this.listarClientes();
-        }
-        else {
-            this.filtrarCliente(nome);
-        }
-    };
+    // buscarCliente(nome: string): void {
+    //   if( nome.length === 0) {
+    //     this.listarClientes()
+    //   }    
+    //   else{      
+    //     this.filtrarCliente(nome)
+    //   }
+    // }
     ClientesComponent.prototype.filtrarCliente = function (nome) {
         var _this = this;
         this.consultaCliente.getClienteNomeempresarial(nome).subscribe(function (resposta) { _this.clientes = resposta.sort(function (a, b) { return (a.nomeEmpresarial - b.nomeEmpresaril) ? 1 : -1; }); });
@@ -51,17 +45,14 @@ var ClientesComponent = /** @class */ (function () {
         });
         return total;
     };
-    ClientesComponent.prototype.passarId = function (idcliente) {
-        this.clienteId = idcliente;
+    ClientesComponent.prototype.passarId = function (cnpjcliente) {
+        this.cnpjcliente = cnpjcliente;
     };
     ClientesComponent.prototype.buscar = function (evento) {
         console.log('teste');
     };
-    ClientesComponent.prototype.consultaclientedb = function (cnpj) {
-        this.bdService.consultarCliente(cnpj);
-    };
     ClientesComponent.prototype.consultarTodosCliente = function () {
-        this.listaFirebase = this.bdService.consultarTodosCliente();
+        this.listaFirebase = this.bdService.getAllClientes();
     };
     ClientesComponent = __decorate([
         core_1.Component({
