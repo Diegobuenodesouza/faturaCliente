@@ -17,11 +17,11 @@ export class ClientesComponent implements OnInit{
   pag: number = 1;
   contador = 8;
   email: string
+  listaFirebase:  Cliente[] = []
       
   constructor(
     private consultaCliente: ConsultaClientesService,
-    private bdService: BdService
-    
+    private bdService: BdService    
     ) { }
 
   ngOnInit(): void {        
@@ -31,9 +31,8 @@ export class ClientesComponent implements OnInit{
       this.email = user.email
     })
      this.listarClientes()
-     this.consultarTodosCliente()
-
-
+     this.consultarTodosCliente()    
+     
   } 
 
   listarClientes(): void {
@@ -83,7 +82,8 @@ export class ClientesComponent implements OnInit{
 
 
   consultarTodosCliente(): void{
-    this.bdService.consultarTodosCliente();
+    this.listaFirebase = this.bdService.consultarTodosCliente();  
+    
   }
 
 }

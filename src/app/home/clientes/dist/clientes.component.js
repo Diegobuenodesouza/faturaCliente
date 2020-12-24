@@ -16,6 +16,7 @@ var ClientesComponent = /** @class */ (function () {
         this.clientes = [];
         this.pag = 1;
         this.contador = 8;
+        this.listaFirebase = [];
         this.cnpj = '47287461000150';
     }
     ClientesComponent.prototype.ngOnInit = function () {
@@ -60,7 +61,7 @@ var ClientesComponent = /** @class */ (function () {
         this.bdService.consultarCliente(cnpj);
     };
     ClientesComponent.prototype.consultarTodosCliente = function () {
-        this.bdService.consultarTodosCliente();
+        this.listaFirebase = this.bdService.consultarTodosCliente();
     };
     ClientesComponent = __decorate([
         core_1.Component({

@@ -8,12 +8,12 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 exports.__esModule = true;
 exports.BdService = void 0;
 var core_1 = require("@angular/core");
+var cliente_1 = require("./cliente");
 var firebase = require("firebase");
 var BdService = /** @class */ (function () {
     function BdService() {
     }
     BdService.prototype.publicar = function (cliente) {
-        console.log(cliente);
         firebase.database().ref("clientes/" + btoa(cliente.cnpj))
             .push({
             cnpj: cliente.cnpj,
@@ -27,19 +27,20 @@ var BdService = /** @class */ (function () {
         });
     };
     BdService.prototype.consultarCliente = function (cnpj) {
-        firebase.database().ref("clientes/" + btoa(cnpj))
-            .once('value').then(function (snapshot) { return console.log(snapshot.val()); });
     };
     BdService.prototype.consultarTodosCliente = function () {
-        firebase.database().ref("clientes/")
-            .once('value').then(function (snapshot) {
-            var clientes = [];
+        var lista = [];
+        firebase.database().ref('/clientes').once('value')
+            .then(function (snapshot) {
             snapshot.forEach(function (childSnapshot) {
-                var cliente = childSnapshot.val();
-                clientes.push(cliente);
+                var chave = Object.keys(childSnapshot.val())[0]; // retorna o valor da chave na posicao 0 do objeto childSnapshot
+                var objetoCliente = childSnapshot.val()[chave]; //  retorna o objeto da chave na posicao 0
+                var cliente = new cliente_1.Cliente(null, objetoCliente['cnpj'], objetoCliente['nomeEmpresarial'], objetoCliente['cep'], objetoCliente['logradouro'], objetoCliente['numero'], objetoCliente['bairro'], objetoCliente['localidade'], objetoCliente['UF'], []);
+                lista.push(cliente);
             });
-            console.log(clientes);
         });
+        console.log(lista);
+        return lista;
     };
     BdService = __decorate([
         core_1.Injectable({

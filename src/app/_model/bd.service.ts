@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
-import * as firebase from 'firebase'
 import { Cliente } from './cliente';
+import * as firebase from 'firebase'
+import { map } from 'rxjs/internal/operators/map';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BdService {
-
+  
   constructor() { }
-
+  
   publicar(cliente: Cliente): void{    
-    console.log(cliente)
     firebase.database().ref(`clientes/${btoa(cliente.cnpj)}`)
     .push({     
       cnpj: cliente.cnpj,
@@ -23,28 +23,35 @@ export class BdService {
       UF: cliente.UF      
     })     
   }
-
+  
   consultarCliente(cnpj: string): void{
-    firebase.database().ref(`clientes/${btoa(cnpj)}`)
-    .once('value').then((snapshot: any ) => console.log(snapshot.val()))
-  }
-
-  consultarTodosCliente(): any{
-    firebase.database().ref(`clientes/`)
-    .once('value').then((snapshot: any) => {
-
-      let clientes: any[] = []
-      snapshot.forEach((childSnapshot: any) =>{
-
-        let cliente = childSnapshot.val()
-        clientes.push(cliente)
-      })
-
-      console.log(clientes)
-    })
-
     
   }
+  
+  consultarTodosCliente(): Cliente[] {
 
-
+    let lista : Array<Cliente> = []
+    firebase.database().ref('/clientes').once('value')
+    .then((snapshot : any) => {
+      snapshot.forEach(( childSnapshot: any) => {
+        let chave = Object.keys(childSnapshot.val())[0] // retorna o valor da chave na posicao 0 do objeto childSnapshot
+        let objetoCliente = childSnapshot.val()[chave] //  retorna o objeto da chave na posicao 0
+        let cliente = new Cliente(
+          null,
+          objetoCliente['cnpj'],
+          objetoCliente['nomeEmpresarial'],
+          objetoCliente['cep'],
+          objetoCliente['logradouro'],
+          objetoCliente['numero'],
+          objetoCliente['bairro'],
+          objetoCliente['localidade'],
+          objetoCliente['UF'],
+          [],          
+        )
+        lista.push(cliente)
+      })      
+    })
+    console.log(lista)
+    return lista
+  }  
 }
