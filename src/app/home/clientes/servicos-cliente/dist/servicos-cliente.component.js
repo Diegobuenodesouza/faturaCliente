@@ -47,11 +47,16 @@ var ServicosClienteComponent = /** @class */ (function () {
     });
     ServicosClienteComponent.prototype.setListaServico = function () {
         var _this = this;
-        this.cliente.listaServico.forEach(function (servico) {
-            var serv = _this.formBuilder.group(new servico_1.Servico());
-            serv.setValue(servico);
-            _this.listaServico.push(serv);
-        });
+        if (this.cliente.listaServico === null) {
+            return;
+        }
+        else {
+            this.cliente.listaServico.forEach(function (servico) {
+                var serv = _this.formBuilder.group(new servico_1.Servico());
+                serv.setValue(servico);
+                _this.listaServico.push(serv);
+            });
+        }
     };
     ServicosClienteComponent.prototype.removeServico = function (index) {
         this.listaServico.removeAt(index);
@@ -64,6 +69,9 @@ var ServicosClienteComponent = /** @class */ (function () {
     };
     ServicosClienteComponent.prototype.somaFatura = function () {
         var total = 0;
+        if (this.cliente.listaServico === null) {
+            return total;
+        }
         this.cliente.listaServico.forEach(function (servico) {
             total += servico.valor;
         });

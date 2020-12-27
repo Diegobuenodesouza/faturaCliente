@@ -51,7 +51,7 @@ export class ClientesComponent implements OnInit{
 
   somarServicos(cliente: Cliente): number {
     let total = 0;
-    if(cliente.listaServico === null) {
+    if (cliente.listaServico === null) {
       return total;
     }
     cliente.listaServico.forEach((servico: Servico) => {

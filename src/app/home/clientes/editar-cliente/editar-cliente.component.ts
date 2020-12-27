@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { BuscaCepService } from 'src/app/busca-cep.service';
 import { ConsultaClientesService } from 'src/app/consulta-clientes.service';
-import { BdService } from 'src/app/_model/bd.service';
 import { Cliente } from 'src/app/_model/cliente';
 
 @Component({
@@ -18,7 +17,7 @@ export class EditarClienteComponent implements OnInit, OnChanges {
   @Output() listanovamente = new EventEmitter();
   erroCep =  false;
   cliente: Cliente;
-  
+
   formularioEditar = new FormGroup({
     cnpj: new FormControl('', [Validators.required ]),
     nomeEmpresarial: new FormControl('' , [Validators.required]),

@@ -4,9 +4,8 @@ import { Cliente } from 'src/app/_model/cliente';
 import { Servico } from 'src/app/_model/servico';
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { jsPDF } from "jspdf";
-
-
+import { jsPDF } from 'jspdf';
+import { IfStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-servicos-cliente',
@@ -19,18 +18,15 @@ export class ServicosClienteComponent implements OnInit, OnChanges {
   @Output() listaNovamente = new EventEmitter();
   cliente = new Cliente(0, '', '', '', '', '', '', '', '', []);
   formulario: FormGroup;
-  
- 
+
 
   constructor(
     private consultaCliente: ConsultaClientesService,
     private formBuilder: FormBuilder,
     private toastr: ToastrService
-    
     ) { }
 
   ngOnInit(): void {
-    
   }
 
   ngOnChanges(): void {
@@ -43,60 +39,67 @@ export class ServicosClienteComponent implements OnInit, OnChanges {
           competencia: new FormControl('', [Validators.required]),
           dataVencimentoRecibo: new FormControl('', [Validators.required]),
           dataDeEmissao: new FormControl('', [Validators.required]),
-          listaServico: new FormArray([])      
+          listaServico: new FormArray([])
         }),
         this.setListaServico();
-        this.somaFatura(); 
+        this.somaFatura();
 
        }
-    );           
-    
+    );
   }
 
-  get listaServico() : FormArray {
+  get listaServico(): FormArray {
     return this.formulario.get('listaServico') as FormArray;
   }
 
-  setListaServico() : void {
-    this.cliente.listaServico.forEach((servico: Servico) =>{
-      let serv = this.formBuilder.group(new Servico());
+  setListaServico(): void {
+    if (this.cliente.listaServico === null) {
+      return;
+    }
+    else{
+      this.cliente.listaServico.forEach((servico: Servico) => {
+      const serv = this.formBuilder.group(new Servico());
       serv.setValue(servico);
-      this.listaServico.push(serv)      
-    })
+      this.listaServico.push(serv);
+      });
+    }
   }
 
-  removeServico(index: number) {
+  removeServico(index: number): void{
     this.listaServico.removeAt(index);
     this.atualizarLista();
     this.somaFatura();
   }
 
-  addServico() {
-    let serv = this.formBuilder.group(new Servico)
-    this.listaServico.push(serv)    
+  addServico(): void {
+    const serv = this.formBuilder.group(new Servico);
+    this.listaServico.push(serv);
   }
 
-  somaFatura() : number{
-    let total: number = 0
-    this.cliente.listaServico.forEach((servico: Servico) =>{
-      total += servico.valor
-    })
-    return total
-    
+  somaFatura(): number{
+    let total = 0;
+    if (this.cliente.listaServico === null) {
+      return total;
+    }
+    this.cliente.listaServico.forEach((servico: Servico) => {
+      total += servico.valor;
+    });
+    return total;
+
   }
 
   atualizarLista(): void{
-   this.cliente.listaServico = []
-   let listaServicoFormulario = this.formulario.controls.listaServico.value   
+   this.cliente.listaServico = [];
+   const listaServicoFormulario = this.formulario.controls.listaServico.value;
    listaServicoFormulario.forEach((servico: Servico) => {
      this.cliente.listaServico.push(new Servico(
        servico.descricao, servico.valor, servico.vencimento
-     ))
-   })
-   this.somaFatura()  
-  }  
+     ));
+   });
+   this.somaFatura();
+  }
 
-  atualizaCliente() : void {
+  atualizaCliente(): void {
     this.consultaCliente.putCliente(this.clienteId, this.cliente).subscribe(
       () => { this.toastr.success('Servicos atualizado com sucessos'),  this.listaNovamente.emit() ,this.atualizarLista() }
     );
@@ -153,7 +156,7 @@ export class ServicosClienteComponent implements OnInit, OnChanges {
   
   }
 
-  dataEmissao(data: string) : string {
+  dataEmissao(data: string): string {
     let dataDeEmissao = ''
     dataDeEmissao += data.substring(8,10) + ' de ' +  this.retornaMesCompetencia(data).toLowerCase().split('/')[0] + ' de ' + data.substring(0,4)
     return dataDeEmissao
@@ -168,7 +171,7 @@ export class ServicosClienteComponent implements OnInit, OnChanges {
     }
   }
 
-  gerarPDF() {
+  gerarPDF(): void {
     this.atualizaCliente()
     let doc = new jsPDF()
     doc.rect(10,20,190,230)

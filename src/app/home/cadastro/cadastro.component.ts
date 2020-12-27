@@ -5,7 +5,6 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { ConsultaClientesService } from 'src/app/consulta-clientes.service';
 import { Cliente} from './../../_model/cliente';
-import { BdService } from './../../_model/bd.service';
 import { BuscaCepService } from 'src/app/busca-cep.service';
 
 @Component({
@@ -36,11 +35,10 @@ export class CadastroComponent implements OnInit {
     private toastr: ToastrService,
     private router: Router,
     private buscaCep: BuscaCepService
-    
+
     ) { }
 
   ngOnInit(): void {
-
   }
 
   buscarCep(cep: string): any {
