@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, OnChanges, Output, EventEmitter  } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { BuscaCepService } from 'src/app/busca-cep.service';
 import { ConsultaClientesService } from 'src/app/consulta-clientes.service';
@@ -13,7 +14,7 @@ import { Cliente } from 'src/app/_model/cliente';
 })
 export class EditarClienteComponent implements OnInit, OnChanges {
 
-  @Input() cnpjcliente: string;
+  @Input() clienteId: number;
   @Output() listanovamente = new EventEmitter();
   erroCep =  false;
   cliente: Cliente;
@@ -29,23 +30,20 @@ export class EditarClienteComponent implements OnInit, OnChanges {
     uf: new FormControl('' , [Validators.required, Validators.maxLength(2), Validators.minLength(2)])
   });
 
-  constructor(    
+  constructor(
     private buscaCep: BuscaCepService,
-    private bdService : BdService,
-    private toastr : ToastrService
+    private consultaCliente: ConsultaClientesService,
+    private toastr: ToastrService,
+    private router: Router
     ) { }
 
   ngOnInit(): void {}
 
   ngOnChanges(): void {
-    this.bdService.getClienteCNPJ(this.cnpjcliente).then((snapshot: any) =>{
-        snapshot.forEach((childSnapshot: any) =>{
-          this.cliente = childSnapshot.val(),
-          this.atualizarInput()     
-        })
-      }
-    )
-    
+    this.consultaCliente.getIdCliente(this.clienteId).subscribe(
+      (resposta) => {this.cliente = resposta, this.atualizarInput(); }
+    );
+
   }
 
   atualizarInput(): any{
@@ -56,7 +54,7 @@ export class EditarClienteComponent implements OnInit, OnChanges {
     this.formularioEditar.controls.numero.setValue(this.cliente.numero);
     this.formularioEditar.controls.bairro.setValue(this.cliente.bairro);
     this.formularioEditar.controls.localidade.setValue(this.cliente.localidade);
-    this.formularioEditar.controls.uf.setValue(this.cliente.UF);
+    this.formularioEditar.controls.uf.setValue(this.cliente.uf);
   }
 
   alterarCliente(): void {
@@ -66,14 +64,18 @@ export class EditarClienteComponent implements OnInit, OnChanges {
     this.cliente.numero = this.formularioEditar.value.numero;
     this.cliente.bairro = this.formularioEditar.value.bairro;
     this.cliente.localidade = this.formularioEditar.value.localidade;
-    this.cliente.UF = this.formularioEditar.value.uf;
+    this.cliente.uf = this.formularioEditar.value.uf;
 
-    this.bdService.putCliente(this.cliente.cnpj, this.cliente)
-    .then(
-      () => {this.toastr.info('Cliente atualizado com sucesso'), this.listanovamente.emit() }
+    this.consultaCliente.putCliente(this.clienteId, this.cliente).subscribe(
+      () => {
+        this.toastr.success('Cliente alterado com sucesso'),
+        this.listanovamente.emit(),
+        this.router.navigate(['/home']);
+      }
     );
+
   }
-  
+
   buscarCep(cep: string): any {
 
     this.buscaCep.buscarCEP(cep).subscribe(

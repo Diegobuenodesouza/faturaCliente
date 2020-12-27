@@ -1,7 +1,6 @@
 import { Servico } from './servico';
 
 export class Cliente{
-    
 
     constructor(
         public id: number,
@@ -12,7 +11,7 @@ export class Cliente{
         public numero: string,
         public bairro: string,
         public localidade: string,
-        public UF: string,
+        public uf: string,
         public listaServico: Array<Servico>
     ){
 

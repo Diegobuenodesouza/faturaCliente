@@ -1,8 +1,8 @@
 
 import { Component, Input,  OnInit, Output , EventEmitter, OnChanges } from '@angular/core';
+import { Router } from '@angular/router';
 import {  ToastrService } from 'ngx-toastr';
 import { ConsultaClientesService } from 'src/app/consulta-clientes.service';
-import { BdService } from 'src/app/_model/bd.service';
 import { Cliente } from 'src/app/_model/cliente';
 
 @Component({
@@ -12,33 +12,32 @@ import { Cliente } from 'src/app/_model/cliente';
 })
 export class DeletarClienteComponent implements OnInit, OnChanges{
 
-  @Input() cnpjcliente: string;
+  @Input() clienteId: number;
   cliente = new Cliente(0, '', '', '', '', '', '', '', '', []);
   @Output() listanovamente = new EventEmitter();
 
   constructor(
     private consultaCliente: ConsultaClientesService,
     private toastr: ToastrService,
-    private bdService : BdService
-    
+    private router: Router,
+
     ) { }
 
   ngOnInit(): void {
+    
   }
 
   ngOnChanges(): void {
-    this.bdService.getClienteCNPJ(this.cnpjcliente)
-    .then((snapshot: any) => {
-      snapshot.forEach((childSnapshot: any) =>{
-        this.cliente = childSnapshot.val()
-      })
-    })   
+    this.consultaCliente.getIdCliente(this.clienteId).subscribe(
+      (resposta: any) => {this.cliente = resposta; }
+    );
   }
 
-  removerCliente(): void{
-    this.bdService.delCliente(this.cliente.cnpj).then(
-      () => { this.listanovamente.emit(), this.toastr.info('Cliente excluido com sucesso');}
-      );
-      
-    }
+  excluirCliente(): void{
+    this.consultaCliente.deleteCliente(this.clienteId).subscribe(
+      () => { this.router.navigate(['/home']),
+      this.toastr.info('Cliente excluido com sucesso'),
+      this.listanovamente.emit(); }
+    );
+  }
 }

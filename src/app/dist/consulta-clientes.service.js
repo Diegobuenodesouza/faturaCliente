@@ -11,10 +11,10 @@ var core_1 = require("@angular/core");
 var ConsultaClientesService = /** @class */ (function () {
     function ConsultaClientesService(http) {
         this.http = http;
-        this.URL = 'http://localhost:3000/clientes';
+        this.URL = 'https://faturaclientes.azurewebsites.net/api/Clientes';
     }
     ConsultaClientesService.prototype.getClientes = function () {
-        return this.http.get(this.URL);
+        return this.http.get("" + this.URL);
     };
     ConsultaClientesService.prototype.getIdCliente = function (id) {
         return this.http.get(this.URL + "/" + id);
@@ -26,7 +26,7 @@ var ConsultaClientesService = /** @class */ (function () {
         return this.http["delete"](this.URL + "/" + id);
     };
     ConsultaClientesService.prototype.putCliente = function (id, cliente) {
-        return this.http.patch(this.URL + "/" + id, cliente);
+        return this.http.put(this.URL + "/" + id, cliente);
     };
     ConsultaClientesService.prototype.getClienteNomeempresarial = function (busca) {
         return this.http.get(this.URL + "?nomeEmpresarial_like=" + busca);

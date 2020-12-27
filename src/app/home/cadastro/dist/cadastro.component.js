@@ -11,9 +11,11 @@ var core_1 = require("@angular/core");
 var forms_1 = require("@angular/forms");
 var cliente_1 = require("./../../_model/cliente");
 var CadastroComponent = /** @class */ (function () {
-    function CadastroComponent(buscaCep, bdService) {
+    function CadastroComponent(consultaCliente, toastr, router, buscaCep) {
+        this.consultaCliente = consultaCliente;
+        this.toastr = toastr;
+        this.router = router;
         this.buscaCep = buscaCep;
-        this.bdService = bdService;
         this.erroCep = false;
         this.formulario = new forms_1.FormGroup({
             cnpj: new forms_1.FormControl('', [forms_1.Validators.required]),
@@ -45,8 +47,9 @@ var CadastroComponent = /** @class */ (function () {
         }, function () { _this.erroCep = true; });
     };
     CadastroComponent.prototype.cadastrar = function () {
+        var _this = this;
         this.cliente = new cliente_1.Cliente(this.formulario.value.id, this.formulario.value.cnpj, this.formulario.value.nomeEmpresarial, this.formulario.value.cep, this.formulario.value.logradouro, this.formulario.value.numero, this.formulario.value.bairro, this.formulario.value.localidade, this.formulario.value.uf, []);
-        this.bdService.publicar(this.cliente);
+        this.consultaCliente.postCliente(this.cliente).subscribe(function () { _this.router.navigate(['/home']), _this.toastr.success('Cliente cadastro com sucesso'); }, function (error) { return console.log('deu erro', error); });
     };
     CadastroComponent = __decorate([
         core_1.Component({

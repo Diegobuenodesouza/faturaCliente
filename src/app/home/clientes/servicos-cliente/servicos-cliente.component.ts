@@ -209,7 +209,7 @@ export class ServicosClienteComponent implements OnInit, OnChanges {
     + this.cliente.numero
     + ' - ' + this.cliente.bairro + ' - ' 
     + this.cliente.localidade + '/' 
-    + this.cliente.UF + ' - CEP '
+    + this.cliente.uf + ' - CEP '
     + this.cliente.cep , 12 , 88)
     let dataVencimentoRecibo: Date = new Date(this.formulario.controls.dataVencimentoRecibo.value)
     dataVencimentoRecibo.setDate(dataVencimentoRecibo.getDate() + 1)

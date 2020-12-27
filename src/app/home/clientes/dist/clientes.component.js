@@ -8,23 +8,21 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 exports.__esModule = true;
 exports.ClientesComponent = void 0;
 var core_1 = require("@angular/core");
-var firebase = require("firebase");
 var ClientesComponent = /** @class */ (function () {
-    function ClientesComponent(consultaCliente, bdService) {
+    function ClientesComponent(consultaCliente) {
         this.consultaCliente = consultaCliente;
-        this.bdService = bdService;
         this.clientes = [];
         this.pag = 1;
         this.contador = 8;
-        this.listaFirebase = [];
+        this.listaClientes = [];
     }
     ClientesComponent.prototype.ngOnInit = function () {
+        this.clienteId = undefined;
+        this.TodosClientes();
+    };
+    ClientesComponent.prototype.TodosClientes = function () {
         var _this = this;
-        this.cnpjcliente = undefined;
-        firebase.auth().onAuthStateChanged(function (user) {
-            _this.email = user.email;
-        });
-        this.consultarTodosCliente();
+        this.consultaCliente.getClientes().subscribe(function (resposta) { return _this.listaClientes = resposta; });
     };
     // buscarCliente(nome: string): void {
     //   if( nome.length === 0) {
@@ -40,19 +38,19 @@ var ClientesComponent = /** @class */ (function () {
     };
     ClientesComponent.prototype.somarServicos = function (cliente) {
         var total = 0;
+        if (cliente.listaServico === null) {
+            return total;
+        }
         cliente.listaServico.forEach(function (servico) {
             total += servico.valor;
         });
         return total;
     };
     ClientesComponent.prototype.passarId = function (cnpjcliente) {
-        this.cnpjcliente = cnpjcliente;
+        this.clienteId = cnpjcliente;
     };
     ClientesComponent.prototype.buscar = function (evento) {
         console.log('teste');
-    };
-    ClientesComponent.prototype.consultarTodosCliente = function () {
-        this.listaFirebase = this.bdService.getAllClientes();
     };
     ClientesComponent = __decorate([
         core_1.Component({

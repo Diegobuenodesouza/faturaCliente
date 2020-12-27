@@ -3,10 +3,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { BuscaCepService } from 'src/app/busca-cep.service';
 import { ConsultaClientesService } from 'src/app/consulta-clientes.service';
 import { Cliente} from './../../_model/cliente';
 import { BdService } from './../../_model/bd.service';
+import { BuscaCepService } from 'src/app/busca-cep.service';
 
 @Component({
   selector: 'app-cadastro',
@@ -32,8 +32,11 @@ export class CadastroComponent implements OnInit {
   });
 
   constructor(
-    private buscaCep: BuscaCepService,
-    private bdService: BdService
+    private consultaCliente: ConsultaClientesService,
+    private toastr: ToastrService,
+    private router: Router,
+    private buscaCep: BuscaCepService
+    
     ) { }
 
   ngOnInit(): void {
@@ -62,7 +65,7 @@ export class CadastroComponent implements OnInit {
   }
 
   cadastrar(): void {
-    
+
     this.cliente = new Cliente(
       this.formulario.value.id,
       this.formulario.value.cnpj,
@@ -74,7 +77,10 @@ export class CadastroComponent implements OnInit {
       this.formulario.value.localidade,
       this.formulario.value.uf,
       []);
-
-    this.bdService.publicar(this.cliente)
+      
+    this.consultaCliente.postCliente(this.cliente).subscribe(
+      () => { this.router.navigate(['/home']), this.toastr.success('Cliente cadastro com sucesso'); },
+      (error: Error) => console.log('deu erro' , error)
+    );
   }
 }

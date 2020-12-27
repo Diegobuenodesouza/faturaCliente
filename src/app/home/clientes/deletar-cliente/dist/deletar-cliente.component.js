@@ -10,10 +10,10 @@ exports.DeletarClienteComponent = void 0;
 var core_1 = require("@angular/core");
 var cliente_1 = require("src/app/_model/cliente");
 var DeletarClienteComponent = /** @class */ (function () {
-    function DeletarClienteComponent(consultaCliente, toastr, bdService) {
+    function DeletarClienteComponent(consultaCliente, toastr, router) {
         this.consultaCliente = consultaCliente;
         this.toastr = toastr;
-        this.bdService = bdService;
+        this.router = router;
         this.cliente = new cliente_1.Cliente(0, '', '', '', '', '', '', '', '', []);
         this.listanovamente = new core_1.EventEmitter();
     }
@@ -21,20 +21,19 @@ var DeletarClienteComponent = /** @class */ (function () {
     };
     DeletarClienteComponent.prototype.ngOnChanges = function () {
         var _this = this;
-        this.bdService.getClienteCNPJ(this.cnpjcliente)
-            .then(function (snapshot) {
-            snapshot.forEach(function (childSnapshot) {
-                _this.cliente = childSnapshot.val();
-            });
-        });
+        this.consultaCliente.getIdCliente(this.clienteId).subscribe(function (resposta) { _this.cliente = resposta; });
     };
-    DeletarClienteComponent.prototype.removerCliente = function () {
+    DeletarClienteComponent.prototype.excluirCliente = function () {
         var _this = this;
-        this.bdService.delCliente(this.cliente.cnpj).then(function () { _this.listanovamente.emit(), _this.toastr.info('Cliente excluido com sucesso'); });
+        this.consultaCliente.deleteCliente(this.clienteId).subscribe(function () {
+            _this.router.navigate(['/home']),
+                _this.toastr.info('Cliente excluido com sucesso'),
+                _this.listanovamente.emit();
+        });
     };
     __decorate([
         core_1.Input()
-    ], DeletarClienteComponent.prototype, "cnpjcliente");
+    ], DeletarClienteComponent.prototype, "clienteId");
     __decorate([
         core_1.Output()
     ], DeletarClienteComponent.prototype, "listanovamente");

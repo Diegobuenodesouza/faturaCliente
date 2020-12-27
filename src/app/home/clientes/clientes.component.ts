@@ -1,7 +1,5 @@
 import { Component,  OnInit} from '@angular/core';
-import * as firebase from 'firebase'
 import { ConsultaClientesService } from 'src/app/consulta-clientes.service';
-import { BdService } from 'src/app/_model/bd.service';
 import { Cliente } from 'src/app/_model/cliente';
 import { Servico } from 'src/app/_model/servico';
 
@@ -13,28 +11,27 @@ import { Servico } from 'src/app/_model/servico';
 export class ClientesComponent implements OnInit{
 
   clientes: Cliente[] = [];
-  cnpjcliente: string;
-  pag: number = 1;
+  clienteId: string;
+  pag = 1;
   contador = 8;
-  email: string
-  listaFirebase:  Cliente[] = []
-      
+  email: string;
+  listaClientes: Cliente[] = [];
+
   constructor(
     private consultaCliente: ConsultaClientesService,
-    private bdService: BdService    
+
     ) { }
 
-  ngOnInit(): void {        
-    this.cnpjcliente = undefined   
+  ngOnInit(): void {
+    this.clienteId = undefined;
+    this.TodosClientes();
+  }
 
-    firebase.auth().onAuthStateChanged((user) =>{
-      this.email = user.email
-    })     
-     this.consultarTodosCliente()    
-     
-  } 
-
-
+  TodosClientes(): void{
+    this.consultaCliente.getClientes().subscribe(
+      (resposta) => this.listaClientes = resposta
+    );
+  }
 
   // buscarCliente(nome: string): void {
   //   if( nome.length === 0) {
@@ -46,14 +43,17 @@ export class ClientesComponent implements OnInit{
   // }
  
 
-  filtrarCliente(nome: string) : void{
+  filtrarCliente(nome: string): void{
     this.consultaCliente.getClienteNomeempresarial(nome).subscribe(
-      (resposta) => { this.clientes = resposta.sort((a,b) => (a.nomeEmpresarial - b.nomeEmpresaril)? 1 : -1)}
+      (resposta) => { this.clientes = resposta.sort((a, b) => (a.nomeEmpresarial - b.nomeEmpresaril) ? 1 : -1)}
     );
   }
 
   somarServicos(cliente: Cliente): number {
     let total = 0;
+    if(cliente.listaServico === null) {
+      return total;
+    }
     cliente.listaServico.forEach((servico: Servico) => {
       total += servico.valor;
     });
@@ -61,14 +61,10 @@ export class ClientesComponent implements OnInit{
   }
 
   passarId(cnpjcliente: any): void {
-    this.cnpjcliente = cnpjcliente;    
+    this.clienteId = cnpjcliente;
   }
 
   buscar(evento: any): void{
-    console.log('teste')
-  }
-  
-  consultarTodosCliente(): void{
-    this.listaFirebase = this.bdService.getAllClientes(); 
+    console.log('teste');
   }
 }

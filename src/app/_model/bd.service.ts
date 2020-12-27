@@ -14,9 +14,9 @@ export class BdService {
     private router: Router,
     private toastr: ToastrService,) { }
   
-  publicar(cliente: Cliente): void{    
+  publicar(cliente: Cliente): void{
     firebase.database().ref(`clientes/${btoa(cliente.cnpj)}`)
-    .push({     
+    .push({
       cnpj: cliente.cnpj,
       nomeEmpresarial: cliente.nomeEmpresarial,
       cep: cliente.cep,
@@ -59,10 +59,10 @@ export class BdService {
           [],          
         )
         lista.push(cliente)
-      })      
-    })    
-    return lista
-  }  
+      })
+    })
+    return lista;
+  }
 
   delCliente(cnpj: string): Promise<Cliente>{
     return firebase.database().ref(`clientes/${btoa(cnpj)}`).remove()

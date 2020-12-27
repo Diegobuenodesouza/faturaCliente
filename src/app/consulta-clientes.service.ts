@@ -1,21 +1,20 @@
-import { HttpClient } from '@angular/common/http';
-import { core } from '@angular/compiler';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Cliente } from './_model/cliente';
-import { debounceTime, map,  retry } from 'rxjs/operators';
+
 
 @Injectable({
   providedIn: 'root'
 })
-export class ConsultaClientesService {
+export class ConsultaClientesService { 
 
-  private URL = 'http://localhost:3000/clientes';
+  private URL = 'https://faturaclientes.azurewebsites.net/api/Clientes';
 
   constructor(private http: HttpClient) { }
 
-  getClientes(): Observable<Cliente[]>{
-    return this.http.get<Cliente[]>(this.URL)
+  getClientes(): Observable<any> {
+    return this.http.get(`${this.URL}`);
   }
 
   getIdCliente(id: number): Observable<Cliente>{
@@ -23,19 +22,18 @@ export class ConsultaClientesService {
   }
 
   postCliente(cliente: Cliente): Observable<any> {
-    return this.http.post(this.URL, cliente);
+    return this.http.post<Cliente>(this.URL, cliente);
   }
 
   deleteCliente(id: number): Observable<any> {
     return this.http.delete(`${this.URL}/${id}`);
   }
 
-  putCliente(id: number, cliente: Cliente): Observable<any>{
-    return this.http.patch(`${this.URL}/${id}` , cliente);
+  putCliente(id: number, cliente: any): Observable<any>{
+    return this.http.put(`${this.URL}/${id}` , cliente);
   }
 
   getClienteNomeempresarial(busca: string) : Observable<any>{
     return this.http.get<Cliente[]>(`${this.URL}?nomeEmpresarial_like=${busca}`)
   }
-  
 }

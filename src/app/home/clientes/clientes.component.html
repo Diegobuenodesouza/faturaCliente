@@ -9,7 +9,7 @@
         <div class="col-3">
             <div class="form-group">               
                 <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="Buscar Cliente" (keyup)="buscarCliente($event.target.value)" >
+                    <input type="text" class="form-control" placeholder="Buscar Cliente"  >
                     <span class="input-group-text" id="basic-addon1">
                         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
                             <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"/>
@@ -35,25 +35,25 @@
                     
                 </tr>
             </thead>
-            <tbody  class="table-sm"   *ngFor="let cliente of listaFirebase | paginate: { itemsPerPage: contador, currentPage: pag }">
+            <tbody  class="table-sm"   *ngFor="let cliente of listaClientes | paginate: { itemsPerPage: contador, currentPage: pag }">
                 <tr class="centralizar">
                     <th scope="row">{{ cliente.cnpj | cpfcnpjPipe }}</th>
                     <td>{{ cliente.nomeEmpresarial }}</td> 
                     <td>{{ cliente.localidade }}</td>
-                    <td> {{ somarServicos(cliente)  | currency : 'BRL'}}</td>
+                    <td> {{ 1 | currency : 'BRL'}}</td>
                     <td> 
                         
                         <button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#editarModal" 
-                        (click)="passarId(cliente.cnpj)" 
+                        (click)="passarId(cliente.id)" 
                         >Editar</button>
                         
                         <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#servicosModal"
-                        (click)="passarId(cliente.cnpj)"
+                        (click)="passarId(cliente.id)"
                         >Serviços</button>
                         
                         <button class="btn btn-danger btn-sm"
                         data-toggle="modal" data-target="#deleteModal"
-                        (click)="passarId(cliente.cnpj)"
+                        (click)="passarId(cliente.id)"
                         >Excluir</button>
                     </td>
                 </tr>                
@@ -65,7 +65,7 @@
     </div>
     
     
-    <div class="alert alert-danger" *ngIf="listaFirebase.length === 0 " style="text-align: center;">
+    <div class="alert alert-danger" *ngIf="listaClientes.length === 0 " style="text-align: center;">
         Nenhum cliente encontrado
     </div>
     
@@ -81,9 +81,9 @@
 </div>
 
 
-<app-editar-cliente  *ngIf="cnpjcliente !== undefined" [cnpjcliente]="cnpjcliente"  (listanovamente)=ngOnInit()   ></app-editar-cliente>
-<app-deletar-cliente *ngIf="cnpjcliente !== undefined"  [cnpjcliente]="cnpjcliente"  (listanovamente)="ngOnInit()"></app-deletar-cliente>
-<!-- <app-servicos-cliente *ngIf="clienteId !== undefined"  [clienteId]="clienteId"  (listaNovamente)="ngOnInit()"></app-servicos-cliente>
- -->
+<app-editar-cliente  *ngIf="clienteId !== undefined" [clienteId]="clienteId"  (listanovamente)=ngOnInit()   ></app-editar-cliente>
+<app-deletar-cliente *ngIf="clienteId !== undefined"  [clienteId]="clienteId"  (listanovamente)="ngOnInit()"></app-deletar-cliente>
+<app-servicos-cliente *ngIf="clienteId !== undefined"  [clienteId]="clienteId"  (listaNovamente)="ngOnInit()"></app-servicos-cliente>
+
 
 
