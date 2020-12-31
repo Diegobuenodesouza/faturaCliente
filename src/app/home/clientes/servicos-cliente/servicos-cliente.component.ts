@@ -6,6 +6,7 @@ import { Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angul
 import { ToastrService } from 'ngx-toastr';
 import { jsPDF } from 'jspdf';
 import { IfStmt } from '@angular/compiler';
+import { stringify } from '@angular/compiler/src/util';
 
 @Component({
   selector: 'app-servicos-cliente',
@@ -72,7 +73,7 @@ export class ServicosClienteComponent implements OnInit, OnChanges {
   }
 
   addServico(): void {
-    const serv = this.formBuilder.group(new Servico);
+    const serv = this.formBuilder.group(new Servico());
     this.listaServico.push(serv);
   }
 
@@ -84,7 +85,7 @@ export class ServicosClienteComponent implements OnInit, OnChanges {
     this.cliente.listaServico.forEach((servico: Servico) => {
       total += servico.valor;
     });
-    return total;
+      return total;
 
   }
 
@@ -92,16 +93,16 @@ export class ServicosClienteComponent implements OnInit, OnChanges {
    this.cliente.listaServico = [];
    const listaServicoFormulario = this.formulario.controls.listaServico.value;
    listaServicoFormulario.forEach((servico: Servico) => {
-     this.cliente.listaServico.push(new Servico(
-       servico.descricao, servico.valor, servico.vencimento
-     ));
+     this.cliente.listaServico.push(servico);
    });
    this.somaFatura();
+ 
+
   }
 
   atualizaCliente(): void {
     this.consultaCliente.putCliente(this.clienteId, this.cliente).subscribe(
-      () => { this.toastr.success('Servicos atualizado com sucessos'),  this.listaNovamente.emit() ,this.atualizarLista() }
+      () => { this.toastr.success('Servicos atualizado com sucessos'),  this.listaNovamente.emit(), this.atualizarLista() }
     );
   }
 

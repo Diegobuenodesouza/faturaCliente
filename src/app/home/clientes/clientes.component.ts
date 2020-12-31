@@ -10,11 +10,9 @@ import { Servico } from 'src/app/_model/servico';
 })
 export class ClientesComponent implements OnInit{
 
-  clientes: Cliente[] = [];
   clienteId: string;
   pag = 1;
   contador = 8;
-  email: string;
   listaClientes: Cliente[] = [];
 
   constructor(
@@ -24,34 +22,23 @@ export class ClientesComponent implements OnInit{
 
   ngOnInit(): void {
     this.clienteId = undefined;
-    this.TodosClientes();
+    this.todosClientes();
   }
 
-  TodosClientes(): void{
+  todosClientes(): void{
     this.consultaCliente.getClientes().subscribe(
-      (resposta) => this.listaClientes = resposta
-    );
-  }
-
-  // buscarCliente(nome: string): void {
-  //   if( nome.length === 0) {
-  //     this.listarClientes()
-  //   }    
-  //   else{      
-  //     this.filtrarCliente(nome)
-  //   }
-  // }
- 
-
-  filtrarCliente(nome: string): void{
-    this.consultaCliente.getClienteNomeempresarial(nome).subscribe(
-      (resposta) => { this.clientes = resposta.sort((a, b) => (a.nomeEmpresarial - b.nomeEmpresaril) ? 1 : -1)}
+      (resposta: any) => {
+        for(let key of Object.keys(resposta)){
+          let cliente = resposta[key]
+          this.listaClientes.push(cliente)
+        }        
+      }
     );
   }
 
   somarServicos(cliente: Cliente): number {
     let total = 0;
-    if (cliente.listaServico === null) {
+    if (cliente.listaServico === undefined ) {
       return total;
     }
     cliente.listaServico.forEach((servico: Servico) => {
@@ -62,9 +49,5 @@ export class ClientesComponent implements OnInit{
 
   passarId(cnpjcliente: any): void {
     this.clienteId = cnpjcliente;
-  }
-
-  buscar(evento: any): void{
-    console.log('teste');
   }
 }

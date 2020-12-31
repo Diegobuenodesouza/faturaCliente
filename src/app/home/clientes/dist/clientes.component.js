@@ -11,34 +11,27 @@ var core_1 = require("@angular/core");
 var ClientesComponent = /** @class */ (function () {
     function ClientesComponent(consultaCliente) {
         this.consultaCliente = consultaCliente;
-        this.clientes = [];
         this.pag = 1;
         this.contador = 8;
         this.listaClientes = [];
     }
     ClientesComponent.prototype.ngOnInit = function () {
         this.clienteId = undefined;
-        this.TodosClientes();
+        this.todosClientes();
     };
-    ClientesComponent.prototype.TodosClientes = function () {
+    ClientesComponent.prototype.todosClientes = function () {
         var _this = this;
-        this.consultaCliente.getClientes().subscribe(function (resposta) { return _this.listaClientes = resposta; });
-    };
-    // buscarCliente(nome: string): void {
-    //   if( nome.length === 0) {
-    //     this.listarClientes()
-    //   }    
-    //   else{      
-    //     this.filtrarCliente(nome)
-    //   }
-    // }
-    ClientesComponent.prototype.filtrarCliente = function (nome) {
-        var _this = this;
-        this.consultaCliente.getClienteNomeempresarial(nome).subscribe(function (resposta) { _this.clientes = resposta.sort(function (a, b) { return (a.nomeEmpresarial - b.nomeEmpresaril) ? 1 : -1; }); });
+        this.consultaCliente.getClientes().subscribe(function (resposta) {
+            for (var _i = 0, _a = Object.keys(resposta); _i < _a.length; _i++) {
+                var key = _a[_i];
+                var cliente = resposta[key];
+                _this.listaClientes.push(cliente);
+            }
+        });
     };
     ClientesComponent.prototype.somarServicos = function (cliente) {
         var total = 0;
-        if (cliente.listaServico === null) {
+        if (cliente.listaServico === undefined) {
             return total;
         }
         cliente.listaServico.forEach(function (servico) {
@@ -48,9 +41,6 @@ var ClientesComponent = /** @class */ (function () {
     };
     ClientesComponent.prototype.passarId = function (cnpjcliente) {
         this.clienteId = cnpjcliente;
-    };
-    ClientesComponent.prototype.buscar = function (evento) {
-        console.log('teste');
     };
     ClientesComponent = __decorate([
         core_1.Component({

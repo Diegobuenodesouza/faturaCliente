@@ -74,11 +74,11 @@ export class CadastroComponent implements OnInit {
       this.formulario.value.bairro,
       this.formulario.value.localidade,
       this.formulario.value.uf,
-      []);
-      
+      null);
+
     this.consultaCliente.postCliente(this.cliente).subscribe(
       () => { this.router.navigate(['/home']), this.toastr.success('Cliente cadastro com sucesso'); },
-      (error: Error) => console.log('deu erro' , error)
+      (error: Error) => alert('deu erro ' + error)
     );
   }
 }

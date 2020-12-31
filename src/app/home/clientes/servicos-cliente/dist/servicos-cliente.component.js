@@ -64,7 +64,7 @@ var ServicosClienteComponent = /** @class */ (function () {
         this.somaFatura();
     };
     ServicosClienteComponent.prototype.addServico = function () {
-        var serv = this.formBuilder.group(new servico_1.Servico);
+        var serv = this.formBuilder.group(new servico_1.Servico());
         this.listaServico.push(serv);
     };
     ServicosClienteComponent.prototype.somaFatura = function () {
@@ -82,7 +82,7 @@ var ServicosClienteComponent = /** @class */ (function () {
         this.cliente.listaServico = [];
         var listaServicoFormulario = this.formulario.controls.listaServico.value;
         listaServicoFormulario.forEach(function (servico) {
-            _this.cliente.listaServico.push(new servico_1.Servico(servico.descricao, servico.valor, servico.vencimento));
+            _this.cliente.listaServico.push(servico);
         });
         this.somaFatura();
     };

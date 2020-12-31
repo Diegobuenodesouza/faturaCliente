@@ -4,11 +4,11 @@
       "id": 1,
       "cnpj": "47287446000150",
       "nomeEmpresarial": "Tibia Forever Comercio e Industria Ltd",
-      "cep": "05160100",
-      "logradouro": "Rua mutinga",
+      "cep": "05160-100",
+      "logradouro": "Rua Manuel Joaquim de Góis",
       "numero": "350",
-      "bairro": "Pirutuba",
-      "localidade": "Sao Paulo",
+      "bairro": "Jaraguá",
+      "localidade": "São Paulo",
       "UF": "BA",
       "listaServico": [
         {
@@ -21,16 +21,17 @@
           "valor": 350,
           "vencimento": "2020-12-25"
         }
-      ]
+      ],
+      "uf": "SP"
     },
     {
       "id": 2,
       "cnpj": "39432946843",
       "nomeEmpresarial": "Python Industria e Comercio LTDA",
-      "cep": "05160340",
-      "logradouro": "Rua Moxoto",
+      "cep": "05160-340",
+      "logradouro": "Rua Moxotó",
       "numero": "38",
-      "bairro": "Pirituba",
+      "bairro": "Jaraguá",
       "localidade": "São Paulo",
       "UF": "SP",
       "listaServico": [
@@ -44,7 +45,8 @@
           "valor": 25,
           "vencimento": "2020-09-30"
         }
-      ]
+      ],
+      "uf": "SP"
     },
     {
       "cnpj": "12312312312311",
@@ -72,7 +74,8 @@
           "vencimento": "2020-12-14"
         }
       ],
-      "id": 4
+      "id": 4,
+      "uf": "SP"
     },
     {
       "cnpj": "54949874979712",
@@ -105,7 +108,8 @@
           "vencimento": "2020-12-23"
         }
       ],
-      "id": 5
+      "id": 5,
+      "uf": "SP"
     },
     {
       "cnpj": "54545142351423",
@@ -123,7 +127,8 @@
           "vencimento": "2020-12-31"
         }
       ],
-      "id": 6
+      "id": 6,
+      "uf": "SP"
     },
     {
       "cnpj": "12312312312312",
@@ -146,7 +151,8 @@
           "vencimento": "2020-01-30"
         }
       ],
-      "id": 8
+      "id": 8,
+      "uf": "SP"
     },
     {
       "cnpj": "65656565656888",
@@ -157,8 +163,50 @@
       "bairro": "Jaraguá",
       "localidade": "São Paulo",
       "UF": "SP",
+      "listaServico": [
+        {
+          "descricao": "DAS",
+          "valor": 350,
+          "vencimento": "2020-09-30"
+        }
+      ],
+      "id": 9,
+      "uf": "SP"
+    },
+    {
+      "cnpj": "12312312312312",
+      "nomeEmpresarial": "Diego Bueno",
+      "cep": "05160-340",
+      "logradouro": "Rua Moxotó",
+      "numero": "123",
+      "bairro": "Jaraguá",
+      "localidade": "São Paulo",
+      "uf": "SP",
       "listaServico": [],
-      "id": 9
+      "id": 10
+    },
+    {
+      "cnpj": "12312312312312",
+      "nomeEmpresarial": "Camila Souza",
+      "cep": "05160-340",
+      "logradouro": "Rua Moxotó",
+      "numero": "123",
+      "bairro": "Jaraguá",
+      "localidade": "São Paulo",
+      "uf": "SP",
+      "listaServico": [
+        {
+          "descricao": "COFINS",
+          "valor": 50,
+          "vencimento": "2020-12-25"
+        },
+        {
+          "descricao": "PIS",
+          "valor": 150,
+          "vencimento": "2020-12-25"
+        }
+      ],
+      "id": 11
     }
   ]
 }
