@@ -15,7 +15,7 @@ import { stringify } from '@angular/compiler/src/util';
 })
 export class ServicosClienteComponent implements OnInit, OnChanges {
 
-  @Input() clienteId: number;
+  @Input() clienteKey: string;
   @Output() listaNovamente = new EventEmitter();
   cliente = new Cliente(0, '', '', '', '', '', '', '', '', []);
   formulario: FormGroup;
@@ -31,7 +31,7 @@ export class ServicosClienteComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(): void {
-    this.consultaCliente.getIdCliente(this.clienteId).subscribe(
+    this.consultaCliente.getIdCliente(this.clienteKey).subscribe(
       (resposta) => {
         this.cliente = resposta, 
         this.formulario = new FormGroup({
@@ -44,7 +44,6 @@ export class ServicosClienteComponent implements OnInit, OnChanges {
         }),
         this.setListaServico();
         this.somaFatura();
-
        }
     );
   }
@@ -54,7 +53,7 @@ export class ServicosClienteComponent implements OnInit, OnChanges {
   }
 
   setListaServico(): void {
-    if (this.cliente.listaServico === null) {
+    if (this.cliente.listaServico === undefined) {
       return;
     }
     else{
@@ -73,13 +72,17 @@ export class ServicosClienteComponent implements OnInit, OnChanges {
   }
 
   addServico(): void {
-    const serv = this.formBuilder.group(new Servico());
+    const serv = this.formBuilder.group({
+      descricao : new FormControl('', [Validators.required]),
+      vencimento: new FormControl('', [Validators.required]),
+      valor: new FormControl('', [Validators.required, Validators.min(1)])
+    });
     this.listaServico.push(serv);
   }
 
   somaFatura(): number{
     let total = 0;
-    if (this.cliente.listaServico === null) {
+    if (this.cliente.listaServico === undefined) {
       return total;
     }
     this.cliente.listaServico.forEach((servico: Servico) => {
@@ -101,7 +104,7 @@ export class ServicosClienteComponent implements OnInit, OnChanges {
   }
 
   atualizaCliente(): void {
-    this.consultaCliente.putCliente(this.clienteId, this.cliente).subscribe(
+    this.consultaCliente.putCliente(this.clienteKey, this.cliente).subscribe(
       () => { this.toastr.success('Servicos atualizado com sucessos'),  this.listaNovamente.emit(), this.atualizarLista() }
     );
   }
@@ -202,9 +205,7 @@ export class ServicosClienteComponent implements OnInit, OnChanges {
     doc.setFontSize(16)
     doc.text( ' R$', 150,70)
     doc.text( this.somaFatura().toFixed(2).replace('.', ',') , 164,70,)
-    doc.rect(161,63,37,9)
-
-    
+    doc.rect(161,63,37,9)    
 
     doc.setFontSize(10)
     doc.setFont('normal')
@@ -279,7 +280,7 @@ export class ServicosClienteComponent implements OnInit, OnChanges {
     doc.text('CONTROLE ASSESSORIA CONTÁBIL LTDA' , 100,238)
     doc.text('CNPJ: 62.031.950/001-30', 117,244)
     
-    doc.output('dataurlnewwindow')
+    doc.save(`${this.cliente.nomeEmpresarial.toLowerCase()} - ${ this.retornaMesCompetencia(dataCompentecia).toLowerCase()}`)
   }
 }
 

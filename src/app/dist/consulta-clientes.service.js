@@ -11,23 +11,22 @@ var core_1 = require("@angular/core");
 var ConsultaClientesService = /** @class */ (function () {
     function ConsultaClientesService(http) {
         this.http = http;
-        this.URL = 'http://localhost:3000/clientes';
         this.URL_FIREBASE = 'https://fatura-cliente-portfolio-default-rtdb.firebaseio.com/clientes';
     }
     ConsultaClientesService.prototype.getClientes = function () {
         return this.http.get(this.URL_FIREBASE + ".json");
     };
-    ConsultaClientesService.prototype.getIdCliente = function (id) {
-        return this.http.get(this.URL + "/" + id);
+    ConsultaClientesService.prototype.getIdCliente = function (key) {
+        return this.http.get(this.URL_FIREBASE + "/" + key + ".json");
     };
     ConsultaClientesService.prototype.postCliente = function (cliente) {
         return this.http.post(this.URL_FIREBASE + ".json", cliente);
     };
-    ConsultaClientesService.prototype.deleteCliente = function (id) {
-        return this.http["delete"](this.URL + "/" + id);
+    ConsultaClientesService.prototype.deleteCliente = function (key) {
+        return this.http["delete"](this.URL_FIREBASE + "/" + key + ".json");
     };
-    ConsultaClientesService.prototype.putCliente = function (id, cliente) {
-        return this.http.put(this.URL + "/" + id, cliente);
+    ConsultaClientesService.prototype.putCliente = function (key, cliente) {
+        return this.http.put(this.URL_FIREBASE + "/" + key + ".json", cliente);
     };
     ConsultaClientesService = __decorate([
         core_1.Injectable({

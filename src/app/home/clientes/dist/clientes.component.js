@@ -14,19 +14,20 @@ var ClientesComponent = /** @class */ (function () {
         this.pag = 1;
         this.contador = 8;
         this.listaClientes = [];
+        this.listakey = [];
     }
     ClientesComponent.prototype.ngOnInit = function () {
-        this.clienteId = undefined;
+        this.clienteKey = undefined;
         this.todosClientes();
+    };
+    ClientesComponent.prototype.retornoIndex = function () {
+        return this.pag > 1 ? this.contador * (this.pag - 1) : 0;
     };
     ClientesComponent.prototype.todosClientes = function () {
         var _this = this;
         this.consultaCliente.getClientes().subscribe(function (resposta) {
-            for (var _i = 0, _a = Object.keys(resposta); _i < _a.length; _i++) {
-                var key = _a[_i];
-                var cliente = resposta[key];
-                _this.listaClientes.push(cliente);
-            }
+            _this.listaClientes = Object.values(resposta),
+                _this.listakey = Object.keys(resposta);
         });
     };
     ClientesComponent.prototype.somarServicos = function (cliente) {
@@ -39,8 +40,8 @@ var ClientesComponent = /** @class */ (function () {
         });
         return total;
     };
-    ClientesComponent.prototype.passarId = function (cnpjcliente) {
-        this.clienteId = cnpjcliente;
+    ClientesComponent.prototype.passarId = function (key) {
+        this.clienteKey = key;
     };
     ClientesComponent = __decorate([
         core_1.Component({

@@ -1,4 +1,5 @@
 import { Component,  OnInit} from '@angular/core';
+import { observable } from 'rxjs';
 import { ConsultaClientesService } from 'src/app/consulta-clientes.service';
 import { Cliente } from 'src/app/_model/cliente';
 import { Servico } from 'src/app/_model/servico';
@@ -10,10 +11,12 @@ import { Servico } from 'src/app/_model/servico';
 })
 export class ClientesComponent implements OnInit{
 
-  clienteId: string;
+  clienteKey: string;
   pag = 1;
   contador = 8;
   listaClientes: Cliente[] = [];
+  listakey: string[] = []
+  
 
   constructor(
     private consultaCliente: ConsultaClientesService,
@@ -21,20 +24,23 @@ export class ClientesComponent implements OnInit{
     ) { }
 
   ngOnInit(): void {
-    this.clienteId = undefined;
-    this.todosClientes();
+    this.clienteKey = undefined;
+    this.todosClientes();  
+  }
+
+  retornoIndex(): number {
+    return this.pag > 1 ? this.contador * (this.pag -1) : 0   
   }
 
   todosClientes(): void{
     this.consultaCliente.getClientes().subscribe(
-      (resposta: any) => {
-        for(let key of Object.keys(resposta)){
-          let cliente = resposta[key]
-          this.listaClientes.push(cliente)
-        }        
+     (resposta: any) => { this.listaClientes = Object.values(resposta),
+      this.listakey = Object.keys(resposta)       
       }
     );
   }
+
+ 
 
   somarServicos(cliente: Cliente): number {
     let total = 0;
@@ -47,7 +53,7 @@ export class ClientesComponent implements OnInit{
     return total;
   }
 
-  passarId(cnpjcliente: any): void {
-    this.clienteId = cnpjcliente;
+  passarId(key: any): void {
+    this.clienteKey = key
   }
 }

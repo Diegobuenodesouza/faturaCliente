@@ -24,7 +24,7 @@ var ServicosClienteComponent = /** @class */ (function () {
     };
     ServicosClienteComponent.prototype.ngOnChanges = function () {
         var _this = this;
-        this.consultaCliente.getIdCliente(this.clienteId).subscribe(function (resposta) {
+        this.consultaCliente.getIdCliente(this.clienteKey).subscribe(function (resposta) {
             _this.cliente = resposta,
                 _this.formulario = new forms_1.FormGroup({
                     cnpj: new forms_1.FormControl(_this.cliente.cnpj),
@@ -47,7 +47,7 @@ var ServicosClienteComponent = /** @class */ (function () {
     });
     ServicosClienteComponent.prototype.setListaServico = function () {
         var _this = this;
-        if (this.cliente.listaServico === null) {
+        if (this.cliente.listaServico === undefined) {
             return;
         }
         else {
@@ -64,12 +64,16 @@ var ServicosClienteComponent = /** @class */ (function () {
         this.somaFatura();
     };
     ServicosClienteComponent.prototype.addServico = function () {
-        var serv = this.formBuilder.group(new servico_1.Servico());
+        var serv = this.formBuilder.group({
+            descricao: new forms_1.FormControl('', [forms_1.Validators.required]),
+            vencimento: new forms_1.FormControl('', [forms_1.Validators.required]),
+            valor: new forms_1.FormControl('', [forms_1.Validators.required, forms_1.Validators.min(1)])
+        });
         this.listaServico.push(serv);
     };
     ServicosClienteComponent.prototype.somaFatura = function () {
         var total = 0;
-        if (this.cliente.listaServico === null) {
+        if (this.cliente.listaServico === undefined) {
             return total;
         }
         this.cliente.listaServico.forEach(function (servico) {
@@ -88,7 +92,7 @@ var ServicosClienteComponent = /** @class */ (function () {
     };
     ServicosClienteComponent.prototype.atualizaCliente = function () {
         var _this = this;
-        this.consultaCliente.putCliente(this.clienteId, this.cliente).subscribe(function () { _this.toastr.success('Servicos atualizado com sucessos'), _this.listaNovamente.emit(), _this.atualizarLista(); });
+        this.consultaCliente.putCliente(this.clienteKey, this.cliente).subscribe(function () { _this.toastr.success('Servicos atualizado com sucessos'), _this.listaNovamente.emit(), _this.atualizarLista(); });
     };
     ServicosClienteComponent.prototype.corrigirData = function (data) {
         var dataCerta = '';
@@ -228,11 +232,11 @@ var ServicosClienteComponent = /** @class */ (function () {
         doc.line(90, 232, 180, 232);
         doc.text('CONTROLE ASSESSORIA CONTÁBIL LTDA', 100, 238);
         doc.text('CNPJ: 62.031.950/001-30', 117, 244);
-        doc.output('dataurlnewwindow');
+        doc.save(this.cliente.nomeEmpresarial.toLowerCase() + " - " + this.retornaMesCompetencia(dataCompentecia).toLowerCase());
     };
     __decorate([
         core_1.Input()
-    ], ServicosClienteComponent.prototype, "clienteId");
+    ], ServicosClienteComponent.prototype, "clienteKey");
     __decorate([
         core_1.Output()
     ], ServicosClienteComponent.prototype, "listaNovamente");

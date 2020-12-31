@@ -21,11 +21,11 @@ var DeletarClienteComponent = /** @class */ (function () {
     };
     DeletarClienteComponent.prototype.ngOnChanges = function () {
         var _this = this;
-        this.consultaCliente.getIdCliente(this.clienteId).subscribe(function (resposta) { _this.cliente = resposta; });
+        this.consultaCliente.getIdCliente(this.clienteKey).subscribe(function (resposta) { _this.cliente = resposta; });
     };
     DeletarClienteComponent.prototype.excluirCliente = function () {
         var _this = this;
-        this.consultaCliente.deleteCliente(this.clienteId).subscribe(function () {
+        this.consultaCliente.deleteCliente(this.clienteKey).subscribe(function () {
             _this.router.navigate(['/home']),
                 _this.toastr.info('Cliente excluido com sucesso'),
                 _this.listanovamente.emit();
@@ -33,7 +33,7 @@ var DeletarClienteComponent = /** @class */ (function () {
     };
     __decorate([
         core_1.Input()
-    ], DeletarClienteComponent.prototype, "clienteId");
+    ], DeletarClienteComponent.prototype, "clienteKey");
     __decorate([
         core_1.Output()
     ], DeletarClienteComponent.prototype, "listanovamente");

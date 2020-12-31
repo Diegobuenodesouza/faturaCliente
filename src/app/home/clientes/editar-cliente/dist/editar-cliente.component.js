@@ -31,7 +31,7 @@ var EditarClienteComponent = /** @class */ (function () {
     EditarClienteComponent.prototype.ngOnInit = function () { };
     EditarClienteComponent.prototype.ngOnChanges = function () {
         var _this = this;
-        this.consultaCliente.getIdCliente(this.clienteId).subscribe(function (resposta) { _this.cliente = resposta, _this.atualizarInput(); });
+        this.consultaCliente.getIdCliente(this.clienteKey).subscribe(function (resposta) { _this.cliente = resposta, _this.atualizarInput(); });
     };
     EditarClienteComponent.prototype.atualizarInput = function () {
         this.formularioEditar.controls.cnpj.setValue(this.cliente.cnpj);
@@ -52,7 +52,7 @@ var EditarClienteComponent = /** @class */ (function () {
         this.cliente.bairro = this.formularioEditar.value.bairro;
         this.cliente.localidade = this.formularioEditar.value.localidade;
         this.cliente.uf = this.formularioEditar.value.uf;
-        this.consultaCliente.putCliente(this.clienteId, this.cliente).subscribe(function () {
+        this.consultaCliente.putCliente(this.clienteKey, this.cliente).subscribe(function () {
             _this.toastr.success('Cliente alterado com sucesso'),
                 _this.listanovamente.emit(),
                 _this.router.navigate(['/home']);
@@ -76,7 +76,7 @@ var EditarClienteComponent = /** @class */ (function () {
     };
     __decorate([
         core_1.Input()
-    ], EditarClienteComponent.prototype, "clienteId");
+    ], EditarClienteComponent.prototype, "clienteKey");
     __decorate([
         core_1.Output()
     ], EditarClienteComponent.prototype, "listanovamente");

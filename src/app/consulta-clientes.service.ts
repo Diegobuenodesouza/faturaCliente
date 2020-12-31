@@ -8,9 +8,7 @@ import { Servico } from './_model/servico';
 @Injectable({
   providedIn: 'root'
 })
-export class ConsultaClientesService { 
-
-  private URL = 'http://localhost:3000/clientes';
+export class ConsultaClientesService {
 
   private URL_FIREBASE = 'https://fatura-cliente-portfolio-default-rtdb.firebaseio.com/clientes'
 
@@ -19,16 +17,16 @@ export class ConsultaClientesService {
   getClientes(): Observable<any> {
     return this.http.get(`${this.URL_FIREBASE}.json`);
   }
-  getIdCliente(id: number): Observable<Cliente>{
-    return this.http.get<Cliente>(`${this.URL}/${id}`);
+  getIdCliente(key: string): Observable<Cliente>{
+    return this.http.get<Cliente>(`${this.URL_FIREBASE}/${key}.json`);
   }
   postCliente(cliente: Cliente): Observable<any> {
     return this.http.post<Cliente>(`${this.URL_FIREBASE}.json`, cliente);
   }
-  deleteCliente(id: number): Observable<any> {
-    return this.http.delete(`${this.URL}/${id}`);
+  deleteCliente(key: string): Observable<any> {
+    return this.http.delete(`${this.URL_FIREBASE}/${key}.json`);
   }
-  putCliente(id: number, cliente: any): Observable<any>{
-    return this.http.put(`${this.URL}/${id}` , cliente);
+  putCliente(key: string, cliente: any): Observable<any>{
+    return this.http.put(`${this.URL_FIREBASE}/${key}.json` , cliente);
   }  
 }

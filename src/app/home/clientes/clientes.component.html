@@ -32,28 +32,27 @@
                     <th scope="col">Localidade</th>
                     <th scope="col">Valor Fatura</th>
                     <th scope="col">Opções</th>
-                    
                 </tr>
             </thead>
-            <tbody  class="table-sm"   *ngFor="let cliente of listaClientes | paginate: { itemsPerPage: contador, currentPage: pag }">
+            <tbody  class="table-sm"   *ngFor="let cliente of listaClientes | paginate: { itemsPerPage: contador, currentPage: pag }; let i=index">
                 <tr class="centralizar">
                     <th scope="row">{{ cliente.cnpj | cpfcnpjPipe }}</th>
                     <td>{{ cliente.nomeEmpresarial }}</td> 
                     <td>{{ cliente.localidade }}</td>
-                    <td> {{ somarServicos(cliente) | currency : 'BRL'}}</td>
+                    <td> {{ somarServicos(cliente) | currency : 'BRL'}}</td>                  
                     <td> 
                         
                         <button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#editarModal" 
-                        (click)="passarId(cliente.id)" 
+                        (click)="passarId( listakey[retornoIndex() + i])" 
                         >Editar</button>
                         
                         <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#servicosModal"
-                        (click)="passarId(cliente.id)"
+                        (click)="passarId( listakey[retornoIndex() + i])" 
                         >Serviços</button>
                         
                         <button class="btn btn-danger btn-sm"
                         data-toggle="modal" data-target="#deleteModal"
-                        (click)="passarId(cliente.id)"
+                        (click)="passarId( listakey[retornoIndex() + i])" 
                         >Excluir</button>
                     </td>
                 </tr>                
@@ -81,9 +80,7 @@
 </div>
 
 
-<app-editar-cliente  *ngIf="clienteId !== undefined" [clienteId]="clienteId"  (listanovamente)=ngOnInit()   ></app-editar-cliente>
-<app-deletar-cliente *ngIf="clienteId !== undefined"  [clienteId]="clienteId"  (listanovamente)="ngOnInit()"></app-deletar-cliente>
-<app-servicos-cliente *ngIf="clienteId !== undefined"  [clienteId]="clienteId"  (listaNovamente)="ngOnInit()"></app-servicos-cliente>
-
-
+<app-editar-cliente  *ngIf="clienteKey !== undefined" [clienteKey]="clienteKey"  (listanovamente)=ngOnInit()   ></app-editar-cliente>
+<app-deletar-cliente *ngIf="clienteKey !== undefined"  [clienteKey]="clienteKey"  (listanovamente)="ngOnInit()"></app-deletar-cliente>
+<app-servicos-cliente *ngIf="clienteKey !== undefined"  [clienteKey]="clienteKey"  (listaNovamente)="ngOnInit()"></app-servicos-cliente>
 
