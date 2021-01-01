@@ -1,0 +1,41 @@
+<div class="container " >  
+    <br> 
+        <div class="shadow-lg p-3 mb-5 bg-black rounded" style="border: 0.5px rgba(122, 120, 120, 0.603) solid;">
+        <div style="text-align: center;">
+            <h5>Utilitario alterar dados da faturas</h5>
+            <p style="border: solid 1.5px rgb(189, 189, 189);margin: 25px 0px 20px;"></p>
+        </div>  
+        <form [formGroup]="formulario"> 
+            <div class="row">
+                <div class="col-4">
+                    <div class="form-group">
+                        <label >Competência</label>
+                        <input  class="form-control" formControlName="competencia" type="month" >
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-group">
+                        <label >Data de Emissão</label>
+                        <input class="form-control"  formControlName="dataDeEmissao" type="date" >
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-group">
+                        <label >Vencimento Recebo</label>
+                        <input class="form-control" formControlName="dataVencimentoRecibo"  type="date" >
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="d-flex justify-content-end">
+                        <button class="btn btn btn-success btn-md"> Alterar</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+

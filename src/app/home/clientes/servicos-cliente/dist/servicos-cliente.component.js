@@ -11,7 +11,6 @@ var forms_1 = require("@angular/forms");
 var servico_1 = require("src/app/_model/servico");
 var core_1 = require("@angular/core");
 var jspdf_1 = require("jspdf");
-var dados = require("src/app/_model/dadosEmissaoFatura");
 var ServicosClienteComponent = /** @class */ (function () {
     function ServicosClienteComponent(consultaCliente, formBuilder, toastr) {
         this.consultaCliente = consultaCliente;
@@ -24,18 +23,21 @@ var ServicosClienteComponent = /** @class */ (function () {
     ServicosClienteComponent.prototype.ngOnChanges = function () {
         var _this = this;
         this.consultaCliente.getIdCliente(this.clienteKey).subscribe(function (resposta) {
-            _this.cliente = Object.values(resposta)[0],
-                _this.key = Object.keys(resposta)[0],
-                _this.formulario = new forms_1.FormGroup({
-                    cnpj: new forms_1.FormControl(_this.cliente.cnpj),
-                    nomeEmpresarial: new forms_1.FormControl(_this.cliente.nomeEmpresarial),
-                    competencia: new forms_1.FormControl(dados.DadosEmissaoFatura.compentecia, [forms_1.Validators.required]),
-                    dataVencimentoRecibo: new forms_1.FormControl(dados.DadosEmissaoFatura.dataVencimentoRecibo, [forms_1.Validators.required]),
-                    dataDeEmissao: new forms_1.FormControl(dados.DadosEmissaoFatura.dataDeEmissao, [forms_1.Validators.required]),
-                    listaServico: new forms_1.FormArray([])
-                }),
-                _this.setListaServico();
-            _this.somaFatura();
+            _this.consultaCliente.getDadosFatura().subscribe(function (dados) {
+                _this.dadosFatura = dados,
+                    _this.cliente = Object.values(resposta)[0],
+                    _this.key = Object.keys(resposta)[0],
+                    _this.formulario = new forms_1.FormGroup({
+                        cnpj: new forms_1.FormControl(_this.cliente.cnpj),
+                        nomeEmpresarial: new forms_1.FormControl(_this.cliente.nomeEmpresarial),
+                        competencia: new forms_1.FormControl(_this.dadosFatura.competencia, [forms_1.Validators.required]),
+                        dataVencimentoRecibo: new forms_1.FormControl(_this.dadosFatura.dataDeEmissao, [forms_1.Validators.required]),
+                        dataDeEmissao: new forms_1.FormControl(_this.dadosFatura.dataVencimentoRecibo, [forms_1.Validators.required]),
+                        listaServico: new forms_1.FormArray([])
+                    }),
+                    _this.setListaServico();
+                _this.somaFatura();
+            });
         });
     };
     Object.defineProperty(ServicosClienteComponent.prototype, "listaServico", {

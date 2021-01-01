@@ -12,6 +12,7 @@ var ConsultaClientesService = /** @class */ (function () {
     function ConsultaClientesService(http) {
         this.http = http;
         this.URL_FIREBASE = 'https://fatura-cliente-portfolio-default-rtdb.firebaseio.com/clientes';
+        this.URL_DADOSFATURA = 'https://fatura-cliente-portfolio-default-rtdb.firebaseio.com/dadosfaturas.json';
     }
     ConsultaClientesService.prototype.getClientes = function () {
         return this.http.get(this.URL_FIREBASE + ".json");
@@ -27,6 +28,9 @@ var ConsultaClientesService = /** @class */ (function () {
     };
     ConsultaClientesService.prototype.putCliente = function (key, cliente) {
         return this.http.put(this.URL_FIREBASE + "/" + key + ".json", cliente);
+    };
+    ConsultaClientesService.prototype.getDadosFatura = function () {
+        return this.http.get(this.URL_DADOSFATURA);
     };
     ConsultaClientesService = __decorate([
         core_1.Injectable({

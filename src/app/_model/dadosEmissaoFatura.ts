@@ -1,6 +1,8 @@
-export class DadosEmissaoFatura{
+export class DadosEmissaoFatura{     
 
-  static compentecia = "2021-01"
-  static dataVencimentoRecibo = "2021-01-01"
-  static dataDeEmissao = "2021-01-01" 
+  static compentecia: string
+  static dataVencimentoRecibo: string
+  static dataDeEmissao: string 
+
 }
+

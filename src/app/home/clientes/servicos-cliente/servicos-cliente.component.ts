@@ -4,7 +4,6 @@ import { Servico } from 'src/app/_model/servico';
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { jsPDF } from 'jspdf';
-import * as dados from 'src/app/_model/dadosEmissaoFatura'
 
 @Component({
   selector: 'app-servicos-cliente',
@@ -18,31 +17,37 @@ export class ServicosClienteComponent implements OnInit, OnChanges {
   cliente : any;
   key: string
   formulario: FormGroup;
+  dadosFatura: any
 
   constructor(
     private consultaCliente: ConsultaClientesService,
     private formBuilder: FormBuilder,
-    private toastr: ToastrService    
+    private toastr: ToastrService,
     ) { }
 
-  ngOnInit(): void {    
+  ngOnInit(): void {   
+     
   }
 
   ngOnChanges(): void {
+    
     this.consultaCliente.getIdCliente(this.clienteKey).subscribe(
       (resposta) => {
+        this.consultaCliente.getDadosFatura().subscribe(
+        (dados) => {this.dadosFatura = dados,
         this.cliente = Object.values(resposta)[0], 
         this.key = Object.keys(resposta)[0], 
         this.formulario = new FormGroup({
           cnpj: new FormControl(this.cliente.cnpj),
           nomeEmpresarial: new FormControl(this.cliente.nomeEmpresarial ),
-          competencia: new FormControl(dados.DadosEmissaoFatura.compentecia, [Validators.required]),
-          dataVencimentoRecibo: new FormControl(dados.DadosEmissaoFatura.dataVencimentoRecibo, [Validators.required]),
-          dataDeEmissao: new FormControl(dados.DadosEmissaoFatura.dataDeEmissao, [Validators.required]),
+          competencia: new FormControl(this.dadosFatura.competencia, [Validators.required]),
+          dataVencimentoRecibo: new FormControl(this.dadosFatura.dataDeEmissao , [Validators.required]),
+          dataDeEmissao: new FormControl(this.dadosFatura.dataVencimentoRecibo, [Validators.required]),
           listaServico: new FormArray([])
         }),
         this.setListaServico();
-        this.somaFatura();       
+        this.somaFatura();   
+        })    
        }
     );
   }

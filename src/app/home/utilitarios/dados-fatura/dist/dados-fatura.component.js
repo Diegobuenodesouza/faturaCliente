@@ -1,0 +1,41 @@
+"use strict";
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+exports.__esModule = true;
+exports.DadosFaturaComponent = void 0;
+var core_1 = require("@angular/core");
+var forms_1 = require("@angular/forms");
+var DadosFaturaComponent = /** @class */ (function () {
+    function DadosFaturaComponent(consultaDados) {
+        this.consultaDados = consultaDados;
+        this.formulario = new forms_1.FormGroup({
+            competencia: new forms_1.FormControl('', [forms_1.Validators.required]),
+            dataDeEmissao: new forms_1.FormControl('', [forms_1.Validators.required]),
+            dataVencimentoRecibo: new forms_1.FormControl('', [forms_1.Validators.required])
+        });
+    }
+    DadosFaturaComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.consultaDados.getDadosFatura().subscribe(function (resposta) {
+            _this.dados = resposta;
+            _this.formulario = new forms_1.FormGroup({
+                competencia: new forms_1.FormControl(_this.dados.competencia, [forms_1.Validators.required]),
+                dataDeEmissao: new forms_1.FormControl(_this.dados.dataDeEmissao, [forms_1.Validators.required]),
+                dataVencimentoRecibo: new forms_1.FormControl(_this.dados.dataVencimentoRecibo, [forms_1.Validators.required])
+            });
+        });
+    };
+    DadosFaturaComponent = __decorate([
+        core_1.Component({
+            selector: 'app-dados-fatura',
+            templateUrl: './dados-fatura.component.html',
+            styleUrls: ['./dados-fatura.component.css']
+        })
+    ], DadosFaturaComponent);
+    return DadosFaturaComponent;
+}());
+exports.DadosFaturaComponent = DadosFaturaComponent;

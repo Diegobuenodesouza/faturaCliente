@@ -2,7 +2,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Cliente } from './_model/cliente';
-import { Servico } from './_model/servico';
 
 
 @Injectable({
@@ -11,6 +10,7 @@ import { Servico } from './_model/servico';
 export class ConsultaClientesService {
 
   private URL_FIREBASE = 'https://fatura-cliente-portfolio-default-rtdb.firebaseio.com/clientes'
+  private URL_DADOSFATURA = 'https://fatura-cliente-portfolio-default-rtdb.firebaseio.com/dadosfaturas.json'
 
   constructor(private http: HttpClient) { }
 
@@ -29,4 +29,8 @@ export class ConsultaClientesService {
   putCliente(key: string, cliente: any): Observable<any>{
     return this.http.put(`${this.URL_FIREBASE}/${key}.json` , cliente);
   }  
+
+  getDadosFatura(): Observable<any>{
+    return this.http.get(this.URL_DADOSFATURA)
+  }
 }

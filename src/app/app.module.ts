@@ -33,6 +33,7 @@ import { AutenticacaoGuardService } from './_model/autenticacao-guard.service';
 import { LOCALE_ID } from '@angular/core';
 import { registerLocaleData } from '@angular/common';
 import localePtBr from '@angular/common/locales/pt';
+import { DadosFaturaComponent } from './home/utilitarios/dados-fatura/dados-fatura.component';
 
 registerLocaleData(localePtBr);
 
@@ -51,6 +52,7 @@ registerLocaleData(localePtBr);
     DeletarClienteComponent,
     CpfcnpjPipePipe,
     ServicosClienteComponent,
+    DadosFaturaComponent,
     
   ],
   imports: [

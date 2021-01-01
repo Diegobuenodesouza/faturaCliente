@@ -2,14 +2,14 @@
   <a class="navbar-brand" [routerLink]="['/home']" routerLinkActive="active" >Controller</a>  
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav">
-      <a class="nav-item nav-link" [routerLink]="['/home', 'cadastro']" routerLinkActive="active" >Cadastrar Cliente</a>
+      <a class="btn btn-light" [routerLink]="['/home', 'cadastro']" routerLinkActive="active" >Cadastrar Cliente</a>
     </div>
-    <div class="dropdown">
-      <a class="btn dropdown-toggle" routerLinkActive="active" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+    <div class="dropdown" >
+      <a class="btn btn-light dropdown-toggle"  role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
         Utilitários
       </a>    
       <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-        <li><a class="dropdown-item" href="#">Datas Faturas</a></li>
+        <li><a class="dropdown-item"  [routerLink]="['/home', 'dadosFatura']">Datas Faturas</a></li>
       </ul>
     </div>
   </div>
