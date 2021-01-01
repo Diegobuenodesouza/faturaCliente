@@ -48,7 +48,7 @@ var CadastroComponent = /** @class */ (function () {
     };
     CadastroComponent.prototype.cadastrar = function () {
         var _this = this;
-        this.cliente = new cliente_1.Cliente(this.formulario.value.id, this.formulario.value.cnpj, this.formulario.value.nomeEmpresarial, this.formulario.value.cep, this.formulario.value.logradouro, this.formulario.value.numero, this.formulario.value.bairro, this.formulario.value.localidade, this.formulario.value.uf, null);
+        this.cliente = new cliente_1.Cliente(this.formulario.value.cnpj, this.formulario.value.nomeEmpresarial, this.formulario.value.cep, this.formulario.value.logradouro, this.formulario.value.numero, this.formulario.value.bairro, this.formulario.value.localidade, this.formulario.value.uf, null);
         this.consultaCliente.postCliente(this.cliente).subscribe(function () { _this.router.navigate(['/home']), _this.toastr.success('Cliente cadastro com sucesso'); }, function (error) { return alert('deu erro ' + error); });
     };
     CadastroComponent = __decorate([

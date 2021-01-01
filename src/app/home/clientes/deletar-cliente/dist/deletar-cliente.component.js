@@ -8,24 +8,25 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 exports.__esModule = true;
 exports.DeletarClienteComponent = void 0;
 var core_1 = require("@angular/core");
-var cliente_1 = require("src/app/_model/cliente");
 var DeletarClienteComponent = /** @class */ (function () {
     function DeletarClienteComponent(consultaCliente, toastr, router) {
         this.consultaCliente = consultaCliente;
         this.toastr = toastr;
         this.router = router;
-        this.cliente = new cliente_1.Cliente(0, '', '', '', '', '', '', '', '', []);
         this.listanovamente = new core_1.EventEmitter();
     }
     DeletarClienteComponent.prototype.ngOnInit = function () {
     };
     DeletarClienteComponent.prototype.ngOnChanges = function () {
         var _this = this;
-        this.consultaCliente.getIdCliente(this.clienteKey).subscribe(function (resposta) { _this.cliente = resposta; });
+        this.consultaCliente.getIdCliente(this.clienteKey).subscribe(function (resposta) {
+            _this.cliente = Object.values(resposta)[0],
+                _this.key = Object.keys(resposta)[0];
+        });
     };
     DeletarClienteComponent.prototype.excluirCliente = function () {
         var _this = this;
-        this.consultaCliente.deleteCliente(this.clienteKey).subscribe(function () {
+        this.consultaCliente.deleteCliente(this.key).subscribe(function () {
             _this.router.navigate(['/home']),
                 _this.toastr.info('Cliente excluido com sucesso'),
                 _this.listanovamente.emit();

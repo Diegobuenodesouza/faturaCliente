@@ -26,9 +26,26 @@ var ClientesComponent = /** @class */ (function () {
     ClientesComponent.prototype.todosClientes = function () {
         var _this = this;
         this.consultaCliente.getClientes().subscribe(function (resposta) {
-            _this.listaClientes = Object.values(resposta),
-                _this.listakey = Object.keys(resposta);
+            _this.listaClientes = Object.values(resposta);
         });
+    };
+    ClientesComponent.prototype.filtrar = function (busca) {
+        var _this = this;
+        if (busca.length === 0) {
+            this.todosClientes();
+        }
+        else {
+            this.consultaCliente.getClientes().subscribe(function (resposta) {
+                var listaFiltrada = [];
+                for (var _i = 0, _a = Object.values(resposta); _i < _a.length; _i++) {
+                    var cliente = _a[_i];
+                    if (cliente['nomeEmpresarial'].toLowerCase().includes(busca.toLowerCase())) {
+                        listaFiltrada.push(cliente);
+                    }
+                }
+                _this.listaClientes = listaFiltrada;
+            });
+        }
     };
     ClientesComponent.prototype.somarServicos = function (cliente) {
         var total = 0;

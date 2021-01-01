@@ -17,7 +17,6 @@ export class ClientesComponent implements OnInit{
   listaClientes: Cliente[] = [];
   listakey: string[] = []
   
-
   constructor(
     private consultaCliente: ConsultaClientesService,
 
@@ -34,13 +33,30 @@ export class ClientesComponent implements OnInit{
 
   todosClientes(): void{
     this.consultaCliente.getClientes().subscribe(
-     (resposta: any) => { this.listaClientes = Object.values(resposta),
-      this.listakey = Object.keys(resposta)       
+     (resposta: any) => { this.listaClientes = Object.values(resposta)
+        
       }
     );
   }
-
- 
+  filtrar(busca?: string): void{
+    if( busca.length === 0){
+      this.todosClientes()
+    }
+    else{
+      this.consultaCliente.getClientes().subscribe(
+        
+      (resposta: any) => {
+        let listaFiltrada : Array<any> = []
+        for (let cliente of Object.values(resposta)) {
+          if (cliente['nomeEmpresarial'].toLowerCase().includes(busca.toLowerCase())){
+            listaFiltrada.push(cliente)
+          }
+        }
+        this.listaClientes = listaFiltrada
+      }
+      );    
+    }
+  }
 
   somarServicos(cliente: Cliente): number {
     let total = 0;

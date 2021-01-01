@@ -1,12 +1,10 @@
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import { ConsultaClientesService } from 'src/app/consulta-clientes.service';
-import { Cliente } from 'src/app/_model/cliente';
 import { Servico } from 'src/app/_model/servico';
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { jsPDF } from 'jspdf';
-import { IfStmt } from '@angular/compiler';
-import { stringify } from '@angular/compiler/src/util';
+import * as dados from 'src/app/_model/dadosEmissaoFatura'
 
 @Component({
   selector: 'app-servicos-cliente',
@@ -17,33 +15,34 @@ export class ServicosClienteComponent implements OnInit, OnChanges {
 
   @Input() clienteKey: string;
   @Output() listaNovamente = new EventEmitter();
-  cliente = new Cliente(0, '', '', '', '', '', '', '', '', []);
+  cliente : any;
+  key: string
   formulario: FormGroup;
-
 
   constructor(
     private consultaCliente: ConsultaClientesService,
     private formBuilder: FormBuilder,
-    private toastr: ToastrService
+    private toastr: ToastrService    
     ) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void {    
   }
 
   ngOnChanges(): void {
     this.consultaCliente.getIdCliente(this.clienteKey).subscribe(
       (resposta) => {
-        this.cliente = resposta, 
+        this.cliente = Object.values(resposta)[0], 
+        this.key = Object.keys(resposta)[0], 
         this.formulario = new FormGroup({
           cnpj: new FormControl(this.cliente.cnpj),
           nomeEmpresarial: new FormControl(this.cliente.nomeEmpresarial ),
-          competencia: new FormControl('', [Validators.required]),
-          dataVencimentoRecibo: new FormControl('', [Validators.required]),
-          dataDeEmissao: new FormControl('', [Validators.required]),
+          competencia: new FormControl(dados.DadosEmissaoFatura.compentecia, [Validators.required]),
+          dataVencimentoRecibo: new FormControl(dados.DadosEmissaoFatura.dataVencimentoRecibo, [Validators.required]),
+          dataDeEmissao: new FormControl(dados.DadosEmissaoFatura.dataDeEmissao, [Validators.required]),
           listaServico: new FormArray([])
         }),
         this.setListaServico();
-        this.somaFatura();
+        this.somaFatura();       
        }
     );
   }
@@ -57,14 +56,17 @@ export class ServicosClienteComponent implements OnInit, OnChanges {
       return;
     }
     else{
-      this.cliente.listaServico.forEach((servico: Servico) => {
+      
+      this.cliente.listaServico.forEach((servico: Servico) => {      
       const serv = this.formBuilder.group(new Servico());
       serv.setValue(servico);
       this.listaServico.push(serv);
+      
       });
     }
   }
 
+ 
   removeServico(index: number): void{
     this.listaServico.removeAt(index);
     this.atualizarLista();
@@ -89,7 +91,6 @@ export class ServicosClienteComponent implements OnInit, OnChanges {
       total += servico.valor;
     });
       return total;
-
   }
 
   atualizarLista(): void{
@@ -99,12 +100,10 @@ export class ServicosClienteComponent implements OnInit, OnChanges {
      this.cliente.listaServico.push(servico);
    });
    this.somaFatura();
- 
-
   }
 
   atualizaCliente(): void {
-    this.consultaCliente.putCliente(this.clienteKey, this.cliente).subscribe(
+    this.consultaCliente.putCliente(this.key, this.cliente).subscribe(
       () => { this.toastr.success('Servicos atualizado com sucessos'),  this.listaNovamente.emit(), this.atualizarLista() }
     );
   }

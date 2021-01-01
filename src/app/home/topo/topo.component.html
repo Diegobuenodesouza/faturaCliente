@@ -4,6 +4,14 @@
     <div class="navbar-nav">
       <a class="nav-item nav-link" [routerLink]="['/home', 'cadastro']" routerLinkActive="active" >Cadastrar Cliente</a>
     </div>
+    <div class="dropdown">
+      <a class="btn dropdown-toggle" routerLinkActive="active" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+        Utilitários
+      </a>    
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+        <li><a class="dropdown-item" href="#">Datas Faturas</a></li>
+      </ul>
+    </div>
   </div>
   <div class="col-sm-6 d-flex justify-content-end">
     <button type="button" class="btn btn-outline-success" (click)=logout() >

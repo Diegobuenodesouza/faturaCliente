@@ -8,30 +8,30 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 exports.__esModule = true;
 exports.ServicosClienteComponent = void 0;
 var forms_1 = require("@angular/forms");
-var cliente_1 = require("src/app/_model/cliente");
 var servico_1 = require("src/app/_model/servico");
 var core_1 = require("@angular/core");
 var jspdf_1 = require("jspdf");
+var dados = require("src/app/_model/dadosEmissaoFatura");
 var ServicosClienteComponent = /** @class */ (function () {
     function ServicosClienteComponent(consultaCliente, formBuilder, toastr) {
         this.consultaCliente = consultaCliente;
         this.formBuilder = formBuilder;
         this.toastr = toastr;
         this.listaNovamente = new core_1.EventEmitter();
-        this.cliente = new cliente_1.Cliente(0, '', '', '', '', '', '', '', '', []);
     }
     ServicosClienteComponent.prototype.ngOnInit = function () {
     };
     ServicosClienteComponent.prototype.ngOnChanges = function () {
         var _this = this;
         this.consultaCliente.getIdCliente(this.clienteKey).subscribe(function (resposta) {
-            _this.cliente = resposta,
+            _this.cliente = Object.values(resposta)[0],
+                _this.key = Object.keys(resposta)[0],
                 _this.formulario = new forms_1.FormGroup({
                     cnpj: new forms_1.FormControl(_this.cliente.cnpj),
                     nomeEmpresarial: new forms_1.FormControl(_this.cliente.nomeEmpresarial),
-                    competencia: new forms_1.FormControl('', [forms_1.Validators.required]),
-                    dataVencimentoRecibo: new forms_1.FormControl('', [forms_1.Validators.required]),
-                    dataDeEmissao: new forms_1.FormControl('', [forms_1.Validators.required]),
+                    competencia: new forms_1.FormControl(dados.DadosEmissaoFatura.compentecia, [forms_1.Validators.required]),
+                    dataVencimentoRecibo: new forms_1.FormControl(dados.DadosEmissaoFatura.dataVencimentoRecibo, [forms_1.Validators.required]),
+                    dataDeEmissao: new forms_1.FormControl(dados.DadosEmissaoFatura.dataDeEmissao, [forms_1.Validators.required]),
                     listaServico: new forms_1.FormArray([])
                 }),
                 _this.setListaServico();
@@ -92,7 +92,7 @@ var ServicosClienteComponent = /** @class */ (function () {
     };
     ServicosClienteComponent.prototype.atualizaCliente = function () {
         var _this = this;
-        this.consultaCliente.putCliente(this.clienteKey, this.cliente).subscribe(function () { _this.toastr.success('Servicos atualizado com sucessos'), _this.listaNovamente.emit(), _this.atualizarLista(); });
+        this.consultaCliente.putCliente(this.key, this.cliente).subscribe(function () { _this.toastr.success('Servicos atualizado com sucessos'), _this.listaNovamente.emit(), _this.atualizarLista(); });
     };
     ServicosClienteComponent.prototype.corrigirData = function (data) {
         var dataCerta = '';

@@ -17,8 +17,8 @@ export class ConsultaClientesService {
   getClientes(): Observable<any> {
     return this.http.get(`${this.URL_FIREBASE}.json`);
   }
-  getIdCliente(key: string): Observable<Cliente>{
-    return this.http.get<Cliente>(`${this.URL_FIREBASE}/${key}.json`);
+  getIdCliente(cnpj: string): Observable<Cliente>{
+    return this.http.get<Cliente>(`${this.URL_FIREBASE}.json?orderBy="cnpj"&equalTo="${cnpj}"`);
   }
   postCliente(cliente: Cliente): Observable<any> {
     return this.http.post<Cliente>(`${this.URL_FIREBASE}.json`, cliente);

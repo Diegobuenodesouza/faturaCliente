@@ -16,8 +16,8 @@ var ConsultaClientesService = /** @class */ (function () {
     ConsultaClientesService.prototype.getClientes = function () {
         return this.http.get(this.URL_FIREBASE + ".json");
     };
-    ConsultaClientesService.prototype.getIdCliente = function (key) {
-        return this.http.get(this.URL_FIREBASE + "/" + key + ".json");
+    ConsultaClientesService.prototype.getIdCliente = function (cnpj) {
+        return this.http.get(this.URL_FIREBASE + ".json?orderBy=\"cnpj\"&equalTo=\"" + cnpj + "\"");
     };
     ConsultaClientesService.prototype.postCliente = function (cliente) {
         return this.http.post(this.URL_FIREBASE + ".json", cliente);

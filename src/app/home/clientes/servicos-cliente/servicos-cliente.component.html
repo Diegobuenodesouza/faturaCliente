@@ -2,7 +2,7 @@
   <div class="modal-dialog  modal-xl">
     <div class="modal-content">
       <div class="modal-header">      
-        <div class="col-9">
+        <div class="col-9" *ngIf="cliente">
           <h5 class="modal-title" id="exampleModalLabel">Lista de Servicos do cliente <b style="color: rgb(15, 121, 59); font-style: italic; ">{{ cliente.nomeEmpresarial }}</b></h5>
         </div>         
         <div> 
@@ -17,7 +17,7 @@
             <div class="col-6">
               <div class="input-group mb-">
                 <span class="input-group-text" style="font: 1px;">Competência</span>
-                <input type="month" class="form-control" formControlName="competencia"  >
+                <input type="month" class="form-control" formControlName="competencia" >
               </div>
             </div>
             <div class="col-6">

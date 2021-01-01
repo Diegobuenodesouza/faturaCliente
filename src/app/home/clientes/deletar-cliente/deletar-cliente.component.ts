@@ -13,7 +13,8 @@ import { Cliente } from 'src/app/_model/cliente';
 export class DeletarClienteComponent implements OnInit, OnChanges{
 
   @Input() clienteKey: string;
-  cliente = new Cliente(0, '', '', '', '', '', '', '', '', []);
+  cliente: any;
+  key: string
   @Output() listanovamente = new EventEmitter();
 
   constructor(
@@ -28,12 +29,14 @@ export class DeletarClienteComponent implements OnInit, OnChanges{
 
   ngOnChanges(): void {
     this.consultaCliente.getIdCliente(this.clienteKey).subscribe(
-      (resposta: any) => { this.cliente = resposta}
+      (resposta: any) => { this.cliente = Object.values(resposta)[0], 
+      this.key = Object.keys(resposta)[0]}
+        
     );
   }
 
   excluirCliente(): void{
-    this.consultaCliente.deleteCliente(this.clienteKey).subscribe(
+    this.consultaCliente.deleteCliente(this.key).subscribe(
       () => { this.router.navigate(['/home']),
       this.toastr.info('Cliente excluido com sucesso'),
       this.listanovamente.emit(); }

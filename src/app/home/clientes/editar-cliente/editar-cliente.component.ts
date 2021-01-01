@@ -16,7 +16,8 @@ export class EditarClienteComponent implements OnInit, OnChanges {
   @Input() clienteKey: string;
   @Output() listanovamente = new EventEmitter();
   erroCep =  false;
-  cliente: Cliente;
+  cliente: any;
+  key: string
 
   formularioEditar = new FormGroup({
     cnpj: new FormControl('', [Validators.required ]),
@@ -39,11 +40,11 @@ export class EditarClienteComponent implements OnInit, OnChanges {
   ngOnInit(): void {}
 
   ngOnChanges(): void {
-    
     this.consultaCliente.getIdCliente(this.clienteKey).subscribe(
-      (resposta) => { this.cliente = resposta, this.atualizarInput(); }
+      (resposta: any) => { this.cliente = Object.values(resposta)[0], 
+      this.key = Object.keys(resposta)[0] , this.atualizarInput()}
+        
     );
-
   }
 
   atualizarInput(): any{
@@ -66,14 +67,13 @@ export class EditarClienteComponent implements OnInit, OnChanges {
     this.cliente.localidade = this.formularioEditar.value.localidade;
     this.cliente.uf = this.formularioEditar.value.uf;
 
-    this.consultaCliente.putCliente(this.clienteKey, this.cliente).subscribe(
+    this.consultaCliente.putCliente(this.key, this.cliente).subscribe(
       () => {
         this.toastr.success('Cliente alterado com sucesso'),
         this.listanovamente.emit(),
         this.router.navigate(['/home']);
       }
     );
-
   }
 
   buscarCep(cep: string): any {
@@ -96,5 +96,4 @@ export class EditarClienteComponent implements OnInit, OnChanges {
       (): any => { this.erroCep = true; }
       );
   }
-
 }

@@ -65,7 +65,6 @@ export class CadastroComponent implements OnInit {
   cadastrar(): void {
 
     this.cliente = new Cliente(
-      this.formulario.value.id,
       this.formulario.value.cnpj,
       this.formulario.value.nomeEmpresarial,
       this.formulario.value.cep,
