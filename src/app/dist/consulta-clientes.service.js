@@ -32,6 +32,9 @@ var ConsultaClientesService = /** @class */ (function () {
     ConsultaClientesService.prototype.getDadosFatura = function () {
         return this.http.get(this.URL_DADOSFATURA);
     };
+    ConsultaClientesService.prototype.putDadosFatura = function (dado) {
+        return this.http.put(this.URL_DADOSFATURA, dado);
+    };
     ConsultaClientesService = __decorate([
         core_1.Injectable({
             providedIn: 'root'

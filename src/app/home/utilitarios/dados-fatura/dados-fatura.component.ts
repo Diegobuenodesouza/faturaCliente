@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { ConsultaClientesService } from 'src/app/consulta-clientes.service';
 
 @Component({
@@ -16,7 +18,11 @@ export class DadosFaturaComponent implements OnInit {
     dataVencimentoRecibo : new FormControl('', [Validators.required])
   })
 
-  constructor(private consultaDados : ConsultaClientesService) { }
+  constructor(
+    private consultaDados : ConsultaClientesService,
+    private router: Router,
+    private toastr: ToastrService
+    ) { }
   
   ngOnInit(): void {
     this.consultaDados.getDadosFatura().subscribe(
@@ -31,5 +37,17 @@ export class DadosFaturaComponent implements OnInit {
     );
   }
 
- 
+  alterarDados() : void{
+    this.dados.competencia = this.formulario.value.competencia;
+    this.dados.dataDeEmissao = this.formulario.value.dataDeEmissao;
+    this.dados.dataVencimentoRecibo = this.formulario.value.dataVencimentoRecibo;
+    this.consultaDados.putDadosFatura(this.dados).subscribe(
+      () => { 
+        this.toastr.success('Dados alterados com sucesso'),
+        this.router.navigate(['/home'])
+        },
+      (error: Error) => alert(error)
+    )
+  }
+
 }

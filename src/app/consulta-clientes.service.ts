@@ -33,4 +33,8 @@ export class ConsultaClientesService {
   getDadosFatura(): Observable<any>{
     return this.http.get(this.URL_DADOSFATURA)
   }
+
+  putDadosFatura(dado: any): Observable<any>{
+    return this.http.put(this.URL_DADOSFATURA , dado);
+  }
 }

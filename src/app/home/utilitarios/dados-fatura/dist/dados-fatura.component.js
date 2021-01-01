@@ -10,8 +10,10 @@ exports.DadosFaturaComponent = void 0;
 var core_1 = require("@angular/core");
 var forms_1 = require("@angular/forms");
 var DadosFaturaComponent = /** @class */ (function () {
-    function DadosFaturaComponent(consultaDados) {
+    function DadosFaturaComponent(consultaDados, router, toastr) {
         this.consultaDados = consultaDados;
+        this.router = router;
+        this.toastr = toastr;
         this.formulario = new forms_1.FormGroup({
             competencia: new forms_1.FormControl('', [forms_1.Validators.required]),
             dataDeEmissao: new forms_1.FormControl('', [forms_1.Validators.required]),
@@ -28,6 +30,16 @@ var DadosFaturaComponent = /** @class */ (function () {
                 dataVencimentoRecibo: new forms_1.FormControl(_this.dados.dataVencimentoRecibo, [forms_1.Validators.required])
             });
         });
+    };
+    DadosFaturaComponent.prototype.alterarDados = function () {
+        var _this = this;
+        this.dados.competencia = this.formulario.value.competencia;
+        this.dados.dataDeEmissao = this.formulario.value.dataDeEmissao;
+        this.dados.dataVencimentoRecibo = this.formulario.value.dataVencimentoRecibo;
+        this.consultaDados.putDadosFatura(this.dados).subscribe(function () {
+            _this.toastr.success('Dados alterados com sucesso'),
+                _this.router.navigate(['/home']);
+        }, function (error) { return alert(error); });
     };
     DadosFaturaComponent = __decorate([
         core_1.Component({
