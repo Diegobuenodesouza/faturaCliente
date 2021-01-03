@@ -10,12 +10,14 @@ exports.DeletarServicosClientesComponent = void 0;
 var core_1 = require("@angular/core");
 var forms_1 = require("@angular/forms");
 var DeletarServicosClientesComponent = /** @class */ (function () {
-    function DeletarServicosClientesComponent(http, fb) {
+    function DeletarServicosClientesComponent(http, fb, router) {
         this.http = http;
         this.fb = fb;
+        this.router = router;
         this.listaClientes = [];
         this.clienteFormulario = new forms_1.FormArray([]);
         this.checkFormulario = false;
+        this.listaDelconfirmar = new forms_1.FormArray([]);
     }
     DeletarServicosClientesComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -44,7 +46,9 @@ var DeletarServicosClientesComponent = /** @class */ (function () {
                 valorAtual: [_this.somaServicos(cliente)],
                 quantidadeServico: [_this.quantidadeServicos(cliente)]
             });
-            _this.clienteFormulario.push(form);
+            if (form.value.quantidadeServico > 0) {
+                _this.clienteFormulario.push(form);
+            }
         });
     };
     DeletarServicosClientesComponent.prototype.marcaEDesmascar = function () {
@@ -52,6 +56,15 @@ var DeletarServicosClientesComponent = /** @class */ (function () {
         this.checkFormulario = !this.checkFormulario;
         this.clienteFormulario.controls.forEach(function (cliente) {
             cliente.controls.check.setValue(_this.checkFormulario);
+        });
+    };
+    DeletarServicosClientesComponent.prototype.gerarListaDelConfirmacao = function () {
+        var _this = this;
+        this.listaDelconfirmar = new forms_1.FormArray([]);
+        this.clienteFormulario.controls.forEach(function (formGroup) {
+            if (formGroup.value.check === true) {
+                _this.listaDelconfirmar.push(formGroup);
+            }
         });
     };
     DeletarServicosClientesComponent = __decorate([

@@ -1,6 +1,7 @@
 
 import { Component, OnChanges, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ConsultaClientesService } from 'src/app/consulta-clientes.service';
 import { Cliente } from 'src/app/_model/cliente';
 import { Servico } from 'src/app/_model/servico';
@@ -15,11 +16,13 @@ export class DeletarServicosClientesComponent implements OnInit {
   listaClientes: Array<Cliente> = []
   clienteFormulario = new FormArray([])
   checkFormulario = false
+  listaDelconfirmar= new FormArray([])
 
 
   constructor(
     private http: ConsultaClientesService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private router: Router
     ) { }
 
   ngOnInit(): any {    
@@ -50,7 +53,9 @@ export class DeletarServicosClientesComponent implements OnInit {
       valorAtual: [this.somaServicos(cliente)],
       quantidadeServico : [this.quantidadeServicos(cliente)]
     })
+    if (form.value.quantidadeServico > 0) {
     this.clienteFormulario.push(form)
+      }
     })
   }
 
@@ -60,5 +65,15 @@ export class DeletarServicosClientesComponent implements OnInit {
       cliente.controls.check.setValue(this.checkFormulario);      
     })
   }
+
+  gerarListaDelConfirmacao(): void{
+    this.listaDelconfirmar = new FormArray([])
+    this.clienteFormulario.controls.forEach((formGroup: FormGroup) => {
+     if(formGroup.value.check === true) {
+       this.listaDelconfirmar.push(formGroup)
+     }
+    })
+  }
+
 }
 

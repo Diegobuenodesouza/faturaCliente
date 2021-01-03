@@ -94,7 +94,7 @@ var ServicosClienteComponent = /** @class */ (function () {
     };
     ServicosClienteComponent.prototype.atualizaCliente = function () {
         var _this = this;
-        this.consultaCliente.putCliente(this.key, this.cliente).subscribe(function () { _this.toastr.success('Servicos atualizado com sucessos'), _this.listaNovamente.emit(), _this.atualizarLista(); });
+        this.consultaCliente.putCliente(this.key, this.cliente).subscribe(function () { _this.toastr.success('Servicos atualizados com sucessos'), _this.listaNovamente.emit(), _this.atualizarLista(); });
     };
     ServicosClienteComponent.prototype.corrigirData = function (data) {
         var dataCerta = '';

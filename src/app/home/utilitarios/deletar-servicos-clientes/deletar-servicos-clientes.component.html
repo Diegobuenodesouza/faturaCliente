@@ -17,7 +17,7 @@
                 </tr>
             </thead>
             <tbody >
-                <tr *ngFor="let cliente of clienteFormulario.controls; let i=index" [formGroupName]="i">
+                <tr style="line-height: 0.1;" *ngFor="let cliente of clienteFormulario.controls; let i=index" [formGroupName]="i">
                     <td  class="centralizar"><input type="checkbox" formControlName="check" class="form-check-inline"></td>
                     <td > <label class="control-label"> {{  cliente.value.cnpj  | cpfcnpjPipe}} </label> </td>
                     <td > <label class="control-label"> {{  cliente.value.nome }} </label> </td>
@@ -27,11 +27,15 @@
                 </tr>
             </tbody>
         </table>   
-        <p>formulario: </p>  
-        {{ clienteFormulario.value| json }}
+        <div class="d-flex justify-content-end">
+            <button class="btn btn-info" type="button"data-bs-toggle="modal" data-bs-target="#confirmarDelClientes" (click)="gerarListaDelConfirmacao()" >Continuar</button>
+        </div>        
     </form>  
     </div>
 </div>
+
+
+<app-confirmar-del-servico [listasClienteRemoverServicos]="listaDelconfirmar" ></app-confirmar-del-servico>
 
 
 

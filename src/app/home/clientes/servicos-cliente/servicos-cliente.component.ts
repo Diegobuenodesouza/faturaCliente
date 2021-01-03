@@ -108,7 +108,7 @@ export class ServicosClienteComponent implements OnInit, OnChanges {
 
   atualizaCliente(): void {
     this.consultaCliente.putCliente(this.key, this.cliente).subscribe(
-      () => { this.toastr.success('Servicos atualizado com sucessos'),  this.listaNovamente.emit(), this.atualizarLista() }
+      () => { this.toastr.success('Servicos atualizados com sucessos'),  this.listaNovamente.emit(), this.atualizarLista() }
     );
   }
 

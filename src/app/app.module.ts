@@ -35,6 +35,7 @@ import { registerLocaleData } from '@angular/common';
 import localePtBr from '@angular/common/locales/pt';
 import { DadosFaturaComponent } from './home/utilitarios/dados-fatura/dados-fatura.component';
 import { DeletarServicosClientesComponent } from './home/utilitarios/deletar-servicos-clientes/deletar-servicos-clientes.component';
+import { ConfirmarDelServicoComponent } from './home/utilitarios/deletar-servicos-clientes/confirmar-del-servico/confirmar-del-servico.component';
 
 registerLocaleData(localePtBr);
 
@@ -55,6 +56,7 @@ registerLocaleData(localePtBr);
     ServicosClienteComponent,
     DadosFaturaComponent,
     DeletarServicosClientesComponent,
+    ConfirmarDelServicoComponent,
     
   ],
   imports: [

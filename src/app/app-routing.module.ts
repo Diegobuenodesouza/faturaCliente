@@ -17,7 +17,7 @@ const routes: Routes = [
     { path: 'clientes' , component: ClientesComponent},
     { path: 'cadastro' , component: CadastroComponent},
     { path: 'dadosFatura', component: DadosFaturaComponent},
-    { path: 'deletarServicosClientes', component : DeletarServicosClientesComponent}
+    { path: 'deletarServicosClientes', component : DeletarServicosClientesComponent }
   ] }
 ];
 
