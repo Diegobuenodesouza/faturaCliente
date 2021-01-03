@@ -34,6 +34,7 @@ import { LOCALE_ID } from '@angular/core';
 import { registerLocaleData } from '@angular/common';
 import localePtBr from '@angular/common/locales/pt';
 import { DadosFaturaComponent } from './home/utilitarios/dados-fatura/dados-fatura.component';
+import { DeletarServicosClientesComponent } from './home/utilitarios/deletar-servicos-clientes/deletar-servicos-clientes.component';
 
 registerLocaleData(localePtBr);
 
@@ -53,6 +54,7 @@ registerLocaleData(localePtBr);
     CpfcnpjPipePipe,
     ServicosClienteComponent,
     DadosFaturaComponent,
+    DeletarServicosClientesComponent,
     
   ],
   imports: [

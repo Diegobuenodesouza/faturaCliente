@@ -60,8 +60,7 @@ export class ServicosClienteComponent implements OnInit, OnChanges {
     if (this.cliente.listaServico === undefined) {
       return;
     }
-    else{
-      
+    else{      
       this.cliente.listaServico.forEach((servico: Servico) => {      
       const serv = this.formBuilder.group(new Servico());
       serv.setValue(servico);
