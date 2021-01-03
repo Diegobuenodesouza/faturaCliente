@@ -13,7 +13,7 @@ import { Servico } from 'src/app/_model/servico';
 })
 export class DeletarServicosClientesComponent implements OnInit {
 
-  listaClientes: Array<Cliente> = []
+  listaClientes: Array<any> = []
   clienteFormulario = new FormArray([])
   checkFormulario = false
   listaDelconfirmar= new FormArray([])
@@ -27,7 +27,7 @@ export class DeletarServicosClientesComponent implements OnInit {
 
   ngOnInit(): any {    
     this.http.getClientes().subscribe(
-      (resposta) => {this.listaClientes = Object.values(resposta), this.CriacaoFormulario() }
+      (resposta) => {this.listaClientes = Object.values(resposta).sort((a, b) => (a['nomeEmpresarial'] - b['nomeEmpresarial'])? 1 : -1), this.CriacaoFormulario() }
     );
   }
 

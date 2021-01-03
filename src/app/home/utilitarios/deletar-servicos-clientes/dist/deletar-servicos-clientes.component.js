@@ -21,7 +21,7 @@ var DeletarServicosClientesComponent = /** @class */ (function () {
     }
     DeletarServicosClientesComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.http.getClientes().subscribe(function (resposta) { _this.listaClientes = Object.values(resposta), _this.CriacaoFormulario(); });
+        this.http.getClientes().subscribe(function (resposta) { _this.listaClientes = Object.values(resposta).sort(function (a, b) { return (a['nomeEmpresarial'] - b['nomeEmpresarial']) ? 1 : -1; }), _this.CriacaoFormulario(); });
     };
     DeletarServicosClientesComponent.prototype.quantidadeServicos = function (cliente) {
         return cliente.listaServico !== undefined ? cliente.listaServico.length : 0;

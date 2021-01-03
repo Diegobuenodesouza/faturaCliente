@@ -14,8 +14,9 @@ export class ClientesComponent implements OnInit{
   clienteKey: string;
   pag = 1;
   contador = 8;
-  listaClientes: Cliente[] = [];
+  listaClientes: any[] = [];
   listakey: string[] = []
+  valorTotal = 0
   
   constructor(
     private consultaCliente: ConsultaClientesService,
@@ -27,24 +28,19 @@ export class ClientesComponent implements OnInit{
     this.todosClientes();  
   }
 
-  retornoIndex(): number {
-    return this.pag > 1 ? this.contador * (this.pag -1) : 0   
-  }
-
   todosClientes(): void{
     this.consultaCliente.getClientes().subscribe(
-     (resposta: any) => { this.listaClientes = Object.values(resposta)
-        
+     (resposta: any) => { this.listaClientes = Object.values(resposta) , this.faturamentoTotal()
       }
     );
   }
+
   filtrar(busca?: string): void{
     if( busca.length === 0){
       this.todosClientes()
     }
     else{
-      this.consultaCliente.getClientes().subscribe(
-        
+      this.consultaCliente.getClientes().subscribe(        
       (resposta: any) => {
         let listaFiltrada : Array<any> = []
         for (let cliente of Object.values(resposta)) {
@@ -56,6 +52,14 @@ export class ClientesComponent implements OnInit{
       }
       );    
     }
+  }
+
+  faturamentoTotal(): void {
+    let total = 0
+    this.listaClientes.forEach((cliente: Cliente) => {
+      total += this.somarServicos(cliente)
+    })
+    this.valorTotal = total
   }
 
   somarServicos(cliente: Cliente): number {

@@ -15,18 +15,16 @@ var ClientesComponent = /** @class */ (function () {
         this.contador = 8;
         this.listaClientes = [];
         this.listakey = [];
+        this.valorTotal = 0;
     }
     ClientesComponent.prototype.ngOnInit = function () {
         this.clienteKey = undefined;
         this.todosClientes();
     };
-    ClientesComponent.prototype.retornoIndex = function () {
-        return this.pag > 1 ? this.contador * (this.pag - 1) : 0;
-    };
     ClientesComponent.prototype.todosClientes = function () {
         var _this = this;
         this.consultaCliente.getClientes().subscribe(function (resposta) {
-            _this.listaClientes = Object.values(resposta);
+            _this.listaClientes = Object.values(resposta), _this.faturamentoTotal();
         });
     };
     ClientesComponent.prototype.filtrar = function (busca) {
@@ -46,6 +44,14 @@ var ClientesComponent = /** @class */ (function () {
                 _this.listaClientes = listaFiltrada;
             });
         }
+    };
+    ClientesComponent.prototype.faturamentoTotal = function () {
+        var _this = this;
+        var total = 0;
+        this.listaClientes.forEach(function (cliente) {
+            total += _this.somarServicos(cliente);
+        });
+        this.valorTotal = total;
     };
     ClientesComponent.prototype.somarServicos = function (cliente) {
         var total = 0;
