@@ -9,11 +9,11 @@
         <table  class="table table-striped">
             <thead >
                 <tr>
-                    <th><input type="checkbox" class="form-check-inline" > </th>
+                    <th class="centralizar"><input type="checkbox" class="form-check-inline" (click)="marcaEDesmascar()"> </th>
                     <th>CPF/CNPJ</th>  
                     <th>Nome</th> 
-                    <th>Valor Atual</th> 
                     <th>Qtd. Serviços</th>                  
+                    <th>Valor Atual</th> 
                 </tr>
             </thead>
             <tbody >
@@ -21,8 +21,8 @@
                     <td  class="centralizar"><input type="checkbox" formControlName="check" class="form-check-inline"></td>
                     <td > <label class="control-label"> {{  cliente.value.cnpj  | cpfcnpjPipe}} </label> </td>
                     <td > <label class="control-label"> {{  cliente.value.nome }} </label> </td>
-                    <td > <label class="control-label"> {{  cliente.value.valorAtual | currency:'BRL'  }} </label> </td>
                     <td class="centralizar" > <label class="control-label"  > {{  cliente.value.quantidadeServico  }} </label> </td>
+                    <td > <label class="control-label"> {{  cliente.value.valorAtual | currency:'BRL'  }} </label> </td>
                     
                 </tr>
             </tbody>

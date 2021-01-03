@@ -14,6 +14,8 @@ export class DeletarServicosClientesComponent implements OnInit {
 
   listaClientes: Array<Cliente> = []
   clienteFormulario = new FormArray([])
+  checkFormulario = false
+
 
   constructor(
     private http: ConsultaClientesService,
@@ -49,6 +51,13 @@ export class DeletarServicosClientesComponent implements OnInit {
       quantidadeServico : [this.quantidadeServicos(cliente)]
     })
     this.clienteFormulario.push(form)
+    })
+  }
+
+  marcaEDesmascar(): void{
+    this.checkFormulario = !this.checkFormulario
+    this.clienteFormulario.controls.forEach((cliente: FormGroup) =>{      
+      cliente.controls.check.setValue(this.checkFormulario);      
     })
   }
 }

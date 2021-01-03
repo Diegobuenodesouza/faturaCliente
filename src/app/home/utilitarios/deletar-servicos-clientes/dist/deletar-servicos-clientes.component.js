@@ -15,6 +15,7 @@ var DeletarServicosClientesComponent = /** @class */ (function () {
         this.fb = fb;
         this.listaClientes = [];
         this.clienteFormulario = new forms_1.FormArray([]);
+        this.checkFormulario = false;
     }
     DeletarServicosClientesComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -44,6 +45,13 @@ var DeletarServicosClientesComponent = /** @class */ (function () {
                 quantidadeServico: [_this.quantidadeServicos(cliente)]
             });
             _this.clienteFormulario.push(form);
+        });
+    };
+    DeletarServicosClientesComponent.prototype.marcaEDesmascar = function () {
+        var _this = this;
+        this.checkFormulario = !this.checkFormulario;
+        this.clienteFormulario.controls.forEach(function (cliente) {
+            cliente.controls.check.setValue(_this.checkFormulario);
         });
     };
     DeletarServicosClientesComponent = __decorate([
