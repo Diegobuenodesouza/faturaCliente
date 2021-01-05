@@ -1,9 +1,9 @@
 <div class="modal fade" id="confirmarDelClientes" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
-        <div class="modal-header">
+        <div class="modal-header background">
           <h5 class="modal-title" id="exampleModalLabel">Deseja excluir todos os serviços dos clientes abaixos?</h5>
-          <button type="button" class="btn btn-info" data-bs-dismiss="modal" aria-label="Close">X</button>
+          <button type="button" class="btn btn-info backgroundButton" data-bs-dismiss="modal" aria-label="Close">&times;</button>
         </div>
         <div class="modal-body">
           <div *ngFor="let cliente of listasClienteRemoverServicos.value; let i=index">

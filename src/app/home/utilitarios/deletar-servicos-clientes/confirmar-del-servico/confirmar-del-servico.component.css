@@ -1,0 +1,11 @@
+.background{
+    background-image: linear-gradient(to bottom, rgba(255, 0, 0, 0.822) , rgba(252, 252, 252));
+    color: white
+   }
+
+.backgroundButton{
+    background-image: linear-gradient(to top, rgba(255, 0, 0, 0.822) , rgba(252, 252, 252));
+    color: white;
+    border: 1px white solid;
+    border-radius: 50%;
+}

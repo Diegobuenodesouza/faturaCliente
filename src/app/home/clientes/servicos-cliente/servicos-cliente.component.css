@@ -6,3 +6,15 @@
     font-family: 'Courier New', Courier, monospace;
     font-size: large ;
 }
+
+.background{
+    background-image: linear-gradient(to bottom, #28a746de , rgba(252, 252, 252));
+    color: white
+   }
+
+.backgroundButton{
+    background-image: linear-gradient(to top, #28a746de  , rgba(252, 252, 252));
+    color: white;
+    border: 1px white solid;
+    border-radius: 50%;
+}

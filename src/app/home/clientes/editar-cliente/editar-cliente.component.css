@@ -7,3 +7,15 @@
     font-size: 15px;
 }
 
+.background{
+    background-image: linear-gradient(to bottom, #ffc107d7 , rgba(252, 252, 252));
+    color: white
+   }
+
+.backgroundButton{
+    background-image: linear-gradient(to top, #ffc107d7  , rgba(252, 252, 252));
+    color: white;
+    border: 1px white solid;
+    border-radius: 50%;
+}
+
