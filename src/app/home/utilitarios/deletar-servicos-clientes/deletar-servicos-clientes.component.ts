@@ -18,14 +18,13 @@ export class DeletarServicosClientesComponent implements OnInit {
   checkFormulario = false
   listaDelconfirmar= new FormArray([])
 
-
   constructor(
     private http: ConsultaClientesService,
     private fb: FormBuilder,
-    private router: Router
     ) { }
 
   ngOnInit(): any {    
+    console.log(this.clienteFormulario.controls.some(formGroup => formGroup.value.check === false))
     this.http.getClientes().subscribe(
       (resposta) => {this.listaClientes = Object.values(resposta).sort((a, b) => (a['nomeEmpresarial'] - b['nomeEmpresarial'])? 1 : -1), this.CriacaoFormulario() }
     );
@@ -34,6 +33,7 @@ export class DeletarServicosClientesComponent implements OnInit {
   quantidadeServicos(cliente: Cliente): number {
     return cliente.listaServico !== undefined ? cliente.listaServico.length : 0
   }
+
   somaServicos(cliente: Cliente): number {
     let total = 0
     if (cliente.listaServico === undefined) {
@@ -44,6 +44,7 @@ export class DeletarServicosClientesComponent implements OnInit {
     })
     return total
   }
+
   CriacaoFormulario(): void{
   this.listaClientes.forEach((cliente: Cliente) =>{
     const form = this.fb.group({
@@ -62,7 +63,7 @@ export class DeletarServicosClientesComponent implements OnInit {
   marcaEDesmascar(): void{
     this.checkFormulario = !this.checkFormulario
     this.clienteFormulario.controls.forEach((cliente: FormGroup) =>{      
-      cliente.controls.check.setValue(this.checkFormulario);      
+      cliente.controls.check.setValue(this.checkFormulario) ;      
     })
   }
 
@@ -73,6 +74,10 @@ export class DeletarServicosClientesComponent implements OnInit {
        this.listaDelconfirmar.push(formGroup)
      }
     })
+  }
+
+  disabledButton() : boolean{ 
+    return this.clienteFormulario.controls.every(formGroup => formGroup.value.check === false)
   }
 
 }

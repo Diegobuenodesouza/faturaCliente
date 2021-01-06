@@ -5,3 +5,21 @@
     height: auto;
     
 }
+
+.animacao{   
+ 
+    border-radius: 8%;
+    animation-name: logout;
+    animation-duration: 4s;
+    text-align:center;
+    position: absolute;
+    margin-top: -20px;    
+  }
+  
+  @keyframes logout {  
+    0% { margin-right: 700px; transform: rotate(-20deg); }     
+    90% {transform: rotate(20deg);box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.863);}    
+    100% {transform: rotate(360deg);box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.863);
+   }
+}
+  
