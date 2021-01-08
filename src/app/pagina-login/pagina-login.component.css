@@ -1,13 +1,23 @@
 
-.cor-fundo{
-    
-    background-color: #CAFFFB;
-    
+.cor-fundo{    
+    background-color: #CAFFFB;    
 }
 
 .container{    
-    padding:  5% 0 ;
-       
+    padding:  5% 0 ;       
 }
 
+.animation{
+    animation: tremer 0.1s;
+    animation-delay: 1.0s;
+    animation-iteration-count: 7;
+}
 
+@keyframes tremer{
+    0% {margin-left: 0px;}
+    25% {margin-left: 10px;}
+    50% {margin-left: 0px;}
+    75% {margin-left: -10px;}
+    100% {margin-left: 0px;}
+
+}

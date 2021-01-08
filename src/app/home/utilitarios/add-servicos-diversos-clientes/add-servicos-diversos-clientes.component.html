@@ -1,0 +1,45 @@
+<div class="container " >  
+    <br> 
+     <div class="shadow-lg p-3 mb-5 bg-black rounded" style="border: 0.5px rgba(122, 120, 120, 0.603) solid;">
+        <div style="text-align: center;">
+            <div class="row">
+                <div class="offset-2"></div>
+                <div class="col-8">
+                    <h4 class="faturamento" style="padding-bottom: 6px;">Selecione os clientes para adicionar os servicos</h4>
+                </div>
+            </div>
+            <p style="border: solid 1.5px rgb(189, 189, 189);margin: 25px 0px 20px;"></p>
+        </div>
+       <form [formGroup]="formulario">
+                    <table  class="table table-striped">
+            <thead >
+                <tr>
+                    <th class="centralizar"><input type="checkbox" class="form-check-inline" (click)="marcaEDesmascar()"> </th>
+                    <th>CPF/CNPJ </th>  
+                    <th>Nome</th>                                     
+                    <th> Localidade</th> 
+                </tr>
+            </thead>
+            <tbody >
+                <tr style="line-height: 0.1;" *ngFor="let cliente of formulario.controls; let i=index"  [formGroupName]="i">
+                    <td  class="centralizar"><input type="checkbox" formControlName="check" class="form-check-inline"  ></td>
+                    <td > <label class="control-label"> {{ cliente.value.cnpj | cpfcnpjPipe}}  </label> </td>
+                    <td > <label class="control-label"> {{ cliente.value.nome }}    </label> </td>
+                    <td class="centralizar" > <label class="control-label"  > {{ cliente.value.localidade }}   </label> </td>
+                    <td > <label class="control-label"> </label> </td>
+                    
+                </tr>
+            </tbody>
+        </table>  
+    </form> 
+        <div class="d-flex justify-content-end">
+          
+            <button class="btn btn-info" type="button" [disabled]="disabledButton()"  data-bs-toggle="modal" data-bs-target="#modalAddServicos" (click)="clientesSelecionados()" >Continuar</button>
+        </div>        
+    
+    </div>   
+</div>
+
+<app-adicionar-servicos [listaCliente]="clientesSelencionadosForm" ></app-adicionar-servicos>
+
+

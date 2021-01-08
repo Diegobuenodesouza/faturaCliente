@@ -12,6 +12,7 @@ var router_1 = require("@angular/router");
 var cadastro_component_1 = require("./home/cadastro/cadastro.component");
 var clientes_component_1 = require("./home/clientes/clientes.component");
 var home_component_1 = require("./home/home.component");
+var add_servicos_diversos_clientes_component_1 = require("./home/utilitarios/add-servicos-diversos-clientes/add-servicos-diversos-clientes.component");
 var dados_fatura_component_1 = require("./home/utilitarios/dados-fatura/dados-fatura.component");
 var deletar_servicos_clientes_component_1 = require("./home/utilitarios/deletar-servicos-clientes/deletar-servicos-clientes.component");
 var pagina_login_component_1 = require("./pagina-login/pagina-login.component");
@@ -23,7 +24,8 @@ var routes = [
             { path: 'clientes', component: clientes_component_1.ClientesComponent },
             { path: 'cadastro', component: cadastro_component_1.CadastroComponent },
             { path: 'dadosFatura', component: dados_fatura_component_1.DadosFaturaComponent },
-            { path: 'deletarServicosClientes', component: deletar_servicos_clientes_component_1.DeletarServicosClientesComponent }
+            { path: 'deletarServicosClientes', component: deletar_servicos_clientes_component_1.DeletarServicosClientesComponent },
+            { path: 'addServClientes', component: add_servicos_diversos_clientes_component_1.AddServicosDiversosClientesComponent }
         ] }
 ];
 var AppRoutingModule = /** @class */ (function () {
