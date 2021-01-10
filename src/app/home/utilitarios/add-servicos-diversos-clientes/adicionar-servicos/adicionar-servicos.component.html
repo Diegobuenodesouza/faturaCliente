@@ -1,30 +1,84 @@
 <div class="modal fade" id="modalAddServicos" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
+  <div class="modal-dialog modal-xl">
     <div class="modal-content ">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Adicionar Servicos</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      <div class="modal-header background">
+        <h5 class="modal-title" id="exampleModalLabel">Adicionar Serviços</h5>
+        <button type="button" class="btn-close backgroundButton" data-bs-dismiss="modal" aria-label="Close">&times;</button>
       </div>
-      <div class="modal-body">
-        <form [formGroup]="listaCliente"> 
-          <div *ngFor="let cliente of listaCliente.controls; let i=index" [formGroupName]="i">
-              <p> CPF/CNPJ: <b>{{ cliente.value.cnpj | cpfcnpjPipe}}</b> Nome: <b>{{ cliente.value.nome}}</b> </p>
-          </div>            
-        </form>
-
-        <form [formGroup]="listaCliente">
-          <div class="d-flex justify-content-end">
-           <button class="btn btn-link">+Servicos</button>
-           
-          </div>
-        </form>
-
+      <div class="modal-body">        
+        <label class="col-form-label">Lista de cliente selecionados: </label>      
        
-
+            <select class="form-control col-6" >         
+              <option *ngFor="let cliente of listaCliente.controls" >{{cliente.value.nome}}</option>
+            </select>  
+        
+        <hr>   
+        
+        <form [formGroup]="listadeServicos">
+          
+          <div class="row" *ngIf="listadeServicos.controls.length > 0">
+            <div class="col-6">
+              <label class="label-control">Descrição</label>
+            </div>
+            <div class="col-3">
+              <label class="label-control">Vencimento</label>
+            </div>
+            <div class="col-2">
+              <label class="label-control">Valor R$</label>
+            </div>
+          </div>
+          
+          <div *ngFor="let servico of listadeServicos.controls; let i=index"  [formGroupName]="i">    
+            
+            <div class="row">
+              <div class="col-6"> 
+                <div class="form-group">              
+                  <input formControlName="descricao" class="form-control" type="text" >
+                  <div *ngIf="servico.controls.descricao.invalid === true && servico.controls.descricao.touched" > 
+                    <div class="alert alert-danger"> Campo deve ser prenchido  </div>  
+                  </div>
+                </div>
+              </div>
+              <div class="col-3">
+                <div class="form-group">                    
+                  <input formControlName="vencimento"  class="form-control" type="date" >
+                  <div class="invalid-feedback"> Campo deve ser preenchido </div>
+                  <div *ngIf="servico.controls.vencimento.invalid === true && servico.controls.vencimento.touched" > 
+                    <div class="alert alert-danger"> Campo deve ser prenchido </div>  
+                  </div>
+                  
+                </div>
+              </div>  
+              <div class="col-2">
+                <div class="form-group" style="margin-bottom: 0;">                    
+                  <input formControlName="valor" type="number"  class="form-control"  >
+                </div>        
+                <div *ngIf="servico.controls.valor.invalid === true && servico.controls.valor.touched" > 
+                  <div class="alert alert-danger"> Campo deve ser prenchido  e maior que 0 </div>  
+                </div>        
+              </div>
+              <div class="col-1" >
+                <button type="button"  class="btn btn-danger" (click)="removeServico(i)">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"></path>
+                    <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+            
+          </div>
+          
+          <button class="btn btn-link" (click)="adicionarServico()" >+Servicos</button>           
+        </form>
+        
+        
+        
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+      <div class="modal-footer d-flex justify-content-between">   
+      
+        <button type="button" class="btn btn-info" data-bs-dismiss="modal">Voltar</button>
+        <button type="button" class="btn btn-success"  data-bs-dismiss="modal" [disabled]="listadeServicos.invalid ||  listadeServicos.controls.length === 0"  (click)="setServicos()">Gravar Serviços</button>
       </div>
     </div>
   </div>
