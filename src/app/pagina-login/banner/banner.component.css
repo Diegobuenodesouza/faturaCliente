@@ -1,7 +1,9 @@
 .jumbotron{
     background-color:#CAFFFB;
     border-color: red ;
-    margin-top: -50px;
-    color: #048243;
-    
+    color: #048243;    
+}
+
+p{
+    text-align: justify;
 }
